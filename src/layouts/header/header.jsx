@@ -17,13 +17,13 @@ export default function Headers() {
                 <div className="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0 me-lg-4 position-relative" id="myTab">
                         <li className="nav-item pe-lg-2">
-                            <CustomLink to="/#" aria-current="page">Home</CustomLink>
+                            <CustomLink to="/#" aria-current="page">Beranda</CustomLink>
                         </li>
                         <li className="nav-item pe-lg-2">
-                            <CustomLink to="/properties">Properties</CustomLink>
+                            <CustomLink to="/properties">Properti</CustomLink>
                         </li>
                         <li className="nav-item pe-lg-2">
-                            <CustomLink to="/agents">Agents</CustomLink>
+                            <CustomLink to="/agents">Agen</CustomLink>
                         </li>
                         {/* Khusus Sign in user */}
                         {/* <li className="nav-item dropdown">
@@ -33,12 +33,12 @@ export default function Headers() {
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a href="href={() => false" className="dropdown-item"><i className="fas fa-heart fa-fw"></i> Wish List</a></li>
                                 <li><hr className="dropdown-divider"></hr></li>
-                                <li><a href="href={() => false" className="dropdown-item" ><i className="fas fa-sign-out-alt fa-fw"></i> Log Out</a></li>
+                                <li><a href="href={() => false" className="dropdown-item" ><i className="fas fa-sign-out-alt fa-fw"></i> Keluar</a></li>
                             </ul>
                         </li> */}
                     </ul>
                     <Link to="/sign-in" className="nav-link" >
-                        <button className="btn btn-primary" style={{ backgroundColor: "#003459", border: "none" }}>Sign in</button>
+                        <button className="btn btn-primary" style={{ backgroundColor: "#003459", border: "none" }}>Masuk</button>
                     </Link>
                 </div>
             </div>
