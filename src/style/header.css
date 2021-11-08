@@ -7,6 +7,7 @@
     margin-right: auto;
 }
 
+
 @media (min-width: 992px) {
     #myTab .nav-link {
         width: 120px;
