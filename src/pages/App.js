@@ -1,3 +1,4 @@
+import Layout from '../layouts';
 import logo from '../logo.svg';
 import '../style/App.css';
 
@@ -18,6 +19,8 @@ function App() {
           Learn React
         </a>
       </header>
+
+      <Layout></Layout>
     </div>
   );
 }
