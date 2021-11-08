@@ -1,6 +1,10 @@
 
 import React from 'react'
 
+// CSS
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../style/index.css'
+
 export default function Footer() {
   return (
     <footer className="bg-light">
