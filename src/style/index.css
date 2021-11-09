@@ -26,6 +26,40 @@ code {
   letter-spacing: .04em;
 }
 
+/* COLOR */
 .text-main {
   color: #003459;
+}
+
+.btn.btn-main {
+  color: #fff;
+  background-color: #003459;
+  border-color: #003459;
+}
+
+/* font size */
+.fs-title {
+  /* font-size: 50px; */
+  font-size: 3.1rem;
+}
+
+/* widht and height */
+.max-h-20 {
+  max-height: 20rem;
+}
+
+.max-h-60 {
+  max-height: 20rem;
+}
+
+.w-70 {
+  width: 70%!important;
+}
+
+.w-30 {
+  width: 30%!important;
+}
+
+.object-cover {
+  object-fit: cover;
 }
