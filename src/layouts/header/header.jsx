@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 export default function Headers() {
+    const isLogin = localStorage.getItem('isLogin');
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light text-center">
             <div className="container-fluid px-5">
@@ -26,7 +27,7 @@ export default function Headers() {
                             <CustomLink to="/agents">Agen</CustomLink>
                         </li>
                         {/* Khusus Sign in user */}
-                        {/* <li className="nav-item dropdown">
+                        <li className={"nav-item dropdown " + (isLogin ? "d-none" : "")}>
                             <a className="nav-link dropdown-toggle" href="href={() => false" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i className="fas fa-user"></i>
                             </a>
@@ -35,9 +36,10 @@ export default function Headers() {
                                 <li><hr className="dropdown-divider"></hr></li>
                                 <li><a href="href={() => false" className="dropdown-item" ><i className="fas fa-sign-out-alt fa-fw"></i> Keluar</a></li>
                             </ul>
-                        </li> */}
+                        </li>
                     </ul>
-                    <Link to="/sign-in" className="nav-link" >
+                    {/* {isLogin ? } */}
+                    <Link to="/sign-in" className={"nav-link " + (isLogin ? "" : "d-none")} >
                         <button className="btn btn-primary" style={{ backgroundColor: "#003459", border: "none" }}>Masuk</button>
                     </Link>
                 </div>
