@@ -27,7 +27,7 @@ export default function Headers() {
                             <CustomLink to="/agents">Agen</CustomLink>
                         </li>
                         {/* Khusus Sign in user */}
-                        <li className={"nav-item dropdown " + (isLogin ? "d-none" : "")}>
+                        <li className={"nav-item dropdown " + (isLogin ? "" : "d-none")}>
                             <a className="nav-link dropdown-toggle" href="href={() => false" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i className="fas fa-user"></i>
                             </a>
@@ -39,7 +39,7 @@ export default function Headers() {
                         </li>
                     </ul>
                     {/* {isLogin ? } */}
-                    <Link to="/sign-in" className={"nav-link " + (isLogin ? "" : "d-none")} >
+                    <Link to="/sign-in" className={"nav-link " + (isLogin ? "d-none" : "")} >
                         <button className="btn btn-primary" style={{ backgroundColor: "#003459", border: "none" }}>Masuk</button>
                     </Link>
                 </div>
