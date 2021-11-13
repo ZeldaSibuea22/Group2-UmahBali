@@ -37,6 +37,31 @@ code {
   border-color: #003459;
 }
 
+.btn.btn-main:focus, .btn.btn-main:hover {
+  color: #fff;
+}
+
+/* main section css */
+.title {
+  top: 10%;
+}
+
+.main-section-img {
+  float: right;
+  max-width: 70%;
+}
+
+.searchProperty {
+  position: absolute !important;
+  min-width: 95%;
+  bottom: 6rem;
+}
+
+.searchProperty .nav-item {
+  font-size: larger;
+}
+
+
 /* font size */
 .fs-title {
   /* font-size: 50px; */
@@ -52,6 +77,10 @@ code {
   max-height: 20rem;
 }
 
+.min-w-100 {
+  min-width: 100%;
+}
+
 .w-70 {
   width: 70%!important;
 }
@@ -62,4 +91,109 @@ code {
 
 .object-cover {
   object-fit: cover;
+}
+
+/* carousel */
+
+
+
+/* background transparency */
+.opacity-50 {
+  opacity: 50%;
+}
+
+/* navbar active */
+#typeTab .active {
+  border-bottom: 3px solid #003459 !important;
+  color: #003459 !important;
+  font-weight: 700;
+}
+
+#searchPropertyTab .active {
+  color: #003459 !important;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+
+#searchPropertyTab .active::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  border-bottom: .2em solid #003459 !important;
+}
+
+
+
+
+/* responsive */
+/* mobile */
+@media (max-width: 480px) {
+  .fs-title {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .title {
+    width: 100%;
+    margin-top: 20%;
+    background: rgba(255, 255, 255, 0.7 );
+    padding: .5rem;
+  }
+
+  .main-section-img {
+    max-width: 100%;
+  }
+
+  .main-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .searchProperty {
+    position: relative !important;
+    bottom: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: small;
+  }
+
+  .searchProperty .nav-item {
+    font-size: medium;
+  }
+
+  
+}
+
+/* tablet */
+@media screen and (max-width: 991px) and (min-width: 481px) {
+  .fs-title {
+    font-size: xx-large;
+  }
+
+  .searchProperty .nav-item {
+    font-size: medium;
+  }
+
+  .searchProperty {
+    bottom: 2rem !important;
+    font-size: .8rem !important;
+  }
+
+  .search-property-form input, .search-property-form select {
+    font-size: .88rem !important;
+  }
+}
+
+@media screen and (max-width: 1190px) and (min-width: 990px) {
+  .searchProperty {
+    bottom: 2rem !important;
+    font-size: 1rem !important;
+  }
+
+  .searchProperty .nav-item {
+    font-size: large;
+  }
 }
