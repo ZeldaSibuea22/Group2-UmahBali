@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import Userpage from "./Userpage";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 function SignIn() {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    trigger,
   } = useForm();
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
+    let inputEmail = data.email;
+    let inputPassword = data.password;
+
     let userEmail = localStorage.getItem("SubmissionEmail");
-    let userPass = localStorage.getItem("SubmissionPassword");
-    if (!userEmail || !userPass) {
+    let userPassword = localStorage.getItem("SubmissionPassword");
+    console.log(inputEmail, inputPassword, userEmail, userPassword);
+    if (inputEmail == userEmail && inputPassword == userPassword) {
+      localStorage.setItem("isLogin", "true");
     }
   };
 
@@ -47,8 +53,24 @@ function SignIn() {
                         <span className="input-group-text" id="basic-addon1">
                           <i className="far fa-at"></i>
                         </span>
-                        <input type="text" className={errors?.email ? "is-invalid form control" : "form-control"} placeholder="emailpengguna@mail.com" id="email" autocomplete="off" />
-                        <div className="invalid-feedback">{errors.email && errors.email.type === "required" && "masukan email anda"} </div>
+                        <input
+                          type="text"
+                          className={`form-control ${errors.email && "invalid"}`}
+                          {...register("email", {
+                            required: "Email tidak boleh kosong",
+                            pattern: {
+                              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                              message: "Invalid email address",
+                            },
+                          })}
+                          placeholder="pengguna@mail.com"
+                          id="email"
+                          autocomplete="off"
+                          onKeyUp={() => {
+                            trigger("email");
+                          }}
+                        />
+                        {errors.email && <small className="text-danger">{errors.email.message}</small>}
                       </div>
                     </div>
 
@@ -60,7 +82,21 @@ function SignIn() {
                         <span className="input-group-text" id="basic-addon1">
                           <i className="far fa-lock"></i>
                         </span>
-                        <input type="password" className="form-control" placeholder="minimal 8 karakter" id="password" autocomplete="off" />
+                        <input
+                          type="password"
+                          className={`form-control ${errors.password && "invalid"}`}
+                          {...register("password", {
+                            required: true,
+                            pattern: {
+                              value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                              message: "Min. 8 karakter, huruf dan angka",
+                            },
+                          })}
+                          placeholder="masukan password"
+                          id="password"
+                          autocomplete="off"
+                        />
+                        {errors.password && <small className="text-danger">{errors.password.message}</small>}
                       </div>
                     </div>
 
@@ -81,9 +117,9 @@ function SignIn() {
                   <div className="mt-4">
                     <p className="mb-0">
                       Belum punya akun?{" "}
-                      <a href="#" className="text-primary text-decoration-none">
+                      <Link to="/SignUp" className="text-primary text-decoration-none">
                         Daftar
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>

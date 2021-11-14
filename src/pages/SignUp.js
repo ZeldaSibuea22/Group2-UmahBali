@@ -15,10 +15,12 @@ function SignUp() {
     console.log(data);
     reset();
 
-    localStorage.setItem("SubmissionName", JSON.stringify(data.name));
-    localStorage.setItem("SubmissionEmail", JSON.stringify(data.email));
-    localStorage.setItem("SubmissionPassword", JSON.stringify(data.password));
-    console.log("Simpan di Local Storage");
+    if (data.password == data.passwordconfirm) {
+      localStorage.setItem("SubmissionName", data.name);
+      localStorage.setItem("SubmissionEmail", data.email);
+      localStorage.setItem("SubmissionPassword", data.password);
+      console.log("Simpan di Local Storage");
+    }
   };
 
   // ------------------------------------------------------
@@ -38,6 +40,10 @@ function SignUp() {
     localStorage.setItem("SubmissionPassword", JSON.stringify(password));
     console.log("Simpan di Local Storage");
   }
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setShowPassword(showPassword ? false : true);
+  };
 
   return (
     <div>
@@ -98,7 +104,7 @@ function SignUp() {
                           type="text"
                           className={`form-control ${errors.email && "invalid"}`}
                           {...register("email", {
-                            required: "Email is Required",
+                            required: "Email tidak boleh kosong",
                             pattern: {
                               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                               message: "Invalid email address",
@@ -124,7 +130,7 @@ function SignUp() {
                             <i className="far fa-lock"></i>
                           </span>
                           <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             className={`form-control ${errors.password && "invalid"}`}
                             {...register("password", {
                               required: true,
@@ -140,35 +146,36 @@ function SignUp() {
                           {errors.password && <small className="text-danger">{errors.password.message}</small>}
                         </div>
                       </div>
+
                       {/* konfirmasipassword */}
-                      {/* <div className="mb-3">
+                      <div className="mb-3">
                         <label for="password" className="form-label">
-                          Password
+                          Konfirmasi Password
                         </label>
                         <div className="input-group">
                           <span className="input-group-text" id="basic-addon1">
                             <i className="far fa-lock"></i>
                           </span>
                           <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             className={`form-control ${errors.password && "invalid"}`}
-                            {...register("password", {
+                            {...register("passwordconfirm", {
                               required: true,
                               pattern: {
                                 value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                message: "Min. 8 karakter, huruf dan angka",
+                                message: "password tidak cocok",
                               },
                             })}
                             placeholder="masukan password"
                             id="password"
                             autocomplete="off"
                           />
-                          {errors.password && <small className="text-danger">{errors.password.message}</small>}
+                          {errors.passwordconfirm && <small className="text-danger">{errors.passwordconfirm.message}</small>}
                         </div>
-                      </div> */}
+                      </div>
 
                       <div className="mb-3 form-check">
-                        <input type="checkbox" className="form-check-input" id="showPassword" />
+                        <input type="checkbox" onClick={() => togglePasswordVisiblity()} className="form-check-input" id="showPassword" />
                         <label className="form-check-label" for="showPassword">
                           Tampilkan password
                         </label>
