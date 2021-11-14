@@ -5,11 +5,7 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 
 function App() {
-  return (
-    <Layout>
-      <SignUp />
-    </Layout>
-  );
+  return <Layout></Layout>;
 }
 
 export default App;

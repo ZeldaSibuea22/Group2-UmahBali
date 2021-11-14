@@ -26,11 +26,10 @@ function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const [login, setLogin] = useState(true);
 
-  // on form submit...
+  // on form submit
   function handleFormSubmit(e) {
     e.preventDefault();
 
