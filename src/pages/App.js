@@ -1,11 +1,14 @@
 import "../style/App.css";
-import Headers from "../layouts/header/header";
-import Layout from "../layouts";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import Header from "../layouts/header/header";
+import Layout from "../layouts/layouting";
+import Userpage from "./Userpage";
 
 function App() {
-  return <Layout></Layout>;
+  return (
+    <Layout>
+    <Userpage
+    </Layout>
+  );
 }
 
 export default App;

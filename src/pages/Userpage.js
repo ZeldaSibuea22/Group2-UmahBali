@@ -1,4 +1,5 @@
 import React from "react";
+import Card from "../components/Card";
 import "../style/index.css";
 
 export default function Userpage() {
@@ -14,6 +15,7 @@ export default function Userpage() {
       </figure>
 
       <section>
+        <Card />
         <div className="container py-5 mt-5">
           <div className="row">
             <div className="col-12 text-center">
