@@ -2,12 +2,21 @@ import '../style/index.css'
 import Layout from "../layouts";
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 function App() {
+
+  const [hakMilik, setHakMilik] = useState('Dijual')
+
+  const handleSewa = () => setHakMilik('Disewa')
+  const handleBeli = () => setHakMilik('Dijual')
   
   const { register, handleSubmit, formState: {errors} } = useForm()
   const onSubmit = data => {
+    data.hakMilikType = hakMilik
     console.log(data);
+    const searchValue = data
+    localStorage.setItem('searchProperty', JSON.stringify(searchValue))
   }
 
   return (
@@ -35,13 +44,13 @@ function App() {
             <div className="mt-5 ms-xl-5 pe-xl-5 ps-xl-5 ps-md-5 searchProperty">
               <ul className="nav" role="tablist" id="searchPropertyTab">
                 <li className="nav-item p-0">
-                  <button className="px-3 nav-link text-secondary active bg-transparent border-0" id="pills-searchForm-tab" data-bs-toggle="pill" data-bs-target="#pills-searchForm" type="button" role="tab" aria-controls="pills-searchForm" aria-selected="true">
+                  <button className="px-3 nav-link text-secondary active bg-transparent border-0" id="pills-searchForm-tab" data-bs-toggle="pill" data-bs-target="#pills-searchForm" type="button" role="tab" aria-controls="pills-searchForm" aria-selected="true" onClick={() => handleBeli()}>
                     <div><i className="fas fa-home"></i></div>
                     <div>Beli</div>
                   </button>
                 </li>
                 <li className="nav-item">
-                  <button className="nav-link text-secondary bg-transparent border-0" id="pills-searchForm-tab" data-bs-toggle="pill" data-bs-target="#pills-searchForm" type="button" role="tab" aria-controls="pills-searchForm" aria-selected="true">
+                  <button className="nav-link text-secondary bg-transparent border-0" id="pills-searchForm-tab" data-bs-toggle="pill" data-bs-target="#pills-searchForm" type="button" role="tab" aria-controls="pills-searchForm" aria-selected="true" onClick={() => handleSewa()}>
                     <div><i className="fas fa-home"></i></div>
                     <div>Sewa</div>  
                   </button>
@@ -86,6 +95,7 @@ function App() {
                           ) }
                         >
                           <option value="">Pilih Tipe</option>
+                          <option>Semua</option>
                           <option>Rumah</option>
                           <option>Ruko</option>
                           <option>Vila</option>
@@ -105,10 +115,10 @@ function App() {
                           )}
                         >
                           <option value="">Harga Min - Max</option>
-                          <option>100 - 500 JT</option>
-                          <option>500 JT - 1 M</option>
-                          <option>1 - 10 M</option>
-                          <option>10 - 20 M</option>
+                          <option value={JSON.stringify({min: 100000000, max: 500000000})}>100 - 500 JT</option>
+                          <option value={JSON.stringify({min: 500000000, max: 1000000000})}>500 JT - 1 M</option>
+                          <option value={JSON.stringify({min: 1000000000, max: 10000000000})}>1 - 10 M</option>
+                          <option value={JSON.stringify({min: 10000000000, max: 20000000000})}>10 - 20 M</option>
                         </select>
                       </div>
 
