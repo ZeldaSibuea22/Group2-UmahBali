@@ -4,13 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/index.css'
 import '../style/Card.css'
 
-export default function Card({src,top,nama,lokasi,logo,sale,harga,like,agen}){
+export default function Card({src,nama,lokasi,tipe,agen,harga}){
             return (
-            
-              <div className="col-xxl-3 col-xl-3 col-lg-2 col-md-12 col-sm-6 col-12">
+              
+              
                <div className="card h-100 hover-shadow mt-3">
                     <div className="card-img-overlay py-1 px-2">
-                    <div className="label-top-left col-3 mt-2 badge rounded-pill">House</div>
+                    <div className="label-top-left col-3 mt-2 badge rounded-pill">{tipe}</div>
                     <div className="label-top shadow-sm"><i class="far fa-heart"></i></div>
                         </div> 
                    <img
@@ -30,15 +30,16 @@ export default function Card({src,top,nama,lokasi,logo,sale,harga,like,agen}){
 
                                             <div className="row mt-3">
                                 <div className="col-12 col-md-6">
-                                <p className="text-secondary"><i class="fas fa-user-circle"></i> Home Agency</p>
+                                <p className="text-secondary"><i class="fas fa-user-circle"></i>{agen}</p>
                                 </div>
                             <div className="col-12 col-md-6 text-start text-md-end">
-                                <h5 className="fw-bold">IDR. 600 M</h5>
+                                <h5 className="fw-bold">{harga}</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
-                 </div>
+           
+              
                             
         
             );
