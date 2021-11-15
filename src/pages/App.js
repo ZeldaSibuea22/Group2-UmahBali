@@ -1,7 +1,15 @@
 import '../style/index.css'
 import Layout from "../layouts";
+import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom';
 
 function App() {
+  
+  const { register, handleSubmit, formState: {errors} } = useForm()
+  const onSubmit = data => {
+    console.log(data);
+  }
+
   return (
     <Layout>
       {/* main section */}
@@ -43,10 +51,19 @@ function App() {
               <div className="tab-content" id="pills-tabContent">
                 <div className="tab-pane show active" id="pills-searchForm" role="tabpanel" aria-labelledby="pills-searchForm-tab">
                   <div className="shadow-sm p-lg-4 p-md-3 p-3 bg-body rounded">
-                    <form className="row gx-0 gy-5 gy-md-0 gx-lg-5 px-lg-4 align-items-center justify-content-between search-property-form">
+                    <form className="row gx-0 gy-5 gy-md-0 gx-lg-5 px-lg-4 align-items-center justify-content-between search-property-form" onSubmit={handleSubmit(onSubmit)}>
                       <div className="col-md-3 col-12">
                         <label htmlFor="city"><p className="text-muted"><i className="fas fa-map-marker-alt"></i> <span className="ms-2">Kota</span></p></label>
-                        <input className="form-control" list="datalistOptions" id="city" placeholder="Pilih Kota" />
+                        <input 
+                          className={`form-control ${errors?.city ? 'is-invalid' : ''}`}
+                          list="datalistOptions" id="city" placeholder="Pilih Kota"
+                          {...register(
+                            'city',
+                            {
+                              required: true
+                            }
+                          )}
+                        />
                         <datalist id="datalistOptions">
                           <option value="San Francisco" />
                           <option value="New York" />
@@ -58,8 +75,17 @@ function App() {
 
                       <div className="col-md-3 col-12">
                         <label htmlFor="type"><p className="text-muted"><i className="fas fa-list"></i> <span className="ms-2">Tipe Properti</span></p></label>
-                        <select id="type" className="form-select border-0 fw-bold">
-                          <option selected="">Pilih Tipe</option>
+                        <select
+                          id="type"
+                          className={`form-select border-0 fw-bold ${errors?.type ? 'is-invalid' : ''}`}
+                          { ...register(
+                            'type',
+                            {
+                              required: true
+                            }
+                          ) }
+                        >
+                          <option value="">Pilih Tipe</option>
                           <option>Rumah</option>
                           <option>Ruko</option>
                           <option>Vila</option>
@@ -68,8 +94,17 @@ function App() {
 
                       <div className="col-md-4 col-12">
                         <label htmlFor="price"><p className="text-muted"><i className="fas fa-dollar-sign"></i> <span className="ms-2">Range Harga</span></p></label>
-                        <select id="price" className="form-select border-0 fw-bold">
-                          <option selected="">Harga Min - Max</option>
+                        <select 
+                          id="price" 
+                          className={`form-select border-0 fw-bold ${errors?.price ? 'is-invalid' : ''}`}
+                          {...register(
+                            'price',
+                            {
+                              required: true
+                            }
+                          )}
+                        >
+                          <option value="">Harga Min - Max</option>
                           <option>100 - 500 JT</option>
                           <option>500 JT - 1 M</option>
                           <option>1 - 10 M</option>
@@ -78,8 +113,8 @@ function App() {
                       </div>
 
                       <div className="col-md-1 col-12 text-center">
-                        <button className="btn btn-sm btn-main d-none d-md-block"><i className="fas fa-search"></i></button>
-                        <button className="btn btn-sm btn-main d-block d-md-none"><i className="fas fa-search me-2"></i> Cari</button>
+                        <button className="btn btn-sm btn-main d-none d-md-block" type="submit"><i className="fas fa-search"></i></button>
+                        <button className="btn btn-sm btn-main d-block d-md-none" type="submit"><i className="fas fa-search me-2"></i> Cari</button>
                       </div>
                     </form>
                   </div>
@@ -100,7 +135,7 @@ function App() {
               <h4 className="fw-bold">Baru Ditambahkan.</h4>
             </div>
             <div className="col-12 col-md-4 text-md-end">
-              <button className="btn btn-sm btn-main">Lihat Semua Property</button>
+              <Link to="/properties"><button className="btn btn-sm btn-main">Lihat Semua Property</button></Link>
             </div>
           </div>
           
