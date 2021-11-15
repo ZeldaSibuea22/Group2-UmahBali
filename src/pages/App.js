@@ -1,5 +1,6 @@
 import '../style/index.css'
 import Layout from "../layouts";
+import Card from '../components/Card';
 
 function App() {
   return (
@@ -106,33 +107,7 @@ function App() {
           
           <div className="row mt-1 gx-0 gy-4 gx-md-4">
             <div className="col-md-6">
-              <div className="card">
-                <a href=""><img src="https://images.unsplash.com/photo-1522050212171-61b01dd24579?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80" className="card-img-top max-h-20 object-cover" alt="House" /></a>
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-12 col-lg-8 order-1 order-lg-0">
-                    <a href="" className="text-decoration-none">
-                      <h5 className="card-title fw-bold text-dark">Townhouse Bagus 2 Lantai</h5>
-                      <p className="text-secondary">Jimbaran, Badung</p>
-                    </a>
-                    </div>
-
-                    <div className="col-12 col-lg-4 text-start text-lg-end mb-3 mb-lg-0">
-                      <span className="badge rounded-pill bg-primary">New</span>
-                      <span className="badge rounded-pill bg-warning ms-1">Rent</span>
-                    </div>
-                  </div>
-                  
-                  <div className="row mt-4">
-                    <div className="col-12 col-md-6">
-                      <p className="text-secondary"><i className="fas fa-user-circle"></i> Futurehomy Agency</p>
-                    </div>
-                    <div className="col-12 col-md-6 text-start text-md-end">
-                      <h4 className="fw-bold">IDR. 600 M</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <Card src="https://images.unsplash.com/photo-1522050212171-61b01dd24579?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" />
             </div>
 
             <div className="col-md-6">
