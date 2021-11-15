@@ -4,10 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/index.css'
 import '../style/Card.css'
 
-export default function Card({src,nama,lokasi,tipe,agen,harga}){
+export default function Card({src,nama,lokasi,tipe,agen,harga,href}){
             return (
               
-              
+                
                <div className="card h-100 hover-shadow mt-3">
                     <div className="card-img-overlay py-1 px-2">
                     <div className="label-top-left col-3 mt-2 badge rounded-pill">{tipe}</div>
