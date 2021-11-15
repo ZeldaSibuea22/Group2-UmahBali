@@ -1,7 +1,11 @@
 import { Routes, Route } from "react-router";
 import App from "../pages/App";
 import Properties from "../pages/Properties";
-import Agents from "../pages/Agents";
+
+import Agents from "../pages/Agents"
+import DetailProperty from "../pages/Detail";
+
+
 
 
 export default function Routers(){
@@ -12,6 +16,8 @@ export default function Routers(){
         <Route path="/properties" element={<Properties />}>
         </Route>
         <Route path="/agents" element={<Agents />}>
+        </Route>
+        <Route path="/detail" element={<DetailProperty />}>
         </Route>
     </Routes>
     )
