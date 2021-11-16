@@ -1,15 +1,19 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import "../style/index.css";
 import Layout from "../layouts";
 import Card from "../components/Card";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { PropertiesContext } from "../context/property-context";
 import { AgentsContext } from "../context/agent-context";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const kota = ["Denpasar", "Ubud", "Kuta", "Badung", "Gianyar"];
   const [hakMilik, setHakMilik] = useState("Dijual");
+
+  let navigate = useNavigate();
 
   const handleSewa = () => setHakMilik("Disewa");
   const handleBeli = () => setHakMilik("Dijual");
@@ -23,6 +27,7 @@ function App() {
     data.hakMilikType = hakMilik;
     const searchValue = data;
     localStorage.setItem("searchProperty", JSON.stringify(searchValue));
+    navigate("/searchProperty");
   };
 
   const { properties, loading } = useContext(PropertiesContext);
@@ -225,12 +230,12 @@ function App() {
                     <div className="col-md-6 col-xl-4" key={property.id}>
                       <Card
                         src={property.img[0]}
-                        top={property.propertyType}
+                        tipe={property.propertyType}
                         nama={property.propertyName}
                         lokasi={`${property.kota}, Bali`}
                         harga={`IDR. ${formatPrice(property.price)}`}
                         agen={agent.nama}
-                        href={`/searchProperty/${property.id}`}
+                        href={`/properties/detail/${property.id}`}
                       />
                     </div>
                   );
@@ -284,12 +289,12 @@ function App() {
                         <div className="col-md-6 col-xl-4" key={property.id}>
                           <Card
                             src={property.img[0]}
-                            top={property.propertyType}
+                            tipe={property.propertyType}
                             nama={property.propertyName}
                             lokasi={`${property.lokasi}, Bali`}
                             harga={`IDR. ${formatPrice(property.price)}`}
                             agen={agent.nama}
-                            href={`/searchProperty/${property.id}`}
+                            href={`/properties/detail/${property.id}`}
                           />
                         </div>
                       );
@@ -308,12 +313,12 @@ function App() {
                         <div className="col-md-6 col-xl-4" key={property.id}>
                           <Card
                             src={property.img[0]}
-                            top={property.propertyType}
+                            tipe={property.propertyType}
                             nama={property.propertyName}
                             lokasi={`${property.lokasi}, Bali`}
                             harga={`IDR. ${formatPrice(property.price)}`}
                             agen={agent.nama}
-                            href={`/searchProperty/${property.id}`}
+                            href={`/properties/detail/${property.id}`}
                           />
                         </div>
                       );
@@ -332,12 +337,12 @@ function App() {
                         <div className="col-md-6 col-xl-4" key={property.id}>
                           <Card
                             src={property.img[0]}
-                            top={property.propertyType}
+                            tipe={property.propertyType}
                             nama={property.propertyName}
                             lokasi={`${property.lokasi}, Bali`}
                             harga={`IDR. ${formatPrice(property.price)}`}
                             agen={agent.nama}
-                            href={`/searchProperty/${property.id}`}
+                            href={`/properties/detail/${property.id}`}
                           />
                         </div>
                       );
