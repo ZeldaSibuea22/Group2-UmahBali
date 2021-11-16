@@ -1,10 +1,13 @@
 import React from 'react'
-import Headers from '../layouts/header/header'
 import "../style/header.css"
+import { Link } from 'react-router-dom'
+// import DetailProperty from './Detail'
 
 export default function Properties() {
     return (
-        <Headers></Headers>
+        <>
+        <Link to="detail" >Test</Link>
+        </>
     )
 }
 

@@ -12,12 +12,12 @@ export default function Routers(){
     <Routes>
         <Route path="/" element={<App />}>
         </Route>
-        <Route path="/properties" element={<Properties />}>
+        <Route path="properties" element={<Properties />}>
         </Route>
-        <Route path="/agents" element={<Agents />}>
+        <Route path="agents" element={<Agents />}>
         </Route>
-        <Route path="/detail" element={<DetailProperty />}>
-        </Route>
+        <Route path="properties/detail/*" element={<DetailProperty />} />
+        
     </Routes>
     )
 }
