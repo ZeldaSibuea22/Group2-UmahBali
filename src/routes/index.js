@@ -5,6 +5,7 @@ import Agents from "../pages/Agents";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import DetailProperty from "../pages/Detail";
+import Userpage from "../pages/Userpage";
 
 export default function Routers() {
   return (
@@ -14,6 +15,8 @@ export default function Routers() {
       <Route path="/agents" element={<Agents />}></Route>
       <Route path="/SignUp" element={<SignUp />}></Route>
       <Route path="/SignIn" element={<SignIn />}></Route>
+      <Route path="/Userpage" element={<Userpage />}></Route>
+
     </Routes>
   );
 }
