@@ -10,7 +10,6 @@ function App() {
     <Layout>
       <SignUp />
       <SignIn />
-      <Userpage />
     </Layout>
   );
 }

@@ -10,6 +10,10 @@ function SignIn() {
     formState: { errors },
     trigger,
   } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setShowPassword(showPassword ? false : true);
+  };
 
   const onSubmit = (data) => {
     let inputEmail = data.email;
@@ -60,7 +64,7 @@ function SignIn() {
                             required: "Email tidak boleh kosong",
                             pattern: {
                               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                              message: "Invalid email address",
+                              message: "Email tidak valid",
                             },
                           })}
                           placeholder="pengguna@mail.com"
@@ -83,7 +87,7 @@ function SignIn() {
                           <i className="far fa-lock"></i>
                         </span>
                         <input
-                          type="password"
+                          type={showPassword ? "text" : "password"}
                           className={`form-control ${errors.password && "invalid"}`}
                           {...register("password", {
                             required: true,
@@ -101,7 +105,7 @@ function SignIn() {
                     </div>
 
                     <div className="mb-3 form-check">
-                      <input type="checkbox" className="form-check-input" id="showPassword" />
+                      <input type="checkbox" onClick={() => togglePasswordVisiblity()} className="form-check-input" id="showPassword" />
                       <label className="form-check-label" for="showPassword">
                         Tampilkan password
                       </label>
