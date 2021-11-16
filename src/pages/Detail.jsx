@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "../style/header.css"
 import Layout from '../layouts'
 import '../style/3d.css'
+import { PropertiesContext } from '../context/property-context'
+import { AgentsContext } from '../context/agent-context'
+import { useForm } from 'react-hook-form'
 
 
 
 export default function DetailProperty() {
     const [image, setImage] = useState("#1")
-
+    const { properties } = useContext(PropertiesContext)
+    const { agents } = useContext(AgentsContext)
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = data => console.log(data);
     return (
-        <div className="App">
+        < div className="App" >
             <Layout>
                 {/* foto */}
                 <div className="container">
@@ -24,10 +30,7 @@ export default function DetailProperty() {
                                 <h6 className="d-inline">
                                     Simpan
                                 </h6>
-
                             </div>
-
-                            {/* <button style={{ cursor: 'pointer', borderRadius: '50%' }}><i className="fas fa-circle fa-heart fa-fw"></i></button> */}
                         </div>
                         <h2 className="fw-bold text-start mb-3">Villa Bali</h2>
                         <div className="mb-2 d-flex justify-content-between">
@@ -79,16 +82,16 @@ export default function DetailProperty() {
                                         </div>
                                     </div>
                                     <a class="image-tile d-none" href="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" data-abc="true" >
-                                        <img className="img-fluid" style={{ borderBottomRightRadius: '3%', filter: 'blur(1.5px)' }} src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
+                                        <img className="img-fluid" src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
                                     </a>
                                     <a class="image-tile d-none" href="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" data-abc="true" >
-                                        <img className="img-fluid" style={{ borderBottomRightRadius: '3%', filter: 'blur(1.5px)' }} src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
+                                        <img className="img-fluid" src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
                                     </a>
                                     <a class="image-tile d-none" href="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" data-abc="true" >
-                                        <img className="img-fluid" style={{ borderBottomRightRadius: '3%', filter: 'blur(1.5px)' }} src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
+                                        <img className="img-fluid" src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
                                     </a>
                                     <a class="image-tile d-none" href="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" data-abc="true" >
-                                        <img className="img-fluid" style={{ borderBottomRightRadius: '3%', filter: 'blur(1.5px)' }} src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
+                                        <img className="img-fluid" src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
                                     </a>
                                 </div>
                             </div>
@@ -190,19 +193,23 @@ export default function DetailProperty() {
 
                                 </div>
                                 <div className="card-body">
-
-                                    <div class="mb-1">
-                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name" />
-                                    </div>
-                                    <div class="mb-1">
-                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="email" />
-                                    </div>
-                                    <div class="mb-1">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="message"></textarea>
-                                    </div>
-                                    <button className="btn btn-primary mt-2" style={{ width: "100%" }}>
-                                        Hubungi
-                                    </button>
+                                    <form onSubmit={handleSubmit(onSubmit)}>
+                                        <div class="mb-1">
+                                            <input type="text" class="form-control" placeholder="name" {...register("Name", { required: true, maxLength: 80 })} />
+                                            {errors.Name?.type === 'required' && "Nama harus diisi"}
+                                        </div>
+                                        <div class="mb-1">
+                                            <input type="text" class="form-control" placeholder="email" {...register("Email", { required: true, pattern: /^\S+@\S+$/i })} />
+                                            {errors.Email?.type === 'required' && "Isi email dengan format yang benar"}
+                                        </div>
+                                        <div class="mb-1">
+                                            <textarea class="form-control" rows="3" placeholder="message" {...register("Message", { required: true, maxLength: 1000 })}></textarea>
+                                            {errors.Message?.type === 'required' && "Pesan harus diisi"}
+                                        </div>
+                                        <button className="btn btn-primary mt-2" style={{ width: "100%" }} type="submit">
+                                            Hubungi
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

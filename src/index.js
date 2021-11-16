@@ -6,15 +6,20 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
+import { PropertiesProvider } from './context/property-context'
+import {AgentsProvider} from './context/agent-context'
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routers />
-    </BrowserRouter>
-  </React.StrictMode>,
-  
+  <AgentsProvider>
+    <PropertiesProvider>
+      <React.StrictMode>
+        <BrowserRouter>
+          <Routers />
+        </BrowserRouter>
+      </React.StrictMode>
+    </PropertiesProvider>
+  </AgentsProvider>,
   document.getElementById('root')
 );
 
