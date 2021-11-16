@@ -3,7 +3,9 @@ import Layout from "../layouts";
 import Card from '../components/Card';
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext, useEffect} from 'react';
+import { PropertiesContext } from '../context/property-context';
+import { AgentsContext } from '../context/agent-context'
 
 function App() {
 
@@ -16,9 +18,36 @@ function App() {
   const { register, handleSubmit, formState: {errors} } = useForm()
   const onSubmit = data => {
     data.hakMilikType = hakMilik
-    console.log(data);
     const searchValue = data
     localStorage.setItem('searchProperty', JSON.stringify(searchValue))
+  }
+
+  const { properties, loading } = useContext(PropertiesContext)
+  const { agents, agentLoading } = useContext(AgentsContext)
+  let newestProperties = []
+  const filterType = {
+    rumah : [],
+    vila: [],
+    ruko: []
+  }
+
+  if(!loading) {
+    newestProperties = properties.slice(-6)
+    filterType.rumah = properties.filter(element => element.propertyType === 'Rumah').slice(-3)
+    filterType.vila = properties.filter(element => element.propertyType === 'Vila').slice(-3)
+    filterType.ruko = properties.filter(element => element.propertyType === 'Ruko').slice(-3)
+  }
+
+  const formatPrice = (price) => {
+    if(price > 999 && price < 1000000) {
+      return `${(price / 1000).toFixed(1)} K`
+    } else if(price >= 1000000 && price < 1000000000) {
+      return `${(price / 1000000).toFixed(1)} M`
+    } else if( price >= 1000000000) {
+      return `${(price / 1000000000).toFixed(1)} B`
+    } else {
+      return price
+    }
   }
 
   return (
@@ -77,7 +106,7 @@ function App() {
                           )}
                         />
                         <datalist id="datalistOptions">
-                          {kota.sort().map(element => <option value={element} />)}
+                          {kota.sort().map(element => <option key={element} value={element} />)}
                         </datalist>
                       </div>
 
@@ -149,22 +178,18 @@ function App() {
           </div>
           
           <div className="row mt-1 gx-0 gy-4 gx-md-4">
-            <div className="col-md-6 col-xl-4">
-              <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-            </div>
-
-            <div className="col-md-6 col-xl-4">
-              <Card src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-
-            </div>
-            
-            <div className="col-md-6 col-xl-4">
-              <Card src="https://images.unsplash.com/photo-1627141234469-24711efb373c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-            </div>
-            
-            <div className="col-md-6 col-xl-4">
-              <Card src="https://images.unsplash.com/photo-1522050212171-61b01dd24579?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-            </div>
+            {
+              !loading && !agentLoading ? (
+                newestProperties.map(property => {
+                  let agent = agents.find(agent => agent.id === property.agent);
+                  return (
+                    <div className="col-md-6 col-xl-4" key={property.id} >
+                      <Card src={property.img[0]} top={property.propertyType} nama={property.propertyName} lokasi={`${property.kota}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/searchProperty/${property.id}`}/>
+                    </div>
+                  )
+                })
+              ) : null
+            }
           </div>
         </div>
       </section>
@@ -200,35 +225,55 @@ function App() {
           <div className="tab-content" id="pills-tabContent">
             {/* rumah tab */}
             <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-              <div className="row mt-1">
-                <div className="col-md-6 col-xl-4">
-                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-                </div>
-                <div className="col-md-6 col-xl-4">
-                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-                </div>
+              <div className="row mt-1  gx-0 gy-4 gx-md-4">
+                {
+                  !loading && !agentLoading ? (
+                    filterType.rumah.map(property => {
+                      let agent = agents.find(agent => agent.id === property.agent);
+                      return (
+                        <div className="col-md-6 col-xl-4" key={property.id}>
+                          <Card src={property.img[0]} top={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/searchProperty/${property.id}`} />
+                        </div>
+                      )
+                    })
+                  ) : null
+                }
               </div>
             </div>
             
             {/* ruko tab */}
             <div className="tab-pane fade" id="pills-ruko" role="tabpanel" aria-labelledby="pills-ruko-tab">
-              <div className="row mt-1">
-                <div className="col-md-6 col-xl-4">
-                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-                </div>
+              <div className="row mt-1  gx-0 gy-4 gx-md-4">
+                {
+                  !loading && !agentLoading ? (
+                    filterType.ruko.map(property => {
+                      let agent = agents.find(agent => agent.id === property.agent);
+                      return (
+                        <div className="col-md-6 col-xl-4" key={property.id}>
+                          <Card src={property.img[0]} top={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/searchProperty/${property.id}`} />
+                        </div>
+                      )
+                    })
+                  ) : null
+                }
               </div>
             </div>
             
             {/* vila tab */}
             <div className="tab-pane fade" id="pills-vila" role="tabpanel" aria-labelledby="pills-vila-tab">
-              <div className="row">
-                <div className="col-md-6 col-xl-4">
-                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-                </div>
-
-                <div className="col-md-6 col-xl-4">
-                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Ruko Bagus Asri" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/2" />
-                </div>
+              <div className="row mt-1 gx-0 gy-4 gx-md-4">
+                {
+                  !loading && !agentLoading ? (
+                    filterType.vila.map(property => {
+                      let agent = agents.find(agent => agent.id === property.agent);
+                      return (
+                        <div className="col-md-6 col-xl-4" key={property.id}>
+                          <Card src={property.img[0]} top={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/searchProperty/${property.id}`} />
+                        </div>
+                      )
+                    })
+                  ) : null
+                }
               </div>
             </div>
           </div>
