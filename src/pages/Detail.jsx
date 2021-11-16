@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import "../style/header.css"
 import Layout from '../layouts'
 import '../style/3d.css'
-
+import { useParams } from 'react-router'
+import { PropertiesContext } from "../context/property-context"
+import { AgentsContext } from "../context/agent-context"
 
 
 export default function DetailProperty() {
