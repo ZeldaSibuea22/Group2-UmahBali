@@ -19,20 +19,21 @@ export default function DetailProperty() {
             context = properties[key]
         }
     }
-    console.log(params.id)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
+    const location = context.location
+
 
     return (
         <div className="App">
             {!loading ?
                 <Layout>
-                    <h6>{ }</h6>
+                    <h6>{JSON.stringify(context)}</h6>
                     {/* foto */}
                     <div className="container">
                         <div className="container mt-4 mb-5">
                             <div className="d-flex justify-content-between">
-                                <p>Home &nbsp; | &nbsp; For Sale</p>
+                                <p>{context.propertyType} &nbsp; | &nbsp; {context.hakMilikType}</p>
                                 <div >
                                     <span class="fa-stack fa-lg">
                                         <i class="fa fa-circle fa-stack-2x" style={{ color: 'white', borderColor: 'black' }}></i>
@@ -46,56 +47,56 @@ export default function DetailProperty() {
 
                                 {/* <button style={{ cursor: 'pointer', borderRadius: '50%' }}><i className="fas fa-circle fa-heart fa-fw"></i></button> */}
                             </div>
-                            <h2 className="fw-bold text-start mb-3">Villa Bali</h2>
+                            <h2 className="fw-bold text-start mb-3">{context.propertyName}</h2>
                             <div className="mb-2 d-flex justify-content-between">
                                 <div>
-                                    <p style={{ fontSize: "200" }}><i style={{ color: 'red' }} class="fas fa-map-marker-alt"></i> Jalan Bali no 1</p>
+                                    <p style={{ fontSize: "200" }}><i style={{ color: 'red' }} class="fas fa-map-marker-alt"></i> {context.alamatLengkap}</p>
                                 </div>
                                 <h5 className="fw-bold">
                                     IDR 4.500.000.000
                                 </h5>
                             </div>
                             <div className="d-flex d-block mb-2" style={{ color: 'grey' }}>
-                                <h6 className="me-4"><i class="fas fa-home"></i> 1200 m2</h6>
-                                <h6 className="me-4"><i class="fas fa-bed"></i> 4 kamar</h6>
-                                <h6 className="me-4"><i class="fas fa-shower"></i> 2 toilet</h6>
-                                <h6 className="me-4"><i class="fas fa-warehouse"></i> 1 garasi</h6>
-                                <h6 className="me-4"><i class="fas fa-calendar-check"></i> Dibangun 2020</h6>
-                                <h6 className="me-4"><i class="fas fa-calendar-check"></i> Ditambahkan 13/10/21</h6>
+                                <h6 className="me-4"><i class="fas fa-home"></i> {context.propertyDetail.luas} m2</h6>
+                                <h6 className="me-4"><i class="fas fa-bed"></i> {context.propertyDetail.kamar ? context.propertyDetail.kamar : '-'} kamar</h6>
+                                <h6 className="me-4"><i class="fas fa-shower"></i> {context.propertyDetail.toilet ? context.propertyDetail.toilet : '-'} toilet</h6>
+                                <h6 className="me-4"><i class="fas fa-warehouse"></i> {context.propertyDetail.garasi ? context.propertyDetail.garasi : '-'} garasi</h6>
+                                <h6 className="me-4"><i class="fas fa-calendar-check"></i> Dibangun {context.propertyDetail.dibangun ? context.propertyDetail.dibangun : '-'}</h6>
+                                <h6 className="me-4"><i class="fas fa-calendar-check"></i> Ditambahkan {context.tglDitambahkan ? context.tglDitambahkan : '-'}</h6>
 
                             </div>
                             <div className="row g-2" id="lightgallery">
                                 <div className="col-12 col-lg-6">
-                                    <a className="image-tile" href="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=1200" data-abc="true" >
-                                        <img className="img-fluid" style={{ borderTopLeftRadius: '3%', borderBottomLeftRadius: '3%', height: '100%' }} src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar" />
+                                    <a className="image-tile" href={context.img[0]} data-abc="true" >
+                                        <img className="img-fluid" style={{ borderTopLeftRadius: '3%', borderBottomLeftRadius: '3%', height: '100%' }} src={context.img[0]} alt="ini gambar" />
                                     </a>
                                 </div>
                                 <div className="col-6 d-none d-lg-block ">
                                     <div className="row gy-2">
                                         <div className="col-lg-6">
-                                            <a class="image-tile" href="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" data-abc="true" >
-                                                <img className="img-fluid" src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
+                                            <a class="image-tile" href={context.img[1]} data-abc="true" >
+                                                <img className="img-fluid" src={context.img[1]} style={{ objectFit: 'cover', height: '250px', width: '100%' }} alt="ini gambar juga" />
                                             </a>
                                         </div>
                                         <div className="col-6 d-none d-lg-block">
-                                            <a class="image-tile" href="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" data-abc="true" >
-                                                <img className="img-fluid" style={{ borderTopRightRadius: '3%' }} src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
+                                            <a class="image-tile" href={context.img[2]} data-abc="true" >
+                                                <img className="img-fluid" style={{ borderTopRightRadius: '3%', objectFit: 'cover', height: '250px', width: '100%' }} src={context.img[2]} alt="ini gambar juga" />
                                             </a>
                                         </div>
                                         <div className="col-6 d-none d-lg-block">
-                                            <a class="image-tile" href="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" data-abc="true" >
-                                                <img className="img-fluid" src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
+                                            <a class="image-tile" href={context.img[3]} data-abc="true" >
+                                                <img className="img-fluid" style={{ objectFit: 'cover', height: '250px', width: '100%' }} src={context.img[3]} alt="ini gambar juga" />
                                             </a>
                                         </div>
                                         <div className="col-6 position-relative d-none d-lg-block">
-                                            <a class="image-tile" href="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" data-abc="true" >
-                                                <img className="img-fluid" style={{ borderBottomRightRadius: '3%', filter: 'blur(2px)' }} src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
+                                            <a class="image-tile" href={context.img[4]} data-abc="true" >
+                                                <img className="img-fluid" style={{ borderBottomRightRadius: '3%', filter: 'blur(2px)', objectFit: 'cover', height: '250px', width: '100%' }} src={context.img[4]} alt="ini gambar juga" />
                                             </a>
                                             <div className="img-fluid position-absolute" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
                                                 <button id="magic_start" className="btn btn-primary">Lihat Lainnya</button>
                                             </div>
                                         </div>
-                                        <a class="image-tile d-none" href="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" data-abc="true" >
+                                        {/* <a class="image-tile d-none" href="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" data-abc="true" >
                                             <img className="img-fluid" style={{ borderBottomRightRadius: '3%', filter: 'blur(1.5px)' }} src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
                                         </a>
                                         <a class="image-tile d-none" href="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" data-abc="true" >
@@ -106,7 +107,7 @@ export default function DetailProperty() {
                                         </a>
                                         <a class="image-tile d-none" href="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" data-abc="true" >
                                             <img className="img-fluid" style={{ borderBottomRightRadius: '3%', filter: 'blur(1.5px)' }} src="https://a0.muscache.com/im/pictures/b4d24a47-6830-431e-a1b7-4f9ada90b2b0.jpg?im_w=720" alt="ini gambar juga" />
-                                        </a>
+                                        </a> */}
                                     </div>
                                 </div>
                             </div>
@@ -143,31 +144,11 @@ export default function DetailProperty() {
 
                     <div className="container mt-5 mb-5">
                         <h3 className="text-start fw-bold" id="detail">Detail</h3>
-                        <ul className="nav nav-tabs" id="myTab" role="tablist">
-                            {/* <li className="nav-item" role="presentation">
-                                <button onClick={() => { setImage("#1") }} className="nav-link active" id="home" data-bs-toggle="tab" data-bs-target="#page-vr" type="button" role="tab" aria-controls="home" aria-selected="true">Kamar</button>
-                            </li>
-                            <li className="nav-item" role="presentation">
-                                <button onClick={() => { setImage("#2") }} className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#page-vr" type="button" role="tab" aria-controls="profile" aria-selected="false">Restaurant</button>
-                            </li>
-                            <li className="nav-item" role="presentation">
-                                <button onClick={() => { setImage("#3") }} className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#page-vr" type="button" role="tab" aria-controls="contact" aria-selected="false">Kolam</button>
-                            </li> */}
-                        </ul>
-                        <div className="tab-content" id="myTabContent">
-                            <div className="tab-pane fade show active" id="page-vr" role="tabpanel" aria-labelledby="page-vr">
-                                <div className="mt-3">
-                                    {/* <a-scene>
-                                        <a-assets>
-                                            <img id="1" src="https://lh3.googleusercontent.com/p/AF1QipN_qI-Kg7gocNAgtoQI1C2BcUMT9OE-p9bS76SQ=w4000" alt='' crossorigin="anonymous" />
-                                            <img id="2" src="https://lh3.googleusercontent.com/p/AF1QipOAj9kCkOiukh9ev28Oy8zGqDOHzayVRtU0gXrU=w4000" alt='' crossorigin="anonymous" />
-                                            <img id="3" src="https://lh3.googleusercontent.com/p/AF1QipNYHGTtRnVOyBIJZUcQTW6_Diju8f1CYVYzcCw3=w4000" alt='' crossorigin="anonymous" />
-                                        </a-assets>
-                                        <a-sky src={image} rotation="0 -90 0"></a-sky>
-                                    </a-scene> */}
-                                </div>
-                            </div>
-                        </div>
+
+                        <iframe src={context.image360} width="100%" height="500px" frameborder="0"></iframe>
+
+
+
                     </div>
 
                     {/* Video */}
@@ -185,7 +166,7 @@ export default function DetailProperty() {
                         </div>
                         <div className="row">
                             <div className="col-12 col-lg-9">
-                                <iframe className="ms-auto" width="100%" height="100%" src="//maps.google.com/maps?q=-8.528408856703427,115.27136296033859&z=15&output=embed"></iframe>
+                                <iframe className="ms-auto" width="100%" height="100%" src={"//maps.google.com/maps?q=" + `${location.location1},${location.location2}` + "&z=15&output=embed"}></iframe>
                             </div>
                             <div className="col-12 col-lg-3 mt-3 mt-md-0">
                                 {/* Nanti dulu blm selesai */}

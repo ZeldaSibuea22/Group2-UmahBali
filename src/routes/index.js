@@ -17,7 +17,8 @@ export default function Routers(){
         </Route>
         <Route path="agents" element={<Agents />}>
         </Route>
-        <Route path="properties/detail/*" element={<DetailProperty />} />
+        <Route path="/properties/detail/:id" element={<DetailProperty />}>
+        </Route>
         
     </Routes>
     )
