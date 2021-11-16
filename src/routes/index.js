@@ -4,6 +4,7 @@ import Properties from "../pages/Properties";
 import Agents from "../pages/Agents";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
+import DetailProperty from "../pages/Detail";
 
 export default function Routers() {
   return (

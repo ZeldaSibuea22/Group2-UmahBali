@@ -23,50 +23,17 @@ export default function Userpage() {
       </div>
 
       <section>
-        <div className="col-12 px-5">
-          <div className="">
-            <Card
-              src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=873&q=80"
-              nama="Townhouse Bali"
-              lokasi="Jimbaran, Lombok"
-              agen="Agung Estate"
-              harga="IDR 600M"
-              top="House"
-            />
-          </div>
-          <div className="row-3">
-            <Card
-              src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-              nama="Townhouse Bali"
-              lokasi="Jimbaran, Bali"
-              agen="Futurehome Agency"
-              harga="IDR 600M"
-              top="House"
-            />
-          </div>
-        </div>
-        <div className="col-12 px-5">
-          <div className="">
-            <Card
-              src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=873&q=80"
-              nama="Townhouse Bali"
-              lokasi="Jimbaran, Lombok"
-              agen="Agung Estate"
-              harga="IDR 600M"
-              top="House"
-            />
-          </div>
-          <div className="row-3">
-            <Card
-              src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-              nama="Townhouse Bali"
-              lokasi="Jimbaran, Bali"
-              agen="Futurehome Agency"
-              harga="IDR 600M"
-              top="House"
-            />
-          </div>
-        </div>
+        <div className="container mb-5" />
+        <div className="row mt-1 gx-0 gy-4 gx-md-4 mx-2" />
+        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-4 col-sm-4 col-12 m-auto mt-4" />
+        <Card
+          src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=873&q=80"
+          nama="Townhouse Bali"
+          lokasi="Jimbaran, Badung"
+          agen="Home Agency"
+          harga="IDR 600M"
+          tipe="House"
+        />
       </section>
     </div>
   );
