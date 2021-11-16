@@ -3,13 +3,20 @@ import Layout from "../layouts";
 import Card from '../components/Card';
 
 function App() {
+
+  const kota = ['Denpasar', 'Ubud', 'Kuta', 'Badung', 'Gianyar']
+  
+  const { register, handleSubmit, formState: {errors} } = useForm()
+  const onSubmit = data => {
+    console.log(data);
+  }
+
   return (
     <Layout>
       {/* main section */}
       <section>
-        <div className="positon-relative main-section">
-          
-
+        <div className="positon-relative main-section">       
+          {/* image and title sub section */}
           <div className="d-block d-md-flex min-w-100 position-relative">
             <div className="position-relative w-30 d-none d-md-block"></div>
             <div className="position-relative main-section-img">
@@ -24,6 +31,8 @@ function App() {
             </div>
           </div>
 
+
+          {/* search property sub section */}
           <div className="position-relative">
             <div className="mt-5 ms-xl-5 pe-xl-5 ps-xl-5 ps-md-5 searchProperty">
               <ul className="nav" role="tablist" id="searchPropertyTab">
@@ -47,23 +56,37 @@ function App() {
                     <form className="row gx-0 gy-5 gy-md-0 gx-lg-5 px-lg-4 align-items-center justify-content-between search-property-form">
                       <div className="col-md-3 col-12">
                         <label htmlFor="city"><p className="text-muted"><i className="fas fa-map-marker-alt"></i> <span className="ms-2">Kota</span></p></label>
-                        <input className="form-control" list="datalistOptions" id="city" placeholder="Pilih Kota" />
+                        <input 
+                          className={`form-control border-0 fw-bold ${errors?.city ? 'is-invalid' : ''}`}
+                          list="datalistOptions" id="city" placeholder="Pilih Kota" autoComplete="off"
+                          {...register(
+                            'city',
+                            {
+                              required: true
+                            }
+                          )}
+                        />
                         <datalist id="datalistOptions">
-                          <option value="San Francisco" />
-                          <option value="New York" />
-                          <option value="Seattle" />
-                          <option value="Los Angeles" />
-                          <option value="Chicago" />
+                          {kota.sort().map(element => <option value={element} />)}
                         </datalist>
                       </div>
 
                       <div className="col-md-3 col-12">
                         <label htmlFor="type"><p className="text-muted"><i className="fas fa-list"></i> <span className="ms-2">Tipe Properti</span></p></label>
-                        <select id="type" className="form-select border-0 fw-bold">
-                          <option selected="">Pilih Tipe</option>
-                          <option>Rumah</option>
-                          <option>Ruko</option>
-                          <option>Vila</option>
+                        <select
+                          id="type"
+                          className={`form-select border-0 fw-bold ${errors?.type ? 'is-invalid' : ''}`}
+                          { ...register(
+                            'type',
+                            {
+                              required: true
+                            }
+                          ) }
+                        >
+                          <option value="">Pilih Tipe</option>
+                          <option value="Rumah">Rumah</option>
+                          <option value="Ruko">Ruko</option>
+                          <option value="Vila">Vila</option>
                         </select>
                       </div>
 
@@ -88,7 +111,6 @@ function App() {
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
