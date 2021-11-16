@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import SignIn from "./SignIn";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 function SignUp() {
   const {
@@ -47,7 +47,7 @@ function SignUp() {
 
   return (
     <div>
-      <main className="d-flex min-vh-100 justify-content-center align-items-center">
+      <main className="d-flex min-vh-100 justify-content-center align-items-center p-5">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12 col-lg-12 col-xl-10 shadow rounded-6">
@@ -87,8 +87,8 @@ function SignUp() {
                           id="name"
                           autocomplete="off"
                         />
-                        {errors.name && <small className="text-danger">{errors.name.message}</small>}
                       </div>
+                      {errors.name && <small className="text-danger">{errors.name.message}</small>}
                     </div>
 
                     {/* Input Email */}
@@ -107,7 +107,7 @@ function SignUp() {
                             required: "Email tidak boleh kosong",
                             pattern: {
                               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                              message: "Invalid email address",
+                              message: "Email tidak valid",
                             },
                           })}
                           placeholder="pengguna@gmail.com"
@@ -117,11 +117,11 @@ function SignUp() {
                             trigger("email");
                           }}
                         />
-                        {errors.email && <small className="text-danger">{errors.email.message}</small>}
                       </div>
+                      {errors.email && <small className="text-danger">{errors.email.message}</small>}
 
                       {/* form password */}
-                      <div className="mb-3">
+                      <div className="mb-3 mt-3">
                         <label for="password" className="form-label">
                           Password
                         </label>
@@ -133,7 +133,7 @@ function SignUp() {
                             type={showPassword ? "text" : "password"}
                             className={`form-control ${errors.password && "invalid"}`}
                             {...register("password", {
-                              required: true,
+                              required: "Password tidak boleh kosong",
                               pattern: {
                                 value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
                                 message: "Min. 8 karakter, huruf dan angka",
@@ -143,8 +143,8 @@ function SignUp() {
                             id="password"
                             autocomplete="off"
                           />
-                          {errors.password && <small className="text-danger">{errors.password.message}</small>}
                         </div>
+                        {errors.password && <small className="text-danger">{errors.password.message}</small>}
                       </div>
 
                       {/* konfirmasipassword */}
@@ -170,8 +170,8 @@ function SignUp() {
                             id="password"
                             autocomplete="off"
                           />
-                          {errors.passwordconfirm && <small className="text-danger">{errors.passwordconfirm.message}</small>}
                         </div>
+                        {errors.passwordconfirm && <small className="text-danger">{errors.passwordconfirm.message}</small>}
                       </div>
 
                       <div className="mb-3 form-check">
@@ -192,9 +192,9 @@ function SignUp() {
                   <div className="mt-4">
                     <p class=" mb-0">
                       Sudah punya akun?{" "}
-                      <a href="#" className="text-primary text-decoration-none">
+                      <Link to="/SignIn" className="text-primary text-decoration-none">
                         Masuk
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>
