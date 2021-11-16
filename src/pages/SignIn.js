@@ -76,6 +76,7 @@ function SignIn() {
                             }}
                           />
                         </div>
+                        {errors.email && <small className="text-danger">{errors.email.message}</small>}
                       </div>
 
                       <div className="mb-2">
@@ -87,10 +88,10 @@ function SignIn() {
                             <i className="far fa-lock"></i>
                           </span>
                           <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             className={`form-control ${errors.password && "invalid"}`}
                             {...register("password", {
-                              required: true,
+                              required: "Password tidak boleh kosong",
                               pattern: {
                                 value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
                                 message: "Min. 8 karakter, huruf dan angka",
@@ -105,7 +106,7 @@ function SignIn() {
                       </div>
 
                       <div className="mb-3 form-check">
-                        <input type="checkbox" onSubmit={() => togglePasswordVisiblity()} className="form-check-input" id="showPassword" />
+                        <input type="checkbox" onClick={() => togglePasswordVisiblity()} className="form-check-input" id="showPassword" />
                         <label className="form-check-label" for="showPassword">
                           Tampilkan password
                         </label>

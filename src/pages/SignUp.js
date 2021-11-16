@@ -87,8 +87,8 @@ function SignUp() {
                           id="name"
                           autocomplete="off"
                         />
-                        {errors.name && <small className="text-danger">{errors.name.message}</small>}
                       </div>
+                      {errors.name && <small className="text-danger">{errors.name.message}</small>}
                     </div>
 
                     {/* Input Email */}
@@ -107,7 +107,7 @@ function SignUp() {
                             required: "Email tidak boleh kosong",
                             pattern: {
                               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                              message: "Invalid email address",
+                              message: "Email tidak valid",
                             },
                           })}
                           placeholder="pengguna@gmail.com"
@@ -117,8 +117,8 @@ function SignUp() {
                             trigger("email");
                           }}
                         />
-                        {errors.email && <small className="text-danger">{errors.email.message}</small>}
                       </div>
+                      {errors.email && <small className="text-danger">{errors.email.message}</small>}
 
                       {/* form password */}
                       <div className="mb-3">
@@ -133,7 +133,7 @@ function SignUp() {
                             type={showPassword ? "text" : "password"}
                             className={`form-control ${errors.password && "invalid"}`}
                             {...register("password", {
-                              required: true,
+                              required: "Password tidak boleh kosong",
                               pattern: {
                                 value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
                                 message: "Min. 8 karakter, huruf dan angka",
@@ -143,8 +143,8 @@ function SignUp() {
                             id="password"
                             autocomplete="off"
                           />
-                          {errors.password && <small className="text-danger">{errors.password.message}</small>}
                         </div>
+                        {errors.password && <small className="text-danger">{errors.password.message}</small>}
                       </div>
 
                       {/* konfirmasipassword */}
@@ -170,8 +170,8 @@ function SignUp() {
                             id="password"
                             autocomplete="off"
                           />
-                          {errors.passwordconfirm && <small className="text-danger">{errors.passwordconfirm.message}</small>}
                         </div>
+                        {errors.passwordconfirm && <small className="text-danger">{errors.passwordconfirm.message}</small>}
                       </div>
 
                       <div className="mb-3 form-check">
