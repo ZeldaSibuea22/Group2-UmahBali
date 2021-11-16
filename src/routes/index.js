@@ -18,6 +18,8 @@ export default function Routers(){
         </Route>
         <Route path="/detail" element={<DetailProperty />}>
         </Route>
+        <Route path="/properties/detail/:id" element={<DetailProperty />}>
+        </Route>
     </Routes>
     )
 }
