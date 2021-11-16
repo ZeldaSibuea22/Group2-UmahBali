@@ -2,14 +2,52 @@ import '../style/index.css'
 import Layout from "../layouts";
 import Card from '../components/Card';
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom';
+import { useState, useContext, useEffect} from 'react';
+import { PropertiesContext } from '../context/property-context';
+import { AgentsContext } from '../context/agent-context'
 
 function App() {
 
   const kota = ['Denpasar', 'Ubud', 'Kuta', 'Badung', 'Gianyar']
+  const [hakMilik, setHakMilik] = useState('Dijual')
+
+  const handleSewa = () => setHakMilik('Disewa')
+  const handleBeli = () => setHakMilik('Dijual')
   
   const { register, handleSubmit, formState: {errors} } = useForm()
   const onSubmit = data => {
-    console.log(data);
+    data.hakMilikType = hakMilik
+    const searchValue = data
+    localStorage.setItem('searchProperty', JSON.stringify(searchValue))
+  }
+
+  const { properties, loading } = useContext(PropertiesContext)
+  const { agents, agentLoading } = useContext(AgentsContext)
+  let newestProperties = []
+  const filterType = {
+    rumah : [],
+    vila: [],
+    ruko: []
+  }
+
+  if(!loading) {
+    newestProperties = properties.slice(-6)
+    filterType.rumah = properties.filter(element => element.propertyType === 'Rumah').slice(-3)
+    filterType.vila = properties.filter(element => element.propertyType === 'Vila').slice(-3)
+    filterType.ruko = properties.filter(element => element.propertyType === 'Ruko').slice(-3)
+  }
+
+  const formatPrice = (price) => {
+    if(price > 999 && price < 1000000) {
+      return `${(price / 1000).toFixed(1)} K`
+    } else if(price >= 1000000 && price < 1000000000) {
+      return `${(price / 1000000).toFixed(1)} M`
+    } else if( price >= 1000000000) {
+      return `${(price / 1000000000).toFixed(1)} B`
+    } else {
+      return price
+    }
   }
 
   return (
@@ -38,13 +76,13 @@ function App() {
             <div className="mt-5 ms-xl-5 pe-xl-5 ps-xl-5 ps-md-5 searchProperty">
               <ul className="nav" role="tablist" id="searchPropertyTab">
                 <li className="nav-item p-0">
-                  <button className="px-3 nav-link text-secondary active bg-transparent border-0" id="pills-searchForm-tab" data-bs-toggle="pill" data-bs-target="#pills-searchForm" type="button" role="tab" aria-controls="pills-searchForm" aria-selected="true">
+                  <button className="px-3 nav-link text-secondary active bg-transparent border-0" id="pills-searchForm-tab" data-bs-toggle="pill" data-bs-target="#pills-searchForm" type="button" role="tab" aria-controls="pills-searchForm" aria-selected="true" onClick={() => handleBeli()}>
                     <div><i className="fas fa-home"></i></div>
                     <div>Beli</div>
                   </button>
                 </li>
                 <li className="nav-item">
-                  <button className="nav-link text-secondary bg-transparent border-0" id="pills-searchForm-tab" data-bs-toggle="pill" data-bs-target="#pills-searchForm" type="button" role="tab" aria-controls="pills-searchForm" aria-selected="true">
+                  <button className="nav-link text-secondary bg-transparent border-0" id="pills-searchForm-tab" data-bs-toggle="pill" data-bs-target="#pills-searchForm" type="button" role="tab" aria-controls="pills-searchForm" aria-selected="true" onClick={() => handleSewa()}>
                     <div><i className="fas fa-home"></i></div>
                     <div>Sewa</div>  
                   </button>
@@ -54,7 +92,7 @@ function App() {
               <div className="tab-content" id="pills-tabContent">
                 <div className="tab-pane show active" id="pills-searchForm" role="tabpanel" aria-labelledby="pills-searchForm-tab">
                   <div className="shadow-sm p-lg-4 p-md-3 p-3 bg-body rounded">
-                    <form className="row gx-0 gy-5 gy-md-0 gx-lg-5 px-lg-4 align-items-center justify-content-between search-property-form">
+                    <form className="row gx-0 gy-5 gy-md-0 gx-lg-5 px-lg-4 align-items-center justify-content-between search-property-form" onSubmit={handleSubmit(onSubmit)}>
                       <div className="col-md-3 col-12">
                         <label htmlFor="city"><p className="text-muted"><i className="fas fa-map-marker-alt"></i> <span className="ms-2">Kota</span></p></label>
                         <input 
@@ -68,7 +106,7 @@ function App() {
                           )}
                         />
                         <datalist id="datalistOptions">
-                          {kota.sort().map(element => <option value={element} />)}
+                          {kota.sort().map(element => <option key={element} value={element} />)}
                         </datalist>
                       </div>
 
@@ -85,6 +123,7 @@ function App() {
                           ) }
                         >
                           <option value="">Pilih Tipe</option>
+                          <option value="Semua">Semua</option>
                           <option value="Rumah">Rumah</option>
                           <option value="Ruko">Ruko</option>
                           <option value="Vila">Vila</option>
@@ -93,18 +132,28 @@ function App() {
 
                       <div className="col-md-4 col-12">
                         <label htmlFor="price"><p className="text-muted"><i className="fas fa-dollar-sign"></i> <span className="ms-2">Range Harga</span></p></label>
-                        <select id="price" className="form-select border-0 fw-bold">
-                          <option selected="">Harga Min - Max</option>
-                          <option>100 - 500 JT</option>
-                          <option>500 JT - 1 M</option>
-                          <option>1 - 10 M</option>
-                          <option>10 - 20 M</option>
+                        <select 
+                          id="price" 
+                          className={`form-select border-0 fw-bold ${errors?.price ? 'is-invalid' : ''}`}
+                          {...register(
+                            'price',
+                            {
+                              required: true
+                            }
+                          )}
+                        >
+                          <option value="">Harga Min - Max</option>
+                          <option value="Semua">Semua</option>
+                          <option value={JSON.stringify({min: 100000000, max: 500000000})}>100 - 500 JT</option>
+                          <option value={JSON.stringify({min: 500000000, max: 1000000000})}>500 JT - 1 M</option>
+                          <option value={JSON.stringify({min: 1000000000, max: 10000000000})}>1 - 10 M</option>
+                          <option value={JSON.stringify({min: 10000000000, max: 20000000000})}>10 - 20 M</option>
                         </select>
                       </div>
 
                       <div className="col-md-1 col-12 text-center">
-                        <button className="btn btn-sm btn-main d-none d-md-block"><i className="fas fa-search"></i></button>
-                        <button className="btn btn-sm btn-main d-block d-md-none"><i className="fas fa-search me-2"></i> Cari</button>
+                        <button className="btn btn-sm btn-main d-none d-md-block" type="submit"><i className="fas fa-search"></i></button>
+                        <button className="btn btn-sm btn-main d-block d-md-none" type="submit"><i className="fas fa-search me-2"></i> Cari</button>
                       </div>
                     </form>
                   </div>
@@ -124,27 +173,23 @@ function App() {
               <h4 className="fw-bold">Baru Ditambahkan.</h4>
             </div>
             <div className="col-12 col-md-4 text-md-end">
-              <button className="btn btn-sm btn-main">Lihat Semua Property</button>
+              <Link to="/properties"><button className="btn btn-sm btn-main">Lihat Semua Property</button></Link>
             </div>
           </div>
           
           <div className="row mt-1 gx-0 gy-4 gx-md-4">
-            <div className="col-md-6 col-xl-4">
-              <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-            </div>
-
-            <div className="col-md-6 col-xl-4">
-              <Card src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-
-            </div>
-            
-            <div className="col-md-6 col-xl-4">
-              <Card src="https://images.unsplash.com/photo-1627141234469-24711efb373c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-            </div>
-            
-            <div className="col-md-6 col-xl-4">
-              <Card src="https://images.unsplash.com/photo-1522050212171-61b01dd24579?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-            </div>
+            {
+              !loading && !agentLoading ? (
+                newestProperties.map(property => {
+                  let agent = agents.find(agent => agent.id === property.agent);
+                  return (
+                    <div className="col-md-6 col-xl-4" key={property.id} >
+                      <Card src={property.img[0]} top={property.propertyType} nama={property.propertyName} lokasi={`${property.kota}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/searchProperty/${property.id}`}/>
+                    </div>
+                  )
+                })
+              ) : null
+            }
           </div>
         </div>
       </section>
@@ -180,35 +225,55 @@ function App() {
           <div className="tab-content" id="pills-tabContent">
             {/* rumah tab */}
             <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-              <div className="row mt-1">
-                <div className="col-md-6 col-xl-4">
-                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-                </div>
-                <div className="col-md-6 col-xl-4">
-                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-                </div>
+              <div className="row mt-1  gx-0 gy-4 gx-md-4">
+                {
+                  !loading && !agentLoading ? (
+                    filterType.rumah.map(property => {
+                      let agent = agents.find(agent => agent.id === property.agent);
+                      return (
+                        <div className="col-md-6 col-xl-4" key={property.id}>
+                          <Card src={property.img[0]} top={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/searchProperty/${property.id}`} />
+                        </div>
+                      )
+                    })
+                  ) : null
+                }
               </div>
             </div>
             
             {/* ruko tab */}
             <div className="tab-pane fade" id="pills-ruko" role="tabpanel" aria-labelledby="pills-ruko-tab">
-              <div className="row mt-1">
-                <div className="col-md-6 col-xl-4">
-                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-                </div>
+              <div className="row mt-1  gx-0 gy-4 gx-md-4">
+                {
+                  !loading && !agentLoading ? (
+                    filterType.ruko.map(property => {
+                      let agent = agents.find(agent => agent.id === property.agent);
+                      return (
+                        <div className="col-md-6 col-xl-4" key={property.id}>
+                          <Card src={property.img[0]} top={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/searchProperty/${property.id}`} />
+                        </div>
+                      )
+                    })
+                  ) : null
+                }
               </div>
             </div>
             
             {/* vila tab */}
             <div className="tab-pane fade" id="pills-vila" role="tabpanel" aria-labelledby="pills-vila-tab">
-              <div className="row">
-                <div className="col-md-6 col-xl-4">
-                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
-                </div>
-
-                <div className="col-md-6 col-xl-4">
-                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Ruko Bagus Asri" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/2" />
-                </div>
+              <div className="row mt-1 gx-0 gy-4 gx-md-4">
+                {
+                  !loading && !agentLoading ? (
+                    filterType.vila.map(property => {
+                      let agent = agents.find(agent => agent.id === property.agent);
+                      return (
+                        <div className="col-md-6 col-xl-4" key={property.id}>
+                          <Card src={property.img[0]} top={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/searchProperty/${property.id}`} />
+                        </div>
+                      )
+                    })
+                  ) : null
+                }
               </div>
             </div>
           </div>
