@@ -29,9 +29,9 @@ function SignIn() {
   };
 
   return (
-    <Layout>
+    <div className="container">
       <div className="row">
-        <div className="col-12 py-5 my-5 mx-5 px-5">
+        <div className="col-12">
           <main className="d-flex min-vh-100 justify-content-center align-items-center">
             <div className="container">
               <div className="row justify-content-center">
@@ -137,7 +137,7 @@ function SignIn() {
           </main>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 }
 export default SignIn;

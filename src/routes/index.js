@@ -13,6 +13,7 @@ export default function Routers() {
       <Route path="/properties" element={<Properties />}></Route>
       <Route path="/agents" element={<Agents />}></Route>
       <Route path="/SignUp" element={<SignUp />}></Route>
+      <Route path="/SignIn" element={<SignIn />}></Route>
     </Routes>
   );
 }
