@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router";
 import App from "../pages/App";
 import Properties from "../pages/Properties";
-import Agents from "../pages/Agents";
+
+import Agents from "../pages/Agents"
 import DetailProperty from "../pages/Detail";
 
 
