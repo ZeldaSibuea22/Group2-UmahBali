@@ -115,9 +115,11 @@ function SignIn() {
                         </div>
 
                         <div className="d-grid col-12 mt-md-4 mt-3">
-                          <button type="submit" className="btn btn-sm btn-main">
-                            Masuk
-                          </button>
+                          <Link to="/">
+                            <button type="submit" className="btn btn-sm btn-main">
+                              Masuk
+                            </button>
+                          </Link>
                         </div>
                       </form>
 
