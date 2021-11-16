@@ -1,11 +1,13 @@
 import '../style/index.css'
 import Layout from "../layouts";
+import Card from '../components/Card';
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 function App() {
 
+  const kota = ['Denpasar', 'Ubud', 'Kuta', 'Badung', 'Gianyar']
   const [hakMilik, setHakMilik] = useState('Dijual')
 
   const handleSewa = () => setHakMilik('Disewa')
@@ -23,9 +25,8 @@ function App() {
     <Layout>
       {/* main section */}
       <section>
-        <div className="positon-relative main-section">
-          
-
+        <div className="positon-relative main-section">       
+          {/* image and title sub section */}
           <div className="d-block d-md-flex min-w-100 position-relative">
             <div className="position-relative w-30 d-none d-md-block"></div>
             <div className="position-relative main-section-img">
@@ -40,6 +41,8 @@ function App() {
             </div>
           </div>
 
+
+          {/* search property sub section */}
           <div className="position-relative">
             <div className="mt-5 ms-xl-5 pe-xl-5 ps-xl-5 ps-md-5 searchProperty">
               <ul className="nav" role="tablist" id="searchPropertyTab">
@@ -64,8 +67,8 @@ function App() {
                       <div className="col-md-3 col-12">
                         <label htmlFor="city"><p className="text-muted"><i className="fas fa-map-marker-alt"></i> <span className="ms-2">Kota</span></p></label>
                         <input 
-                          className={`form-control ${errors?.city ? 'is-invalid' : ''}`}
-                          list="datalistOptions" id="city" placeholder="Pilih Kota"
+                          className={`form-control border-0 fw-bold ${errors?.city ? 'is-invalid' : ''}`}
+                          list="datalistOptions" id="city" placeholder="Pilih Kota" autoComplete="off"
                           {...register(
                             'city',
                             {
@@ -74,11 +77,7 @@ function App() {
                           )}
                         />
                         <datalist id="datalistOptions">
-                          <option value="San Francisco" />
-                          <option value="New York" />
-                          <option value="Seattle" />
-                          <option value="Los Angeles" />
-                          <option value="Chicago" />
+                          {kota.sort().map(element => <option value={element} />)}
                         </datalist>
                       </div>
 
@@ -95,10 +94,10 @@ function App() {
                           ) }
                         >
                           <option value="">Pilih Tipe</option>
-                          <option>Semua</option>
-                          <option>Rumah</option>
-                          <option>Ruko</option>
-                          <option>Vila</option>
+                          <option value="Semua">Semua</option>
+                          <option value="Rumah">Rumah</option>
+                          <option value="Ruko">Ruko</option>
+                          <option value="Vila">Vila</option>
                         </select>
                       </div>
 
@@ -115,6 +114,7 @@ function App() {
                           )}
                         >
                           <option value="">Harga Min - Max</option>
+                          <option value="Semua">Semua</option>
                           <option value={JSON.stringify({min: 100000000, max: 500000000})}>100 - 500 JT</option>
                           <option value={JSON.stringify({min: 500000000, max: 1000000000})}>500 JT - 1 M</option>
                           <option value={JSON.stringify({min: 1000000000, max: 10000000000})}>1 - 10 M</option>
@@ -132,7 +132,6 @@ function App() {
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -150,127 +149,21 @@ function App() {
           </div>
           
           <div className="row mt-1 gx-0 gy-4 gx-md-4">
-            <div className="col-md-6">
-              <div className="card">
-                <a href=""><img src="https://images.unsplash.com/photo-1522050212171-61b01dd24579?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80" className="card-img-top max-h-20 object-cover" alt="House" /></a>
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-12 col-lg-8 order-1 order-lg-0">
-                    <a href="" className="text-decoration-none">
-                      <h5 className="card-title fw-bold text-dark">Townhouse Bagus 2 Lantai</h5>
-                      <p className="text-secondary">Jimbaran, Badung</p>
-                    </a>
-                    </div>
-
-                    <div className="col-12 col-lg-4 text-start text-lg-end mb-3 mb-lg-0">
-                      <span className="badge rounded-pill bg-primary">New</span>
-                      <span className="badge rounded-pill bg-warning ms-1">Rent</span>
-                    </div>
-                  </div>
-                  
-                  <div className="row mt-4">
-                    <div className="col-12 col-md-6">
-                      <p className="text-secondary"><i className="fas fa-user-circle"></i> Futurehomy Agency</p>
-                    </div>
-                    <div className="col-12 col-md-6 text-start text-md-end">
-                      <h4 className="fw-bold">IDR. 600 M</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="col-md-6 col-xl-4">
+              <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
             </div>
 
-            <div className="col-md-6">
-              <div className="card">
-                <a href=""><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" className="card-img-top max-h-20 object-cover" alt="House" /></a>
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-12 col-lg-8 order-1 order-lg-0">
-                    <a href="" className="text-decoration-none">
-                      <h5 className="card-title fw-bold text-dark">Townhouse Bagus 2 Lantai</h5>
-                      <p className="text-secondary">Jimbaran, Badung</p>
-                    </a>
-                    </div>
+            <div className="col-md-6 col-xl-4">
+              <Card src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
 
-                    <div className="col-12 col-lg-4 text-start text-lg-end mb-3 mb-lg-0">
-                      <span className="badge rounded-pill bg-primary">New</span>
-                      <span className="badge rounded-pill bg-danger ms-1">Sold</span>
-                    </div>
-                  </div>
-                  
-                  <div className="row mt-4">
-                    <div className="col-12 col-md-6">
-                      <p className="text-secondary"><i className="fas fa-user-circle"></i> Futurehomy Agency</p>
-                    </div>
-                    <div className="col-12 col-md-6 text-start text-md-end">
-                      <h4 className="fw-bold">IDR. 600 M</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
             
-            <div className="col-md-6">
-              <div className="card">
-                <a href=""><img src="https://images.unsplash.com/photo-1627141234469-24711efb373c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" className="card-img-top max-h-20 object-cover" alt="House" /></a>
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-12 col-lg-8 order-1 order-lg-0">
-                    <a href="" className="text-decoration-none">
-                      <h5 className="card-title fw-bold text-dark">Townhouse Bagus 2 Lantai</h5>
-                      <p className="text-secondary">Jimbaran, Badung</p>
-                    </a>
-                    </div>
-
-                    <div className="col-12 col-lg-4 text-start text-lg-end mb-3 mb-lg-0">
-                      <span className="badge rounded-pill bg-primary">New</span>
-                      <span className="badge rounded-pill bg-danger ms-1">Sold</span>
-                    </div>
-                  </div>
-                  
-                  <div className="row mt-4">
-                    <div className="col-12 col-md-6">
-                      <p className="text-secondary"><i className="fas fa-user-circle"></i> Futurehomy Agency</p>
-                    </div>
-                    <div className="col-12 col-md-6 text-start text-md-end">
-                      <h4 className="fw-bold">IDR. 600 M</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="col-md-6 col-xl-4">
+              <Card src="https://images.unsplash.com/photo-1627141234469-24711efb373c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
             </div>
             
-            <div className="col-md-6">
-              <div className="card">
-                <div className="position-absolute p-3">
-                  <span className="badge rounded-pill bg-secondary bg-opacity-50 p-2">Rumah</span>
-                </div>
-                <a href=""><img src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" className="card-img-top max-h-20 object-cover" alt="House" /></a>
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-12 col-lg-8 order-1 order-lg-0">
-                    <a href="" className="text-decoration-none">
-                      <h5 className="card-title fw-bold text-dark">Townhouse Bagus 2 Lantai</h5>
-                      <p className="text-secondary">Jimbaran, Badung</p>
-                    </a>
-                    </div>
-
-                    <div className="col-12 col-lg-4 text-start text-lg-end mb-3 mb-lg-0">
-                      <span className="badge rounded-pill bg-primary">New</span>
-                      <span className="badge rounded-pill bg-danger ms-1">Sold</span>
-                    </div>
-                  </div>
-                  
-                  <div className="row mt-4">
-                    <div className="col-12 col-md-6">
-                      <p className="text-secondary"><i className="fas fa-user-circle"></i> Futurehomy Agency</p>
-                    </div>
-                    <div className="col-12 col-md-6 text-start text-md-end">
-                      <h4 className="fw-bold">IDR. 600 M</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="col-md-6 col-xl-4">
+              <Card src="https://images.unsplash.com/photo-1522050212171-61b01dd24579?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
             </div>
           </div>
         </div>
@@ -307,164 +200,34 @@ function App() {
           <div className="tab-content" id="pills-tabContent">
             {/* rumah tab */}
             <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-              <div className="row mt-4">
-                <div className="col-md-6">
-                  <div className="card">
-                    <a href=""><img src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" className="card-img-top max-h-20 object-cover" alt="House" /></a>
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-12 col-lg-8 order-1 order-lg-0">
-                        <a href="" className="text-decoration-none">
-                          <h5 className="card-title fw-bold text-dark">Townhouse Bagus 2 Lantai</h5>
-                          <p className="text-secondary">Jimbaran, Badung</p>
-                        </a>
-                        </div>
-
-                        <div className="col-12 col-lg-4 text-start text-lg-end mb-3 mb-lg-0">
-                          <span className="badge rounded-pill bg-primary">New</span>
-                          <span className="badge rounded-pill bg-danger ms-1">Sold</span>
-                        </div>
-                      </div>
-                      
-                      <div className="row mt-4">
-                        <div className="col-12 col-md-6">
-                          <p className="text-secondary"><i className="fas fa-user-circle"></i> Futurehomy Agency</p>
-                        </div>
-                        <div className="col-12 col-md-6 text-start text-md-end">
-                          <h4 className="fw-bold">IDR. 600 M</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div className="row mt-1">
+                <div className="col-md-6 col-xl-4">
+                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
                 </div>
-                <div className="col-md-6">
-                  <div className="card">
-                    <a href=""><img src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" className="card-img-top max-h-20 object-cover" alt="House" /></a>
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-12 col-lg-8 order-1 order-lg-0">
-                        <a href="" className="text-decoration-none">
-                          <h5 className="card-title fw-bold text-dark">Townhouse Bagus 2 Lantai</h5>
-                          <p className="text-secondary">Jimbaran, Badung</p>
-                        </a>
-                        </div>
-
-                        <div className="col-12 col-lg-4 text-start text-lg-end mb-3 mb-lg-0">
-                          <span className="badge rounded-pill bg-primary">New</span>
-                          <span className="badge rounded-pill bg-danger ms-1">Sold</span>
-                        </div>
-                      </div>
-                      
-                      <div className="row mt-4">
-                        <div className="col-12 col-md-6">
-                          <p className="text-secondary"><i className="fas fa-user-circle"></i> Futurehomy Agency</p>
-                        </div>
-                        <div className="col-12 col-md-6 text-start text-md-end">
-                          <h4 className="fw-bold">IDR. 600 M</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="col-md-6 col-xl-4">
+                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
                 </div>
               </div>
             </div>
             
             {/* ruko tab */}
             <div className="tab-pane fade" id="pills-ruko" role="tabpanel" aria-labelledby="pills-ruko-tab">
-              <div className="row mt-4">
-                <div className="col-md-6">
-                  <div className="card">
-                    <a href=""><img src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" className="card-img-top max-h-20 object-cover" alt="House" /></a>
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-12 col-lg-8 order-1 order-lg-0">
-                        <a href="" className="text-decoration-none">
-                          <h5 className="card-title fw-bold text-dark">Townhouse Bagus 2 Lantai</h5>
-                          <p className="text-secondary">Jimbaran, Badung</p>
-                        </a>
-                        </div>
-
-                        <div className="col-12 col-lg-4 text-start text-lg-end mb-3 mb-lg-0">
-                          <span className="badge rounded-pill bg-primary">New</span>
-                          <span className="badge rounded-pill bg-danger ms-1">Sold</span>
-                        </div>
-                      </div>
-                      
-                      <div className="row mt-4">
-                        <div className="col-12 col-md-6">
-                          <p className="text-secondary"><i className="fas fa-user-circle"></i> Futurehomy Agency</p>
-                        </div>
-                        <div className="col-12 col-md-6 text-start text-md-end">
-                          <h4 className="fw-bold">IDR. 600 M</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div className="row mt-1">
+                <div className="col-md-6 col-xl-4">
+                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
                 </div>
               </div>
             </div>
             
             {/* vila tab */}
             <div className="tab-pane fade" id="pills-vila" role="tabpanel" aria-labelledby="pills-vila-tab">
-              <div className="row mt-4">
-                <div className="col-md-6">
-                  <div className="card">
-                    <a href=""><img src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" className="card-img-top max-h-20 object-cover" alt="House" /></a>
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-12 col-lg-8 order-1 order-lg-0">
-                        <a href="" className="text-decoration-none">
-                          <h5 className="card-title fw-bold text-dark">Townhouse Bagus 2 Lantai</h5>
-                          <p className="text-secondary">Jimbaran, Badung</p>
-                        </a>
-                        </div>
-
-                        <div className="col-12 col-lg-4 text-start text-lg-end mb-3 mb-lg-0">
-                          <span className="badge rounded-pill bg-primary">New</span>
-                          <span className="badge rounded-pill bg-danger ms-1">Sold</span>
-                        </div>
-                      </div>
-                      
-                      <div className="row mt-4">
-                        <div className="col-12 col-md-6">
-                          <p className="text-secondary"><i className="fas fa-user-circle"></i> Futurehomy Agency</p>
-                        </div>
-                        <div className="col-12 col-md-6 text-start text-md-end">
-                          <h4 className="fw-bold">IDR. 600 M</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div className="row">
+                <div className="col-md-6 col-xl-4">
+                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Townhouse Bagus 2 Lantai" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/1" />
                 </div>
 
-                <div className="col-md-6">
-                  <div className="card">
-                    <a href=""><img src="https://images.unsplash.com/photo-1522050212171-61b01dd24579?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80" className="card-img-top max-h-20 object-cover" alt="House" /></a>
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-12 col-lg-8 order-1 order-lg-0">
-                        <a href="" className="text-decoration-none">
-                          <h5 className="card-title fw-bold text-dark">Townhouse Bagus 2 Lantai</h5>
-                          <p className="text-secondary">Jimbaran, Badung</p>
-                        </a>
-                        </div>
-
-                        <div className="col-12 col-lg-4 text-start text-lg-end mb-3 mb-lg-0">
-                          <span className="badge rounded-pill bg-primary">New</span>
-                          <span className="badge rounded-pill bg-warning ms-1">Rent</span>
-                        </div>
-                      </div>
-                      
-                      <div className="row mt-4">
-                        <div className="col-12 col-md-6">
-                          <p className="text-secondary"><i className="fas fa-user-circle"></i> Futurehomy Agency</p>
-                        </div>
-                        <div className="col-12 col-md-6 text-start text-md-end">
-                          <h4 className="fw-bold">IDR. 600 M</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="col-md-6 col-xl-4">
+                  <Card src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" top="Rumah" nama="Ruko Bagus Asri" lokasi="Jimbaran, Badung" harga="IDR. 600 M" agen="Futurehomy Agency" href="/searchProperty/2" />
                 </div>
               </div>
             </div>
