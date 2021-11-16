@@ -14,11 +14,20 @@ export default function DetailProperty() {
     const { agents } = useContext(AgentsContext)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
+
     return (
         < div className="App" >
+            <h6>{JSON.stringify(agents)}</h6>
+            <h6>{JSON.stringify(properties)}</h6>
+            {console.log(agents)}
+            {console.log(properties)}
             <Layout>
                 {/* foto */}
+
                 <div className="container">
+                    <iframe src="https://my.matterport.com/show/?m=e9kjCWVSkjm" width="900px" height="1000px" />
+
+
                     <div className="container mt-4 mb-5">
                         <div className="d-flex justify-content-between">
                             <p>Home &nbsp; | &nbsp; For Sale</p>
