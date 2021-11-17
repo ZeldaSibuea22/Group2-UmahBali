@@ -69,6 +69,16 @@ code {
   color: #fff;
 }
 
+.btn.btn-outline-main {
+  color: #003459;
+  border: 1px solid #003459;
+}
+
+.btn.btn-outline-main:hover, .btn.btn-outline-main:focus {
+  color: #fff;
+  background-color: #003459;
+}
+
 /* main section css */
 .title {
   top: 10%;
@@ -120,6 +130,10 @@ code {
   object-fit: cover;
 }
 
+.rounded-4 {
+  border-radius: 15px;
+}
+
 /* carousel */
 
 /* background transparency */
@@ -152,7 +166,7 @@ code {
 
 /* responsive */
 /* mobile */
-@media (max-width: 480px) {
+@media (max-width: 712px) {
   .fs-title {
     font-size: 1.6rem;
     text-align: center;
@@ -185,6 +199,10 @@ code {
   .searchProperty .nav-item {
     font-size: medium;
   }
+
+  .justdiv {
+    display: none;
+  }
 }
 
 /* tablet */
@@ -206,6 +224,20 @@ code {
   .search-property-form select {
     font-size: 0.88rem !important;
   }
+}
+
+@media screen and (max-width: 767px) and (min-width: 712px) {
+  .searchProperty {
+    min-width: 99%;
+  }
+
+  main-section .d-md-block {
+    display: block !important;
+  }
+}
+
+@media screen and (max-width: 711px) and (min-width: 481px) {
+
 }
 
 @media screen and (max-width: 1190px) and (min-width: 990px) {
