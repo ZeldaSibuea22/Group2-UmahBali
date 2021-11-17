@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 // CSS
-import 'bootstrap/dist/css/bootstrap.min.css'
 import '../../style/index.css'
 
 export default function Footer() {
@@ -14,11 +14,11 @@ export default function Footer() {
         {/* section umahbali */}
           <div className="col-lg-5 col-md-7 col-12">
             <h5 className="fw-bold text-main">UmahBali</h5>
-            <p className="mt-3 fw-bold">Find the best home that meet your needs.</p>
+            <p className="mt-3 fw-bold text-dark">Find the best home that meet your needs.</p>
             <div className="mt-4">
-              <p className="mb-2">Get in touch with us :</p>
-              <p className="mb-2"><i class="fas fa-envelope-open-text"></i> <span className="ms-2"><a href="mailto:umahbali@mail.com" className="text-decoration-none text-body">umahbali@mail.com</a></span></p>
-              <p><i class="fab fa-instagram"></i> <span className="ms-2">umahbali</span></p>
+              <p className="mb-2 text-dark">Get in touch with us :</p>
+              <p className="mb-2 text-dark"><i className="fas fa-envelope-open-text"></i> <span className="ms-2"><a href="mailto:umahbali@mail.com" className="text-decoration-none text-body">umahbali@mail.com</a></span></p>
+              <p className="text-dark"><i className="fab fa-instagram"></i> <span className="ms-2">umahbali</span></p>
             </div>
           </div>
 
@@ -26,9 +26,11 @@ export default function Footer() {
           <div className="col-lg-3 col-md-4 mt-4 mt-md-0 col-12">
             <h6 className="fw-bold text-main">Tipe Properti</h6>
             <div className="mt-4">
-              <p className="mb-2">Rumah</p>
-              <p className="mb-2">Ruko</p>
-              <p>Vila</p>
+              <Link to="/properties" className="text-decoration-none">
+                <p className="mb-2 text-dark">Rumah</p>
+                <p className="mb-2 text-dark">Ruko</p>
+                <p className="text-dark">Vila</p>
+              </Link>
             </div>
           </div>
 
@@ -48,8 +50,8 @@ export default function Footer() {
         <hr className="my-4"/>
 
         <div className="row">
-          <div className="col-12 col-lg-6 text-center text-lg-start text-secondary">
-            <p>&copy; 2021 – Created by Group 2 <span className="px-2">|</span> All Rights Reserved</p>
+          <div className="col-12 col-lg-6 text-center text-lg-start">
+            <p className="text-secondary">&copy; 2021 – Created by Group 2 <span className="px-2">|</span> All Rights Reserved</p>
           </div>
           <div className="col-12 col-lg-6 text-center text-lg-end">
             <p className="text-muted"><a href="#" className="text-decoration-none text-muted pe-4">Privacy</a> | <a href="#" className="text-decoration-none text-muted ps-4">Terms & Condition</a></p>

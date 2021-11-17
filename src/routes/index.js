@@ -6,6 +6,7 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import DetailProperty from "../pages/Detail";
 import Userpage from "../pages/Userpage";
+import NotFound from "../pages/NotFound";
 
 export default function Routers() {
   return (
@@ -16,7 +17,7 @@ export default function Routers() {
       <Route path="/SignUp" element={<SignUp />}></Route>
       <Route path="/SignIn" element={<SignIn />}></Route>
       <Route path="/Userpage" element={<Userpage />}></Route>
-
+      <Route path="*" element={<NotFound />}></Route>
     </Routes>
   );
 }
