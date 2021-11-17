@@ -49,7 +49,7 @@ p {
 }
 
 img {
-    weight: 92px;
+    weight: 80px;
     height: 240px;
     object-contain:fit;
     border-radius: 10px 10px 0 0;

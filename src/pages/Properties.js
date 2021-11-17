@@ -2,10 +2,39 @@ import React from 'react'
 import Layout from "../layouts/index";
 import Card from "../components/Card";
 import "./CardApp";
-
+import { useContext } from "react";
+import { PropertiesContext } from "../context/property-context";
+import { AgentsContext } from "../context/agent-context";
 
 
 export default function Properties() {
+
+    const { properties, loading } = useContext(PropertiesContext);
+    const { agents, agentLoading } = useContext(AgentsContext);
+
+    const filterType = {
+        rumah: [],
+        vila: [],
+        ruko: [],
+      };
+
+    if (!loading) {
+        filterType.rumah = properties.filter((element) => element.propertyType === "Rumah");
+        filterType.vila = properties.filter((element) => element.propertyType === "Vila");
+        filterType.ruko = properties.filter((element) => element.propertyType === "Ruko");
+    }
+
+    const formatPrice = (price) => {
+    if (price > 999 && price < 1000000) {
+        return `${(price / 1000).toFixed(1)} K`;
+    } else if (price >= 1000000 && price < 1000000000) {
+        return `${(price / 1000000).toFixed(1)} M`;
+    } else if (price >= 1000000000) {
+        return `${(price / 1000000000).toFixed(1)} B`;
+    } else {
+        return price;
+    }
+    };
   
     return (
     <Layout>
@@ -31,111 +60,84 @@ export default function Properties() {
             </div>
 
           </div>
-
-            
-
-        {/* <div className="container mt-5 ">
-            <ul className="nav nav-tabs justify-content-center " id="myTab" role="tablist">
-                <li className="nav-item" role="presentation">
-                    <button className="nav-link tabs-style active" id="House" data-bs-toggle="tab"
-                        >
-                        
-                    House
-                    </button>
-                </li>
-                <li className="nav-item" role="presentation">
-                    <button className="nav-link tabs-style disabled" id="Ruko" data-bs-toggle="tab"
-                    >
-                        Ruko
-                    </button>
-                </li>
-                <li className="nav-item" role="presentation">
-                    <button className="nav-link tabs-style disabled" id="Villa" data-bs-toggle="tab" data-bs-target="#contact"
-                    >
-                    Villa
-                    </button>
-                </li>
-            </ul>
-        </div> */}
- 
+           
      <div className="container mb-5">
-        <div className="row mt-1 gx-0 gy-4 gx-md-4 mx-2">
-            <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-4 col-sm-4 col-12 m-auto mt-4"> 
-            
+        <div className="tab-content" id="pills-tabContent">
+            {/* rumah tab */}
+            <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div className="row mt-1 gx-0 gy-4 gx-md-4 mx-2">
+                {!loading && !agentLoading
+                    ? filterType.rumah.map((property) => {
+                        let agent = agents.find((agent) => agent.id === property.agent);
+                        return (
+                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-4 col-sm-4 col-12 m-auto mt-4" key={property.id}>
+                            <Card
+                            src={property.img[0]}
+                            tipe={property.propertyType}
+                            nama={property.propertyName}
+                            lokasi={`${property.kota}, Bali`}
+                            harga={`IDR. ${formatPrice(property.price)}`}
+                            agen={agent.nama}
+                            href={`/properties/detail/${property.id}`}
+                            id={property.id}
+                            />
+                        </div>
+                        );
+                    })
+                    : null}
+                </div> 
+            </div>
 
-                    <Card
-            src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=873&q=80"
-            nama="Townhouse Bali"
-            lokasi="Jimbaran, Badung"
-            agen="Home Agency"
-            harga="IDR 600M"
-            tipe="House"
-            href="/properties/detail"
-            />
-            </div>
-            
-            <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-4 col-sm-4 col-12 m-auto mt-4"> 
-                    <Card
-            src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=873&q=80"
-            nama="Townhouse Bali"
-            lokasi="Jimbaran, Badung"
-            agen="Home Agency"
-            harga="IDR 600M"
-            tipe="House"
-            href="/properties/detail"
-            />
+            {/* ruko tab */}
+            <div className="tab-pane fade show" id="pills-ruko" role="tabpanel" aria-labelledby="pills-ruko-tab">
+                <div className="row mt-1 gx-0 gy-4 gx-md-4 mx-2">
+                {!loading && !agentLoading
+                    ? filterType.ruko.map((property) => {
+                        let agent = agents.find((agent) => agent.id === property.agent);
+                        return (
+                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-4 col-sm-4 col-12 m-auto mt-4" key={property.id}>
+                            <Card
+                            src={property.img[0]}
+                            tipe={property.propertyType}
+                            nama={property.propertyName}
+                            lokasi={`${property.kota}, Bali`}
+                            harga={`IDR. ${formatPrice(property.price)}`}
+                            agen={agent.nama}
+                            href={`/properties/detail/${property.id}`}
+                            />
+                        </div>
+                        );
+                    })
+                    : null}
+                </div> 
             </div>
 
-            <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-4 col-sm-4 col-12 m-auto mt-4"> 
-                <Card
-            src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=873&q=80"
-            nama="Townhouse Bali"
-            lokasi="Jimbaran, Badung"
-            agen="Home Agency"
-            harga="IDR 600M"
-            tipe="House"
-            href="/properties/detail"
-            />
+            {/* vila tab */}
+            <div className="tab-pane fade show" id="pills-vila" role="tabpanel" aria-labelledby="pills-vila-tab">
+                <div className="row mt-1 gx-0 gy-4 gx-md-4 mx-2">
+                {!loading && !agentLoading
+                    ? filterType.vila.map((property) => {
+                        let agent = agents.find((agent) => agent.id === property.agent);
+                        return (
+                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-4 col-sm-4 col-12 m-auto mt-4" key={property.id}>
+                            <Card
+                            src={property.img[0]}
+                            tipe={property.propertyType}
+                            nama={property.propertyName}
+                            lokasi={`${property.kota}, Bali`}
+                            harga={`IDR. ${formatPrice(property.price)}`}
+                            agen={agent.nama}
+                            href={`/properties/detail/${property.id}`}
+                            />
+                        </div>
+                        );
+                    })
+                    : null}
+                </div> 
             </div>
-            
-            <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-4 col-sm-4 col-12 m-auto mt-4"> 
-                <Card
-            src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=873&q=80"
-            nama="Townhouse Bali"
-            lokasi="Jimbaran, Badung"
-            agen="Home Agency"
-            harga="IDR 600M"
-            tipe="House"
-            href="/properties/detail"
-            />
-            </div>
-            
-            <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-4 col-sm-4 col-12 m-auto mt-4"> 
-            <Card
-            src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=873&q=80"
-            nama="Townhouse Bali"
-            lokasi="Jimbaran, Badung"
-            agen="Home Agency"
-            harga="IDR 600M"
-            tipe="House"
-            href="/properties/detail"
-            />
-            </div>
-        
-            <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-4 col-sm-4 col-12 m-auto mt-4"> 
-            <Card
-            src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=873&q=80"
-            nama="Townhouse Bali"
-            lokasi="Jimbaran, Badung"
-            agen="Home Agency"
-            harga="IDR 600M"
-            tipe="House"
-            href="/properties/detail"
-            />
-                    </div>
-                </div>     
-           </div>
-        
+        </div>    
+    </div>
+
                 </Layout>
         
             )
