@@ -6,6 +6,7 @@ import Card from "../components/Card";
 export default function Properties_Search(){
     return( <Layout>
       
+      
         <form className="d-flex mt-5 justify-content-center">
         <input className="form-control me-2 w-75" type="search" placeholder="Cari Properti" aria-label="Search"/>
         <button className="btn btn-outline-primary" type="submit" style={{width:"75px"}}>Cari</button>

@@ -10,6 +10,7 @@ export default function App(){
     harga="IDR 600M"
     top="House"
     href=""
+    hakMilik="SEWA"
 
     />
   </div>

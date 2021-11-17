@@ -1,68 +1,71 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import '../style/index.css'
+import "../style/index.css";
 import Layout from "../layouts";
-import Card from '../components/Card';
-import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom';
-import { useState, useContext} from 'react';
-import { PropertiesContext } from '../context/property-context';
-import { AgentsContext } from '../context/agent-context'
+import Card from "../components/Card";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { PropertiesContext } from "../context/property-context";
+import { AgentsContext } from "../context/agent-context";
 import { useNavigate } from "react-router-dom";
 
 function App() {
+  const kota = ["Denpasar", "Ubud", "Kuta", "Badung", "Gianyar"];
+  const [hakMilik, setHakMilik] = useState("Dijual");
 
-  const kota = ['Denpasar', 'Ubud', 'Kuta', 'Badung', 'Gianyar']
-  const [hakMilik, setHakMilik] = useState('Dijual')
+  let navigate = useNavigate();
 
-  let navigate = useNavigate()
+  const handleSewa = () => setHakMilik("Disewa");
+  const handleBeli = () => setHakMilik("Dijual");
 
-  const handleSewa = () => setHakMilik('Disewa')
-  const handleBeli = () => setHakMilik('Dijual')
-  
-  const { register, handleSubmit, formState: {errors} } = useForm()
-  const onSubmit = data => {
-    data.hakMilikType = hakMilik
-    const searchValue = data
-    localStorage.setItem('searchProperty', JSON.stringify(searchValue))
-    navigate("/searchProperty")
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    data.hakMilikType = hakMilik;
+    const searchValue = data;
+    localStorage.setItem("searchProperty", JSON.stringify(searchValue));
+    navigate("/searchProperty");
+  };
 
-  const { properties, loading } = useContext(PropertiesContext)
-  const { agents, agentLoading } = useContext(AgentsContext)
-  let newestProperties = []
+  const { properties, loading } = useContext(PropertiesContext);
+  const { agents, agentLoading } = useContext(AgentsContext);
+  let newestProperties = [];
   const filterType = {
-    rumah : [],
+    rumah: [],
     vila: [],
-    ruko: []
-  }
+    ruko: [],
+  };
 
-  if(!loading) {
-    newestProperties = properties.slice(-6)
-    filterType.rumah = properties.filter(element => element.propertyType === 'Rumah').slice(-3)
-    filterType.vila = properties.filter(element => element.propertyType === 'Vila').slice(-3)
-    filterType.ruko = properties.filter(element => element.propertyType === 'Ruko').slice(-3)
+  if (!loading) {
+    newestProperties = properties.slice(-6);
+    filterType.rumah = properties.filter((element) => element.propertyType === "Rumah").slice(-3);
+    filterType.vila = properties.filter((element) => element.propertyType === "Vila").slice(-3);
+    filterType.ruko = properties.filter((element) => element.propertyType === "Ruko").slice(-3);
   }
 
   const formatPrice = (price) => {
-    if(price > 999 && price < 1000000) {
-      return `${(price / 1000).toFixed(1)} K`
-    } else if(price >= 1000000 && price < 1000000000) {
-      return `${(price / 1000000).toFixed(1)} M`
-    } else if( price >= 1000000000) {
-      return `${(price / 1000000000).toFixed(1)} B`
+    if (price > 999 && price < 1000000) {
+      return `${(price / 1000).toFixed(1)} K`;
+    } else if (price >= 1000000 && price < 1000000000) {
+      return `${(price / 1000000).toFixed(1)} M`;
+    } else if (price >= 1000000000) {
+      return `${(price / 1000000000).toFixed(1)} B`;
     } else {
-      return price
+      return price;
     }
-  }
+  };
 
   return (
     <Layout>
       {/* main section */}
       <section>
-        <div className="positon-relative main-section">       
+        <div className="positon-relative main-section">
           {/* image and title sub section */}
           <div className="d-block d-sm-flex min-w-100 position-relative">
-            <div className="position-relative w-30 d-none d-md-block"></div>
+            <div className="position-relative w-30 d-md-block justdiv"></div>
             <div className="position-relative main-section-img">
               <img src="https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="House" className="img-fluid" />
             </div>
@@ -75,21 +78,44 @@ function App() {
             </div>
           </div>
 
-
           {/* search property sub section */}
           <div className="position-relative">
             <div className="mt-5 ms-xl-5 pe-xl-5 ps-xl-5 ps-md-5 ps-sm-4 searchProperty">
               <ul className="nav" role="tablist" id="searchPropertyTab">
                 <li className="nav-item p-0">
-                  <button className="px-3 nav-link text-secondary active bg-transparent border-0" id="pills-searchForm-tab" data-bs-toggle="pill" data-bs-target="#pills-searchForm" type="button" role="tab" aria-controls="pills-searchForm" aria-selected="true" onClick={() => handleBeli()}>
-                    <div><i className="fas fa-home"></i></div>
+                  <button
+                    className="px-3 nav-link text-secondary active bg-transparent border-0"
+                    id="pills-searchForm-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-searchForm"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-searchForm"
+                    aria-selected="true"
+                    onClick={() => handleBeli()}
+                  >
+                    <div>
+                      <i className="fas fa-home"></i>
+                    </div>
                     <div>Beli</div>
                   </button>
                 </li>
                 <li className="nav-item">
-                  <button className="nav-link text-secondary bg-transparent border-0" id="pills-searchForm-tab" data-bs-toggle="pill" data-bs-target="#pills-searchForm" type="button" role="tab" aria-controls="pills-searchForm" aria-selected="true" onClick={() => handleSewa()}>
-                    <div><i className="fas fa-home"></i></div>
-                    <div>Sewa</div>  
+                  <button
+                    className="nav-link text-secondary bg-transparent border-0"
+                    id="pills-searchForm-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-searchForm"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-searchForm"
+                    aria-selected="true"
+                    onClick={() => handleSewa()}
+                  >
+                    <div>
+                      <i className="fas fa-home"></i>
+                    </div>
+                    <div>Sewa</div>
                   </button>
                 </li>
               </ul>
@@ -99,33 +125,41 @@ function App() {
                   <div className="shadow-sm p-lg-4 p-md-3 p-3 bg-body rounded">
                     <form className="row gx-0 gy-5 gy-sm-0 gx-lg-5 px-lg-4 align-items-center justify-content-between search-property-form" onSubmit={handleSubmit(onSubmit)}>
                       <div className="col-sm-3 col-12">
-                        <label htmlFor="city"><p className="text-muted"><i className="fas fa-map-marker-alt"></i> <span className="ms-2">Kota</span></p></label>
-                        <input 
-                          className={`form-control border-0 fw-bold ${errors?.city ? 'is-invalid' : ''}`}
-                          list="datalistOptions" id="city" placeholder="Pilih Kota" autoComplete="off"
-                          {...register(
-                            'city',
-                            {
-                              required: true
-                            }
-                          )}
+                        <label htmlFor="city">
+                          <p className="text-muted">
+                            <i className="fas fa-map-marker-alt"></i> <span className="ms-2">Kota</span>
+                          </p>
+                        </label>
+                        <input
+                          className={`form-control border-0 fw-bold ${errors?.city ? "is-invalid" : ""}`}
+                          list="datalistOptions"
+                          id="city"
+                          placeholder="Pilih Kota"
+                          autoComplete="off"
+                          {...register("city", {
+                            required: true,
+                          })}
                         />
                         <datalist id="datalistOptions">
-                          {kota.sort().map(element => <option key={element} value={element} />)}
+                          {kota.sort().map((element) => (
+                            <option key={element} value={element} />
+                          ))}
                         </datalist>
                       </div>
 
+
                       <div className="col-sm-3 col-12">
-                        <label htmlFor="type"><p className="text-muted"><i className="fas fa-list"></i> <span className="ms-2">Tipe Properti</span></p></label>
+                        <label htmlFor="type">
+                          <p className="text-muted">
+                            <i className="fas fa-list"></i> <span className="ms-2">Tipe Properti</span>
+                          </p>
+                        </label>
                         <select
                           id="type"
-                          className={`form-select border-0 fw-bold ${errors?.type ? 'is-invalid' : ''}`}
-                          { ...register(
-                            'type',
-                            {
-                              required: true
-                            }
-                          ) }
+                          className={`form-select border-0 fw-bold ${errors?.type ? "is-invalid" : ""}`}
+                          {...register("type", {
+                            required: true,
+                          })}
                         >
                           <option value="">Pilih Tipe</option>
                           <option value="Semua">Semua</option>
@@ -136,29 +170,36 @@ function App() {
                       </div>
 
                       <div className="col-sm-4 col-12">
-                        <label htmlFor="price"><p className="text-muted"><i className="fas fa-dollar-sign"></i> <span className="ms-2">Range Harga</span></p></label>
-                        <select 
-                          id="price" 
-                          className={`form-select border-0 fw-bold ${errors?.price ? 'is-invalid' : ''}`}
-                          {...register(
-                            'price',
-                            {
-                              required: true
-                            }
-                          )}
+
+                        <label htmlFor="price">
+                          <p className="text-muted">
+                            <i className="fas fa-dollar-sign"></i> <span className="ms-2">Range Harga</span>
+                          </p>
+                        </label>
+                        <select
+                          id="price"
+                          className={`form-select border-0 fw-bold ${errors?.price ? "is-invalid" : ""}`}
+                          {...register("price", {
+                            required: true,
+                          })}
                         >
                           <option value="">Harga Min - Max</option>
                           <option value="Semua">Semua</option>
-                          <option value={JSON.stringify({min: 100000000, max: 500000000})}>100 - 500 JT</option>
-                          <option value={JSON.stringify({min: 500000000, max: 1000000000})}>500 JT - 1 M</option>
-                          <option value={JSON.stringify({min: 1000000000, max: 10000000000})}>1 - 10 M</option>
-                          <option value={JSON.stringify({min: 10000000000, max: 20000000000})}>10 - 20 M</option>
+                          <option value={JSON.stringify({ min: 100000000, max: 500000000 })}>100 - 500 JT</option>
+                          <option value={JSON.stringify({ min: 500000000, max: 1000000000 })}>500 JT - 1 M</option>
+                          <option value={JSON.stringify({ min: 1000000000, max: 10000000000 })}>1 - 10 M</option>
+                          <option value={JSON.stringify({ min: 10000000000, max: 20000000000 })}>10 - 20 M</option>
                         </select>
                       </div>
 
+
                       <div className="col-sm-1 col-12 text-center">
-                        <button className="btn btn-sm btn-main d-none d-sm-block" type="submit"><i className="fas fa-search"></i></button>
-                        <button className="btn btn-sm btn-main d-block d-sm-none" type="submit"><i className="fas fa-search me-2"></i> Cari</button>
+                        <button className="btn btn-sm btn-main d-none d-sm-block" type="submit">
+                          <i className="fas fa-search"></i>
+                        </button>
+                        <button className="btn btn-sm btn-main d-block d-sm-none" type="submit">
+                          <i className="fas fa-search me-2"></i> Cari
+                        </button>
                       </div>
                     </form>
                   </div>
@@ -178,23 +219,32 @@ function App() {
               <h4 className="fw-bold">Baru Ditambahkan.</h4>
             </div>
             <div className="col-12 col-md-4 text-md-end">
-              <Link to="/properties"><button className="btn btn-sm btn-main">Lihat Semua Property</button></Link>
+              <Link to="/properties">
+                <button className="btn btn-sm btn-main">Lihat Semua Property</button>
+              </Link>
             </div>
           </div>
-          
+
           <div className="row mt-1 gx-0 gy-4 gx-md-4">
-            {
-              !loading && !agentLoading ? (
-                newestProperties.map(property => {
-                  let agent = agents.find(agent => agent.id === property.agent);
+            {!loading && !agentLoading
+              ? newestProperties.map((property) => {
+                  let agent = agents.find((agent) => agent.id === property.agent);
                   return (
-                    <div className="col-md-6 col-xl-4" key={property.id} >
-                      <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.kota}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id}/>
+                    <div className="col-md-6 col-xl-4" key={property.id}>
+                      <Card
+                        src={property.img[0]}
+                        tipe={property.propertyType}
+                        nama={property.propertyName}
+                        lokasi={`${property.kota}, Bali`}
+                        harga={`IDR. ${formatPrice(property.price)}`}
+                        agen={agent.nama}
+                        href={`/properties/detail/${property.id}`}
+                        id={property.id}
+                      />
                     </div>
-                  )
+                  );
                 })
-              ) : null
-            }
+              : null}
           </div>
         </div>
       </section>
@@ -208,81 +258,106 @@ function App() {
               <h5 className="text-secondary mt-3">UmahBali berkomitmen untuk membantu para kliennya mencapai tujuan mereka.</h5>
             </div>
           </div>
-          
+
           {/* nav */}
           <div className="row mt-4">
             <div className="col-12">
               <ul className="nav justify-content-center" id="typeTab" role="tablist">
                 <li className="nav-item fs-5">
-                  <button className="nav-link text-dark active bg-transparent border-0" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Rumah</button>
+                  <button className="nav-link text-dark active bg-transparent border-0" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                    Rumah
+                  </button>
                 </li>
                 <li className="nav-item fs-5 mx-3 mx-md-5">
-                  <button className="nav-link text-dark bg-transparent border-0" id="pills-ruko-tab" data-bs-toggle="pill" data-bs-target="#pills-ruko" type="button" role="tab" aria-controls="pills-ruko" aria-selected="false">Ruko</button>
+                  <button className="nav-link text-dark bg-transparent border-0" id="pills-ruko-tab" data-bs-toggle="pill" data-bs-target="#pills-ruko" type="button" role="tab" aria-controls="pills-ruko" aria-selected="false">
+                    Ruko
+                  </button>
                 </li>
                 <li className="nav-item fs-5">
-                  <a className="nav-link text-dark bg-transparent border-0" id="pills-vila-tab" data-bs-toggle="pill" data-bs-target="#pills-vila" type="button" role="tab" aria-controls="pills-vila" aria-selected="false">Vila</a>
+                  <a className="nav-link text-dark bg-transparent border-0" id="pills-vila-tab" data-bs-toggle="pill" data-bs-target="#pills-vila" type="button" role="tab" aria-controls="pills-vila" aria-selected="false">
+                    Vila
+                  </a>
                 </li>
               </ul>
             </div>
-
           </div>
 
           <div className="tab-content" id="pills-tabContent">
             {/* rumah tab */}
             <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
               <div className="row mt-1  gx-0 gy-4 gx-md-4">
-                {
-                  !loading && !agentLoading ? (
-                    filterType.rumah.map(property => {
-                      let agent = agents.find(agent => agent.id === property.agent);
+                {!loading && !agentLoading
+                  ? filterType.rumah.map((property) => {
+                      let agent = agents.find((agent) => agent.id === property.agent);
                       return (
                         <div className="col-md-6 col-xl-4" key={property.id}>
-                          <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id} />
+                          <Card
+                            src={property.img[0]}
+                            tipe={property.propertyType}
+                            nama={property.propertyName}
+                            lokasi={`${property.lokasi}, Bali`}
+                            harga={`IDR. ${formatPrice(property.price)}`}
+                            agen={agent.nama}
+                            href={`/properties/detail/${property.id}`}
+                            id={property.id}
+                          />
                         </div>
-                      )
+                      );
                     })
-                  ) : null
-                }
+                  : null}
               </div>
             </div>
-            
+
             {/* ruko tab */}
             <div className="tab-pane fade" id="pills-ruko" role="tabpanel" aria-labelledby="pills-ruko-tab">
               <div className="row mt-1  gx-0 gy-4 gx-md-4">
-                {
-                  !loading && !agentLoading ? (
-                    filterType.ruko.map(property => {
-                      let agent = agents.find(agent => agent.id === property.agent);
+                {!loading && !agentLoading
+                  ? filterType.ruko.map((property) => {
+                      let agent = agents.find((agent) => agent.id === property.agent);
                       return (
                         <div className="col-md-6 col-xl-4" key={property.id}>
-                          <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id} />
+                          <Card
+                            src={property.img[0]}
+                            tipe={property.propertyType}
+                            nama={property.propertyName}
+                            lokasi={`${property.lokasi}, Bali`}
+                            harga={`IDR. ${formatPrice(property.price)}`}
+                            agen={agent.nama}
+                            href={`/properties/detail/${property.id}`}
+                            id={property.id}
+                          />
                         </div>
-                      )
+                      );
                     })
-                  ) : null
-                }
+                  : null}
               </div>
             </div>
-            
+
             {/* vila tab */}
             <div className="tab-pane fade" id="pills-vila" role="tabpanel" aria-labelledby="pills-vila-tab">
               <div className="row mt-1 gx-0 gy-4 gx-md-4">
-                {
-                  !loading && !agentLoading ? (
-                    filterType.vila.map(property => {
-                      let agent = agents.find(agent => agent.id === property.agent);
+                {!loading && !agentLoading
+                  ? filterType.vila.map((property) => {
+                      let agent = agents.find((agent) => agent.id === property.agent);
                       return (
                         <div className="col-md-6 col-xl-4" key={property.id}>
-                          <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id} />
+                          <Card
+                            src={property.img[0]}
+                            tipe={property.propertyType}
+                            nama={property.propertyName}
+                            lokasi={`${property.lokasi}, Bali`}
+                            harga={`IDR. ${formatPrice(property.price)}`}
+                            agen={agent.nama}
+                            href={`/properties/detail/${property.id}`}
+                            id={property.id}
+                          />
                         </div>
-                      )
+                      );
                     })
-                  ) : null
-                }
+                  : null}
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -295,7 +370,7 @@ function App() {
               <h5 className="text-secondary mt-3">Apa yang klien katakan tentang UmahBali.</h5>
             </div>
           </div>
-          
+
           <div className="row mt-4">
             <div className="col-12">
               <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
@@ -306,13 +381,28 @@ function App() {
                         <div className="card mb-3">
                           <div className="row g-0 align-items-center">
                             <div className="col-md-4">
-                              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80" className="img-fluid rounded-start" alt="Person" />
+                              <img
+                                src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80"
+                                className="img-fluid rounded-start"
+                                alt="Person"
+                              />
                             </div>
                             <div className="col-md-8 ps-4">
                               <div className="card-body">
                                 <h5 className="card-title fw-bold">Edwin O'Connor</h5>
-                                <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit aliquam fugit quasi earum, reprehenderit adipisci, dignissimos porro in dolor minima temporibus voluptatibus, vero ipsam odit magnam ut officia necessitatibus veniam.</p>
-                                <p className="card-text"><small className="text-warning"><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i></small></p>
+                                <p className="card-text">
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit aliquam fugit quasi earum, reprehenderit adipisci, dignissimos porro in dolor minima temporibus voluptatibus, vero ipsam odit magnam ut
+                                  officia necessitatibus veniam.
+                                </p>
+                                <p className="card-text">
+                                  <small className="text-warning">
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                  </small>
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -322,13 +412,28 @@ function App() {
                         <div className="card mb-3">
                           <div className="row g-0 align-items-center">
                             <div className="col-md-4">
-                              <img src="https://images.unsplash.com/photo-1601831698630-a814370b9cca?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjc3fHxwb3J0cmFpdHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" className="img-fluid rounded-start" alt="Person" />
+                              <img
+                                src="https://images.unsplash.com/photo-1601831698630-a814370b9cca?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjc3fHxwb3J0cmFpdHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                                className="img-fluid rounded-start"
+                                alt="Person"
+                              />
                             </div>
                             <div className="col-md-8 ps-4">
                               <div className="card-body">
                                 <h5 className="card-title fw-bold">Summer Young</h5>
-                                <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit aliquam fugit quasi earum, reprehenderit adipisci, dignissimos porro in dolor minima temporibus voluptatibus, vero ipsam odit magnam ut officia necessitatibus veniam.</p>
-                                <p className="card-text"><small className="text-warning"><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i></small></p>
+                                <p className="card-text">
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit aliquam fugit quasi earum, reprehenderit adipisci, dignissimos porro in dolor minima temporibus voluptatibus, vero ipsam odit magnam ut
+                                  officia necessitatibus veniam.
+                                </p>
+                                <p className="card-text">
+                                  <small className="text-warning">
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                  </small>
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -342,36 +447,65 @@ function App() {
                         <div className="card mb-3">
                           <div className="row g-0 align-items-center">
                             <div className="col-md-4">
-                              <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzF8fHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" className="img-fluid rounded-start" alt="Person" />
+                              <img
+                                src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzF8fHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                                className="img-fluid rounded-start"
+                                alt="Person"
+                              />
                             </div>
                             <div className="col-md-8 ps-4">
                               <div className="card-body">
                                 <h5 className="card-title fw-bold">Miles Scott</h5>
-                                <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit aliquam fugit quasi earum, reprehenderit adipisci, dignissimos porro in dolor minima temporibus voluptatibus, vero ipsam odit magnam ut officia necessitatibus veniam.</p>
-                                <p className="card-text"><small className="text-warning"><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i></small></p>
+                                <p className="card-text">
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit aliquam fugit quasi earum, reprehenderit adipisci, dignissimos porro in dolor minima temporibus voluptatibus, vero ipsam odit magnam ut
+                                  officia necessitatibus veniam.
+                                </p>
+                                <p className="card-text">
+                                  <small className="text-warning">
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                  </small>
+                                </p>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="col-12 col-md-10 col-lg-6">
                         <div className="card mb-3">
                           <div className="row g-0 align-items-center">
                             <div className="col-md-4">
-                              <img src="https://images.unsplash.com/photo-1581403341630-a6e0b9d2d257?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzF8fHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" className="img-fluid rounded-start" alt="Person" />
+                              <img
+                                src="https://images.unsplash.com/photo-1581403341630-a6e0b9d2d257?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzF8fHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                                className="img-fluid rounded-start"
+                                alt="Person"
+                              />
                             </div>
                             <div className="col-md-8 ps-4">
                               <div className="card-body">
                                 <h5 className="card-title fw-bold">Agnes Gray</h5>
-                                <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit aliquam fugit quasi earum, reprehenderit adipisci, dignissimos porro in dolor minima temporibus voluptatibus, vero ipsam odit magnam ut officia necessitatibus veniam.</p>
-                                <p className="card-text"><small className="text-warning"><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i></small></p>
+                                <p className="card-text">
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit aliquam fugit quasi earum, reprehenderit adipisci, dignissimos porro in dolor minima temporibus voluptatibus, vero ipsam odit magnam ut
+                                  officia necessitatibus veniam.
+                                </p>
+                                <p className="card-text">
+                                  <small className="text-warning">
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                    <i className="fas fa-star"></i>
+                                  </small>
+                                </p>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      
                     </div>
                   </div>
                 </div>
@@ -385,12 +519,11 @@ function App() {
                 </button> */}
               </div>
             </div>
-
           </div>
         </div>
       </section>
     </Layout>
-  )
+  );
 }
 
 export default App;
