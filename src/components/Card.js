@@ -1,46 +1,58 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/index.css'
 import '../style/Card.css'
 
-export default function Card({src,nama,lokasi,tipe,agen,harga,href}){
+export default function Card({src,nama,lokasi,tipe,agen,harga,href, id}){
+    function addWishlist(id) {
+        let wishlist = localStorage.getItem('wishlist')
+        if(wishlist) {
+            wishlist = JSON.parse(wishlist)
+            wishlist.push(id)
+        } else {
+            wishlist = [id]
+        }
+        localStorage.setItem('wishlist', JSON.stringify(wishlist))
+    }
             return (
-              
-                
-               <div className="card h-100 hover-shadow mt-3">
-                    <div className="card-img-overlay py-1 px-2">
-                    <div className="label-top-left col-3 mt-2 badge rounded-pill">{tipe}</div>
-                    <div className="label-top shadow-sm"><i class="far fa-heart"></i></div>
-                        </div> 
+            <div className="text-decoration-none">
+                <div className="card h-100 hover-shadow mt-4 position-relative">
+                    <div className="card-img">
+                    <div className="label-top-left position-absolute badge rounded-pill col-3 mt-3 ms-3">
+                        <span className="fw-bold ">{tipe}</span>
+                    </div>
+                    <div className="label-top shadow-sm"><button onClick={() => addWishlist(id)} className ="btn btn-sm text-white"><i class="far fa-heart"></i></button></div>
+                    </div> 
+                        
                    <img
                     src={src}
-                    className="card-img-fluid" alt="card property" />
+                    className="" alt="card property"/>
 
                     <div className="card-body">
+                            <span class="me-2 badge rounded-pill bg-success pe-2">NEW</span>
+                            <span class="badge rounded-pill bg-danger">SEWA</span>
+                    <Link className="text-decoration-none" to={href}>
                         <div className="clearfix mb-1">
-                            <span class="float-start fw-bolder fs-5">{nama}</span>
-                            <span class="float-end badge rounded-pill bg-success">NEW</span>
+                            <span class="float-start fw-bolder fs-5" style={{color:"black"}}>{nama}</span>
                         </div>
+                    </Link>   
                             
                             <div className="text-secondary md-3">{lokasi}</div>
-                                {/* <div class="d-flex flex-row align-items-center justify-content mt-3"> <i class="far fa-user-circle">
-                                    </i> <span class="text-secondary ml-1">Futurehome Agency</span> 
-                                    <span class="fw-bolder px-4">{harga}</span> */}
-
                                             <div className="row mt-3">
                                 <div className="col-12 col-md-6">
                                 <p className="text-secondary"><i class="fas fa-user-circle"></i>{agen}</p>
                                 </div>
                             <div className="col-12 col-md-6 text-start text-md-end">
-                                <h5 className="fw-bold">{harga}</h5>
+                                <h5 className="fw-bold"style={{color:"black"}}>{harga}</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
            
               
-                            
-        
+                
             );
                               }

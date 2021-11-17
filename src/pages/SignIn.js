@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Userpage from "./Userpage";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "../layouts";
 
 function SignIn() {
@@ -12,9 +12,11 @@ function SignIn() {
     trigger,
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const [errorsMessage, setErrorMessage] = useState(false);
   const togglePasswordVisiblity = () => {
     setShowPassword(showPassword ? false : true);
   };
+  let Navigate = useNavigate();
 
   const onSubmit = (data) => {
     let inputEmail = data.email;
@@ -24,10 +26,14 @@ function SignIn() {
     let userPassword = localStorage.getItem("SubmissionPassword");
     console.log(inputEmail, inputPassword, userEmail, userPassword);
     if (inputEmail === userEmail && inputPassword === userPassword) {
+      setErrorMessage(true);
+    } else {
       localStorage.setItem("isLogin", "true");
+      localStorage.setItem("isLogin", "true");
+      Navigate("/");
     }
   };
-
+  console.log(errors);
   return (
     <div className="container">
       <div className="row">
@@ -50,9 +56,14 @@ function SignIn() {
                         <h4 className="">Halo !</h4>
                         <p className="text-secondary mt-1">Selamat datang di UmahBali</p>
                       </div>
+                      {/* Alert */}
+
+                      <div class={`alert alert-danger align-items-center ${errorsMessage ? "d-flex" : "d-none"}`} role="alert">
+                        <div>Email dan Password tidak sesuai !</div>
+                      </div>
 
                       <form noValidate onSubmit={handleSubmit(onSubmit)} id="loginForm">
-                        <div className="">
+                        <div className="mb-3">
                           <label htmlFor="text" className="form-label">
                             Email
                           </label>
@@ -115,20 +126,18 @@ function SignIn() {
                         </div>
 
                         <div className="d-grid col-12 mt-md-4 mt-3">
-                          <Link to="/">
-                            <button type="submit" className="btn btn-sm btn-main">
-                              Masuk
-                            </button>
-                          </Link>
+                          <button type="submit" className="btn btn-sm btn-main">
+                            Masuk
+                          </button>
                         </div>
                       </form>
 
                       <div className="mt-4">
                         <p className="mb-0">
                           Belum punya akun?{" "}
-                          <a href="#" className="text-primary text-decoration-none">
+                          <Link to="/SignUp" className="text-primary text-decoration-none">
                             Daftar
-                          </a>
+                          </Link>
                         </p>
                       </div>
                     </div>
