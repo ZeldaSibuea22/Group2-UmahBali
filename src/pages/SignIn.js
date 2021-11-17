@@ -25,10 +25,9 @@ function SignIn() {
     let userEmail = localStorage.getItem("SubmissionEmail");
     let userPassword = localStorage.getItem("SubmissionPassword");
     console.log(inputEmail, inputPassword, userEmail, userPassword);
-    if (inputEmail === userEmail && inputPassword === userPassword) {
+    if (inputEmail !== userEmail && inputPassword !== userPassword) {
       setErrorMessage(true);
     } else {
-      localStorage.setItem("isLogin", "true");
       localStorage.setItem("isLogin", "true");
       Navigate("/");
     }
@@ -135,7 +134,7 @@ function SignIn() {
                       <div className="mt-4">
                         <p className="mb-0">
                           Belum punya akun?{" "}
-                          <Link to="/SignUp" className="text-primary text-decoration-none">
+                          <Link to="/sign-in" className="text-primary text-decoration-none">
                             Daftar
                           </Link>
                         </p>

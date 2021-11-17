@@ -10,13 +10,14 @@ import { useNavigate } from "react-router";
 
 export default function Userpage() {
   let isLogin = localStorage.getItem("isLogin");
+
   let navigate = useNavigate();
   if (isLogin === null) {
-    navigate("/SignIn");
+    navigate("/sign-in");
   }
 
-  const nama = "Agung";
-  const email = "agung@gmail.com";
+  const nama = localStorage.getItem("SubmissionName");
+  const email = localStorage.getItem("SubmissionEmail");
 
   const { properties, loading } = useContext(PropertiesContext);
   const { agents, agentLoading } = useContext(AgentsContext);
