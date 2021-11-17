@@ -61,13 +61,13 @@ function App() {
       <section>
         <div className="positon-relative main-section">       
           {/* image and title sub section */}
-          <div className="d-block d-md-flex min-w-100 position-relative">
+          <div className="d-block d-sm-flex min-w-100 position-relative">
             <div className="position-relative w-30 d-none d-md-block"></div>
             <div className="position-relative main-section-img">
               <img src="https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="House" className="img-fluid" />
             </div>
             
-            <div className="ps-md-5 pt-xl-5 pt-lg-3 pt-md-4 ms-xl-5 position-absolute title">
+            <div className="ps-sm-5 pt-xl-5 pt-lg-3 pt-md-4 ms-xl-5 position-absolute title">
               <div className="position-relative">
                 <h1 className="fw-bold fs-title">Temukan hunian</h1>
                 <h1 className="fw-bold fs-title">impianmu di sini !</h1>
@@ -78,7 +78,7 @@ function App() {
 
           {/* search property sub section */}
           <div className="position-relative">
-            <div className="mt-5 ms-xl-5 pe-xl-5 ps-xl-5 ps-md-5 searchProperty">
+            <div className="mt-5 ms-xl-5 pe-xl-5 ps-xl-5 ps-md-5 ps-sm-4 searchProperty">
               <ul className="nav" role="tablist" id="searchPropertyTab">
                 <li className="nav-item p-0">
                   <button className="px-3 nav-link text-secondary active bg-transparent border-0" id="pills-searchForm-tab" data-bs-toggle="pill" data-bs-target="#pills-searchForm" type="button" role="tab" aria-controls="pills-searchForm" aria-selected="true" onClick={() => handleBeli()}>
@@ -97,8 +97,8 @@ function App() {
               <div className="tab-content" id="pills-tabContent">
                 <div className="tab-pane show active" id="pills-searchForm" role="tabpanel" aria-labelledby="pills-searchForm-tab">
                   <div className="shadow-sm p-lg-4 p-md-3 p-3 bg-body rounded">
-                    <form className="row gx-0 gy-5 gy-md-0 gx-lg-5 px-lg-4 align-items-center justify-content-between search-property-form" onSubmit={handleSubmit(onSubmit)}>
-                      <div className="col-md-3 col-12">
+                    <form className="row gx-0 gy-5 gy-sm-0 gx-lg-5 px-lg-4 align-items-center justify-content-between search-property-form" onSubmit={handleSubmit(onSubmit)}>
+                      <div className="col-sm-3 col-12">
                         <label htmlFor="city"><p className="text-muted"><i className="fas fa-map-marker-alt"></i> <span className="ms-2">Kota</span></p></label>
                         <input 
                           className={`form-control border-0 fw-bold ${errors?.city ? 'is-invalid' : ''}`}
@@ -115,7 +115,7 @@ function App() {
                         </datalist>
                       </div>
 
-                      <div className="col-md-3 col-12">
+                      <div className="col-sm-3 col-12">
                         <label htmlFor="type"><p className="text-muted"><i className="fas fa-list"></i> <span className="ms-2">Tipe Properti</span></p></label>
                         <select
                           id="type"
@@ -135,7 +135,7 @@ function App() {
                         </select>
                       </div>
 
-                      <div className="col-md-4 col-12">
+                      <div className="col-sm-4 col-12">
                         <label htmlFor="price"><p className="text-muted"><i className="fas fa-dollar-sign"></i> <span className="ms-2">Range Harga</span></p></label>
                         <select 
                           id="price" 
@@ -156,9 +156,9 @@ function App() {
                         </select>
                       </div>
 
-                      <div className="col-md-1 col-12 text-center">
-                        <button className="btn btn-sm btn-main d-none d-md-block" type="submit"><i className="fas fa-search"></i></button>
-                        <button className="btn btn-sm btn-main d-block d-md-none" type="submit"><i className="fas fa-search me-2"></i> Cari</button>
+                      <div className="col-sm-1 col-12 text-center">
+                        <button className="btn btn-sm btn-main d-none d-sm-block" type="submit"><i className="fas fa-search"></i></button>
+                        <button className="btn btn-sm btn-main d-block d-sm-none" type="submit"><i className="fas fa-search me-2"></i> Cari</button>
                       </div>
                     </form>
                   </div>
@@ -189,7 +189,7 @@ function App() {
                   let agent = agents.find(agent => agent.id === property.agent);
                   return (
                     <div className="col-md-6 col-xl-4" key={property.id} >
-                      <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.kota}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`}/>
+                      <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.kota}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id}/>
                     </div>
                   )
                 })
@@ -237,7 +237,7 @@ function App() {
                       let agent = agents.find(agent => agent.id === property.agent);
                       return (
                         <div className="col-md-6 col-xl-4" key={property.id}>
-                          <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} />
+                          <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id} />
                         </div>
                       )
                     })
@@ -255,7 +255,7 @@ function App() {
                       let agent = agents.find(agent => agent.id === property.agent);
                       return (
                         <div className="col-md-6 col-xl-4" key={property.id}>
-                          <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} />
+                          <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id} />
                         </div>
                       )
                     })
@@ -273,7 +273,7 @@ function App() {
                       let agent = agents.find(agent => agent.id === property.agent);
                       return (
                         <div className="col-md-6 col-xl-4" key={property.id}>
-                          <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} />
+                          <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.lokasi}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id} />
                         </div>
                       )
                     })
