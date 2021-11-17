@@ -19,7 +19,7 @@ export default function Routers() {
       <Route path="/agents" element={<Agents />}></Route>
       <Route path="/sign-up" element={<SignUp />}></Route>
       <Route path="/sign-in" element={<SignIn />}></Route>
-      <Route path="/Userpage" element={<Userpage />}></Route>
+      <Route path="/userpage" element={<Userpage />}></Route>
       <Route path="*" element={<NotFound />}></Route>
     </Routes>
   );
