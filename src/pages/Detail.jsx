@@ -4,7 +4,7 @@ import '../style/3d.css'
 import { PropertiesContext } from "../context/property-context"
 import { AgentsContext } from "../context/agent-context"
 import { useForm } from 'react-hook-form'
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
     LightgalleryProvider,
     LightgalleryItem,
@@ -28,11 +28,19 @@ export default function DetailProperty() {
     let context = {}
     let agencontext = {}
     let params = useParams()
+    const notfound = useNavigate()
     for (var key in properties) {
         if (key == (params.id - 1)) {
             context = properties[key]
         }
     }
+
+    let loadingcontext = true
+    if (Object.keys(context).length === 0 && !loading) {
+        notfound('/notfound')
+        loadingcontext = false
+    }
+
     for (var key in agents) {
         if (key == (context.agent - 1)) {
             agencontext = agents[key]
@@ -46,7 +54,7 @@ export default function DetailProperty() {
     const PhotoItem = ({ image, thumb, group, classdiv, classimg, button }) => (
         <div className={classdiv}>
             <LightgalleryItem group={group} src={image} thumb={thumb}>
-                <img src={image} className={classimg} />
+                <img src={image} className={classimg} style={{ borderRadius: 'unset' }} />
             </LightgalleryItem>
             {button}
         </div>
@@ -66,8 +74,9 @@ export default function DetailProperty() {
     )
     return (
         <div className="App">
-            {!loading ?
+            {!loading && loadingcontext ?
                 <Layout>
+                    {/* {Object.keys(context).length === 0 ? notfound('/notfound') : ''} */}
                     <LightgalleryProvider>
                         {/* foto */}
                         <div className="container">

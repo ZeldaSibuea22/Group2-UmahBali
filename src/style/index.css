@@ -1,8 +1,7 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
  */
- @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
- /* @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap'); */
-
+@import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap");
+/* @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap'); */
 
 body {
   margin: 0;
@@ -12,18 +11,46 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
   /* font-family: 'Work Sans', sans-serif; */
-  font-family: 'Questrial', sans-serif;
+  font-family: "Questrial", sans-serif;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-  monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 #root {
-  font-family: 'Questrial', sans-serif;
+  font-family: "Questrial", sans-serif;
   /* font-family: 'Work Sans', sans-serif; */
-  letter-spacing: .04em;
+  letter-spacing: 0.04em;
+}
+
+.text-main {
+  color: #003459;
+}
+/* @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+ */
+@import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap");
+/* @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap'); */
+
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+  /* font-family: 'Work Sans', sans-serif; */
+  font-family: "Questrial", sans-serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+#root {
+  font-family: "Questrial", sans-serif;
+  /* font-family: 'Work Sans', sans-serif; */
+  letter-spacing: 0.04em;
 }
 
 /* COLOR */
@@ -37,8 +64,19 @@ code {
   border-color: #003459;
 }
 
-.btn.btn-main:focus, .btn.btn-main:hover {
+.btn.btn-main:focus,
+.btn.btn-main:hover {
   color: #fff;
+}
+
+.btn.btn-outline-main {
+  color: #003459;
+  border: 1px solid #003459;
+}
+
+.btn.btn-outline-main:hover, .btn.btn-outline-main:focus {
+  color: #fff;
+  background-color: #003459;
 }
 
 /* main section css */
@@ -61,7 +99,6 @@ code {
   font-size: larger;
 }
 
-
 /* font size */
 .fs-title {
   /* font-size: 50px; */
@@ -82,20 +119,22 @@ code {
 }
 
 .w-70 {
-  width: 70%!important;
+  width: 70% !important;
 }
 
 .w-30 {
-  width: 30%!important;
+  width: 30% !important;
 }
 
 .object-cover {
   object-fit: cover;
 }
 
+.rounded-4 {
+  border-radius: 15px;
+}
+
 /* carousel */
-
-
 
 /* background transparency */
 .opacity-50 {
@@ -122,15 +161,12 @@ code {
   width: 100%;
   left: 0;
   bottom: 0;
-  border-bottom: .2em solid #003459 !important;
+  border-bottom: 0.2em solid #003459 !important;
 }
-
-
-
 
 /* responsive */
 /* mobile */
-@media (max-width: 480px) {
+@media (max-width: 712px) {
   .fs-title {
     font-size: 1.6rem;
     text-align: center;
@@ -139,8 +175,8 @@ code {
   .title {
     width: 100%;
     margin-top: 20%;
-    background: rgba(255, 255, 255, 0.7 );
-    padding: .5rem;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 0.5rem;
   }
 
   .main-section-img {
@@ -164,7 +200,9 @@ code {
     font-size: medium;
   }
 
-  
+  .justdiv {
+    display: none;
+  }
 }
 
 /* tablet */
@@ -179,12 +217,27 @@ code {
 
   .searchProperty {
     bottom: 2rem !important;
-    font-size: .8rem !important;
+    font-size: 0.8rem !important;
   }
 
-  .search-property-form input, .search-property-form select {
-    font-size: .88rem !important;
+  .search-property-form input,
+  .search-property-form select {
+    font-size: 0.88rem !important;
   }
+}
+
+@media screen and (max-width: 767px) and (min-width: 712px) {
+  .searchProperty {
+    min-width: 99%;
+  }
+
+  main-section .d-md-block {
+    display: block !important;
+  }
+}
+
+@media screen and (max-width: 711px) and (min-width: 481px) {
+
 }
 
 @media screen and (max-width: 1190px) and (min-width: 990px) {

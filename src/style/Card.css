@@ -32,7 +32,7 @@
 }
 
 .label-top-left {
-    background-color: rgb(255,251,236);
+    background-color: whitesmoke;
     width: 60px;
     height: 25px;
     padding-bottom: 3px;
@@ -48,3 +48,9 @@ p {
     color : darkblue;
 }
 
+img {
+    weight: 80px;
+    height: 240px;
+    object-contain:fit;
+    border-radius: 10px 10px 0 0;
+}
