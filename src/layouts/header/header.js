@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import "../../style/header.css"
 import {
     useMatch,
-    useResolvedPath
+    useResolvedPath,
+    useLocation,
 } from "react-router-dom";
 
 export default function Headers() {
     const isLogin = localStorage.getItem('isLogin');
+    let location = useLocation()
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light text-center">
             <div className="container-fluid px-5">
@@ -21,11 +23,16 @@ export default function Headers() {
                             <CustomLink to="/#" aria-current="page">Beranda</CustomLink>
                         </li>
                         <li className="nav-item pe-lg-2">
+                            {location.pathname.includes('/properties/detail/') ? 
+                            <div>
+                                <Link className={"nav-link pb-lg-3 pb-2 active"} to='/properties'>
+                                    Properti
+                                </Link>
+                            </div > : 
                             <CustomLink to="/properties">Properti</CustomLink>
+                            }
                         </li>
-                        <li className="nav-item pe-lg-2">
-                            <CustomLink to="/agents">Agen</CustomLink>
-                        </li>
+                        {console.log(location.pathname)}
                         {/* Khusus Sign in user */}
                         <li className={"nav-item dropdown " + (isLogin ? "" : "d-none")}>
                             <a className="nav-link dropdown-toggle" href="href={() => false" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -52,7 +59,7 @@ function CustomLink({ children, to, ...props }) {
     let match = useMatch({ path: resolved.pathname, end: true });
     return (
         <div>
-            <Link className={"nav-link pb-lg-3 pb-2 " + (match ? "active" : " ")} to={to} {...props}>
+            <Link className={"nav-link pb-lg-3 pb-2 " + (match ? 'active' : '')} to={to} {...props}>
                 {children}
             </Link>
             {match && ""}

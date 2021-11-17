@@ -8,7 +8,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
     LightgalleryProvider,
     LightgalleryItem,
-    useLightgallery
+    useLightgallery,
+    withLightgallery
 } from "react-lightgallery"
 
 
@@ -166,19 +167,37 @@ export default function DetailProperty() {
                         <div className="container mt-5 mb-5">
                             <h3 className="text-start fw-bold" id="detail">Detail</h3>
                             <iframe src={context.image360} width="100%" height="500px" frameborder="0"></iframe>
+                            {console.log(context)}
+                            <div className="d-flex flex-wrap flex-md-row">
+                                <h6 className="me-4"><i class="fas fa-home"></i> {context.propertyDetail.luas} m2</h6>
+                                <h6 className="me-4"><i class="fas fa-bed"></i> {context.propertyDetail.kamar ? context.propertyDetail.kamar : '-'} kamar</h6>
+                                <h6 className="me-4"><i class="fas fa-shower"></i> {context.propertyDetail.toilet ? context.propertyDetail.toilet : '-'} toilet</h6>
+                                <h6 className="me-4"><i class="fas fa-warehouse"></i> {context.propertyDetail.garasi ? context.propertyDetail.garasi : '-'} garasi</h6>
+                                <h6 className="me-4"><i class="fas fa-swimming-pool"></i>{context.propertyDetail.kolam ? context.propertyDetail.garasi : '-'}</h6>
+                                <h6 className="me-4"><i class="fas fa-calendar-check"></i> Dibangun {context.propertyDetail.dibangun ? context.propertyDetail.dibangun : '-'}</h6>
+                                <h6 className="me-4"><i class="fas fa-calendar-check"></i> Ditambahkan {context.tglDitambahkan ? context.tglDitambahkan : '-'}</h6>
+                            </div>
+                            <h5 className="mt-4 fw-bold">Termasuk</h5>
+                            <div className="d-flex mt-4">
+                                <h6 className="me-4"><i class="fas fa-temperature-low"> {context.propertyDetail.termasuk[0] ? context.propertyDetail.termasuk[0] : '-'}</i></h6>
+                                <h6 className="me-4"><i class="fas fa-snowflake"> {context.propertyDetail.termasuk[1] ? context.propertyDetail.termasuk[1] : '-'}</i></h6>
+                                <h6 className="me-4"><i class="fas fa-wifi"> {context.propertyDetail.termasuk[2] ? context.propertyDetail.termasuk[2] : '-'}</i></h6>
+                            </div>
                         </div>
                         {/* Video */}
                         <div className="container mt-5 mb-5" id="videotour">
                             <h3 className="text-start fw-bold">Video Tour</h3>
                             <iframe width="100%" height="500px"
-                                src={context.videotour}>
+                                src={context.videoTour}>
+
                             </iframe>
+                            {console.log(context.videoTour)}
                         </div>
                         {/* Lokasi */}
                         <div className="container mt-5 mb-5" id="lokasi">
                             <h3 className="text-start fw-bold">Lokasi</h3>
                             <div className="text-start">
-                                <p className="icon"><i class="fas fa-map-marker-alt text-danger"></i> Jalan Bali no 1</p>
+                                <p className="icon"><i class="fas fa-map-marker-alt text-danger"></i> {context.alamatLengkap}</p>
                             </div>
                             <div className="row">
                                 <div className="col-12 col-lg-9">
