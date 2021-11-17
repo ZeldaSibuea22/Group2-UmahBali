@@ -121,7 +121,7 @@ function SignUp() {
                       </div>
 
                       {/* form password */}
-                      <div className="mb-3">
+                      <div className="mb-3 mt-3">
                         <label for="password" className="form-label">
                           Password
                         </label>
