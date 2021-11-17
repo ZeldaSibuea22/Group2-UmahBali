@@ -5,7 +5,17 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/index.css'
 import '../style/Card.css'
 
-export default function Card({src,nama,lokasi,tipe,agen,harga,href}){
+export default function Card({src,nama,lokasi,tipe,agen,harga,href, id}){
+    function addWishlist(id) {
+        let wishlist = localStorage.getItem('wishlist')
+        if(wishlist) {
+            wishlist = JSON.parse(wishlist)
+            wishlist.push(id)
+        } else {
+            wishlist = [id]
+        }
+        localStorage.setItem('wishlist', JSON.stringify(wishlist))
+    }
             return (
             <div className="text-decoration-none">
                 <div className="card h-100 hover-shadow mt-4 position-relative">
@@ -13,7 +23,7 @@ export default function Card({src,nama,lokasi,tipe,agen,harga,href}){
                     <div className="label-top-left position-absolute badge rounded-pill col-3 mt-3 ms-3">
                         <span className="fw-bold ">{tipe}</span>
                     </div>
-                    <div className="label-top shadow-sm"><button onClick={(console.log)} className ="btn btn-sm text-white"><i class="far fa-heart"></i></button></div>
+                    <div className="label-top shadow-sm"><button onClick={() => addWishlist(id)} className ="btn btn-sm text-white"><i class="far fa-heart"></i></button></div>
                     </div> 
                         
                    <img
