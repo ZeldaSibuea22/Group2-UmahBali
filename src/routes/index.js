@@ -4,6 +4,7 @@ import Properties from "../pages/Properties";
 
 import Agents from "../pages/Agents"
 import DetailProperty from "../pages/Detail";
+import NotFound from "../pages/NotFound";
 
 
 
@@ -19,6 +20,7 @@ export default function Routers(){
         </Route>
         <Route path="/detail" element={<DetailProperty />}>
         </Route>
+        <Route path="*" element={<NotFound />}></Route>
     </Routes>
     )
 }

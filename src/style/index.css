@@ -41,6 +41,16 @@ code {
   color: #fff;
 }
 
+.btn.btn-outline-main {
+  color: #003459;
+  border: 1px solid #003459;
+}
+
+.btn.btn-outline-main:hover, .btn.btn-outline-main:focus {
+  color: #fff;
+  background-color: #003459;
+}
+
 /* main section css */
 .title {
   top: 10%;
