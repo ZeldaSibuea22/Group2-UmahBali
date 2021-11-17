@@ -135,7 +135,7 @@ function SignIn() {
                       <div className="mt-4">
                         <p className="mb-0">
                           Belum punya akun?{" "}
-                          <Link to="/SignUp" className="text-primary text-decoration-none">
+                          <Link to="/sign-up" className="text-primary text-decoration-none">
                             Daftar
                           </Link>
                         </p>
