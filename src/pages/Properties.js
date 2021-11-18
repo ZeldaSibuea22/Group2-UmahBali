@@ -38,6 +38,7 @@ export default function Properties() {
   
     return (
     <Layout>
+        <div className="container"> 
         <div className="row text-center mt-1 gx-0 gy-4 gx-md-4">
             <h1 className="text-center mt-5 fw-bold">Properti</h1>
                 <h5 className="">UmahBali group berkomitmen untuk membantu Anda</h5>
@@ -70,7 +71,7 @@ export default function Properties() {
                     ? filterType.rumah.map((property) => {
                         let agent = agents.find((agent) => agent.id === property.agent);
                         return (
-                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-4 col-sm-4 col-12 m-auto mt-4" key={property.id}>
+                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
                             <Card
                             src={property.img[0]}
                             tipe={property.propertyType}
@@ -95,7 +96,7 @@ export default function Properties() {
                     ? filterType.ruko.map((property) => {
                         let agent = agents.find((agent) => agent.id === property.agent);
                         return (
-                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-4 col-sm-4 col-12 m-auto mt-4" key={property.id}>
+                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
                             <Card
                             src={property.img[0]}
                             tipe={property.propertyType}
@@ -104,6 +105,7 @@ export default function Properties() {
                             harga={`IDR. ${formatPrice(property.price)}`}
                             agen={agent.nama}
                             href={`/properties/detail/${property.id}`}
+                            id={property.id}
                             />
                         </div>
                         );
@@ -119,7 +121,7 @@ export default function Properties() {
                     ? filterType.vila.map((property) => {
                         let agent = agents.find((agent) => agent.id === property.agent);
                         return (
-                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-4 col-sm-4 col-12 m-auto mt-4" key={property.id}>
+                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
                             <Card
                             src={property.img[0]}
                             tipe={property.propertyType}
@@ -128,6 +130,7 @@ export default function Properties() {
                             harga={`IDR. ${formatPrice(property.price)}`}
                             agen={agent.nama}
                             href={`/properties/detail/${property.id}`}
+                            id={property.id}
                             />
                         </div>
                         );
@@ -137,7 +140,7 @@ export default function Properties() {
             </div>
         </div>    
     </div>
-
+</div>
                 </Layout>
         
             )
