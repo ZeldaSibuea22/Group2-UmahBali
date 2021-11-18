@@ -11,9 +11,9 @@ import { useNavigate } from "react-router";
 export default function Userpage() {
   let isLogin = localStorage.getItem("isLogin");
   let navigate = useNavigate();
-  // if (isLogin === null) {
-  //   navigate("/SignIn");
-  // }
+  if (isLogin === null) {
+    navigate("/SignIn");
+  }
   
   const nama = "Agung";
   const email = "agung@gmail.com";
@@ -71,7 +71,7 @@ export default function Userpage() {
                       let agent = agents.find((agent) => agent.id == value.agent);
                       return (
                         <div className="col-md-6 col-xl-4">
-                          <Card src={value.img[0]} tipe={value.propertyType} nama={value.propertyName} lokasi={`${value.kota}, Bali`} harga={`IDR. ${formatPrice(value.price)}`} agen={agent.nama} href={`/properties/detail/${value.id}`} id={value.id} />
+                          <Card src={value.img[0]} variable = {true} tipe={value.propertyType} nama={value.propertyName} lokasi={`${value.kota}, Bali`} harga={`IDR. ${formatPrice(value.price)}`} agen={agent.nama} href={`/properties/detail/${value.id}`} id={value.id} />
                         </div>
                       );
                     })
