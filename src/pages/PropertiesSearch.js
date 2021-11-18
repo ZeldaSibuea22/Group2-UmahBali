@@ -18,7 +18,7 @@ export default function PropertiesSearch(){
   const { agents, agentLoading } = useContext(AgentsContext);
   let filterProperty = []
   
-  const [isReload,setisReload] = useState(false)
+  const [propertiSearch,setPropertiSearch] = useState([])
 
  let dataProperti = localStorage.getItem ('searchProperty');
  dataProperti = JSON.parse(dataProperti);
@@ -34,8 +34,7 @@ export default function PropertiesSearch(){
   
   function searchbyInput(input){
     filterProperty = filterProperty.filter(item=>(item.alamatLengkap).toLowerCase().includes(input.toLowerCase()))
-    setisReload(true)
-    console.log(filterProperty)
+    setPropertiSearch(filterProperty)
   } 
   const formatPrice = (price) => {
     if (price > 999 && price < 1000000) {
@@ -49,6 +48,7 @@ export default function PropertiesSearch(){
     }
     };
 
+    console.log(propertiSearch);
 
     
     return( 
@@ -64,25 +64,44 @@ export default function PropertiesSearch(){
       <h3 className="mt-5 fw-bold">{dataProperti.type === 'Semua' ? 'Properti' : dataProperti.type} di {dataProperti.city}</h3>
 
       <div className="row mt-1 gx-0 gy-4 gx-md-4 mx-2">
-        {!loading && !agentLoading
-                    ? filterProperty.map((property) => {
-                        let agent = agents.find((agent) => agent.id === property.agent);
-                        return (
-                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
-                            <Card
-                            src={property.img[0]}
-                            tipe={property.propertyType}
-                            nama={property.propertyName}
-                            lokasi={`${property.kota}, Bali`}
-                            harga={`IDR. ${formatPrice(property.price)}`}
-                            agen={agent.nama}
-                            href={`/properties/detail/${property.id}`}
-                            id={property.id}
-                            />
-                        </div>
-                        );
-                    })
-                    : null}
+        {!loading && !agentLoading ? 
+          propertiSearch.length > 0 ? 
+            propertiSearch.map((property) => {
+              let agent = agents.find((agent) => agent.id === property.agent);
+              return (
+              <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
+                  <Card
+                  src={property.img[0]}
+                  tipe={property.propertyType}
+                  nama={property.propertyName}
+                  lokasi={`${property.kota}, Bali`}
+                  harga={`IDR. ${formatPrice(property.price)}`}
+                  agen={agent.nama}
+                  href={`/properties/detail/${property.id}`}
+                  id={property.id}
+                  />
+              </div>
+              );
+          }) :
+          
+            filterProperty.map((property) => {
+              let agent = agents.find((agent) => agent.id === property.agent);
+              return (
+              <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
+                  <Card
+                  src={property.img[0]}
+                  tipe={property.propertyType}
+                  nama={property.propertyName}
+                  lokasi={`${property.kota}, Bali`}
+                  harga={`IDR. ${formatPrice(property.price)}`}
+                  agen={agent.nama}
+                  href={`/properties/detail/${property.id}`}
+                  id={property.id}
+                  />
+              </div>
+              );
+          })
+          : null}
      
     </div>
     <h4 className="mt-5 fw-bold">Lokasi</h4>
