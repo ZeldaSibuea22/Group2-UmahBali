@@ -43,8 +43,8 @@ export default function Card({src,nama,lokasi,tipe,agen,harga,href, id, variable
         addWishlist(id)
     }
             return (
-            <div className="text-decoration-none">
-                <div className={"card h-100 hover-shadow mt-4 position-relative " + (missing? 'invisible': '') }>
+            <div className={"text-decoration-none m-1 " + (missing? 'd-none': '')}>
+                <div className={"card h-100 hover-shadow mt-4 position-relative "  }>
                     <div className="card-img">
                         <div className="label-top-left position-absolute badge rounded-pill col-3 mt-3 ms-3">
                             <span className="fw-bold ">{tipe}</span>

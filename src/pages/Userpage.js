@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import Card from "../components/Card";
 import "../style/index.css";
+import "../style/userpage.css";
 
 import { PropertiesContext } from "../context/property-context";
 import { AgentsContext } from "../context/agent-context";
@@ -20,6 +21,7 @@ export default function Userpage() {
   
   const { properties, loading } = useContext(PropertiesContext);
   const { agents, agentLoading } = useContext(AgentsContext);
+  // let [missing, setMissing] = useState(false)
   
   let idCard = localStorage.getItem("wishlist");
   idCard = JSON.parse(idCard);
@@ -65,14 +67,14 @@ export default function Userpage() {
 
           <section>
             <div className="container py-5 mt-5">
-              <div className="row mt-1 gx-0 gy-4 gx-md-4">
+              <div className="mt-1 gx-0 gy-4 gx-md-4 gridpage">
                 {!loading && !agentLoading
                   ? wishlistUser.map((value) => {
                       let agent = agents.find((agent) => agent.id == value.agent);
                       return (
-                        <div className="col-md-6 col-xl-4">
+                        // <div className="m-2">
                           <Card src={value.img[0]} variable = {true} tipe={value.propertyType} nama={value.propertyName} lokasi={`${value.kota}, Bali`} harga={`IDR. ${formatPrice(value.price)}`} agen={agent.nama} href={`/properties/detail/${value.id}`} id={value.id} />
-                        </div>
+                        // </div>
                       );
                     })
                   : null}
