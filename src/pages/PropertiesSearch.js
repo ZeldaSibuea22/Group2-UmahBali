@@ -5,7 +5,6 @@ import Card from "../components/Card";
 import { PropertiesContext } from "../context/property-context";
 import { AgentsContext } from "../context/agent-context";
 import { useState, useContext } from "react";
-import { useSearchParams } from 'react-router-dom';
 
 
 export default function PropertiesSearch(){

@@ -28,7 +28,7 @@ export default function Userpage() {
   idCard = JSON.parse(idCard);
   let context = {};
   for (let key in properties) {
-    if (key == idCard) {
+    if (key === idCard) {
       context = properties[key];
     }
   }
@@ -79,7 +79,7 @@ export default function Userpage() {
               <div className="row mt-1 gx-0 gy-4 gx-md-4">
                 {!loading && !agentLoading
                   ? wishlistUser.map((value) => {
-                      let agent = agents.find((agent) => agent.id == value.agent);
+                      let agent = agents.find((agent) => agent.id === value.agent);
                       return (
                         <div className="col-md-6 col-xl-4">
                           <Card src={value.img[0]} tipe={value.propertyType} nama={value.propertyName} lokasi={`${value.kota}, Bali`} harga={`IDR. ${formatPrice(value.price)}`} agen={agent.nama} href={`/properties/detail/${value.id}`} />
