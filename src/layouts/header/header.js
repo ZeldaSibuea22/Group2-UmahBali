@@ -1,16 +1,25 @@
 
 import React from 'react'
-import { Link } from "react-router-dom";
 import "../../style/header.css"
 import {
+    Link,
     useMatch,
     useResolvedPath,
     useLocation,
+    useNavigate
 } from "react-router-dom";
 
 export default function Headers() {
     const isLogin = localStorage.getItem('isLogin');
     let location = useLocation()
+
+    const navigate = useNavigate();
+
+    function logout() {
+        localStorage.removeItem("isLogin");
+        navigate("/");
+    }
+    
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light text-center">
             <div className="container-fluid px-5">
