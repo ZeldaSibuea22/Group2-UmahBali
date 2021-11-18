@@ -16,10 +16,10 @@ export default function Routers() {
     <Routes>
       <Route path="/" element={<App />}></Route>
       <Route path="/properties" element={<Properties />}></Route>
-      <Route path="/agents" element={<Agents />}></Route>
       <Route path="/sign-up" element={<SignUp />}></Route>
       <Route path="/sign-in" element={<SignIn />}></Route>
       <Route path="/userpage" element={<Userpage />}></Route>
+      <Route path="/properties/detail/:id" element={<DetailProperty />}></Route>
       <Route path="*" element={<NotFound />}></Route>
     </Routes>
   );

@@ -27,7 +27,7 @@ function App() {
     data.hakMilikType = hakMilik;
     const searchValue = data;
     localStorage.setItem("searchProperty", JSON.stringify(searchValue));
-    navigate("/searchProperty");
+    navigate("/search-property");
   };
 
   const { properties, loading } = useContext(PropertiesContext);
@@ -67,7 +67,7 @@ function App() {
           <div className="d-block d-sm-flex min-w-100 position-relative">
             <div className="position-relative w-30 d-md-block justdiv"></div>
             <div className="position-relative main-section-img">
-              <img src="https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="House" className="img-fluid" />
+              <img src="https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="House" className="img-fluid rounded-0" />
             </div>
             
             <div className="ps-sm-5 pt-xl-5 pt-lg-3 pt-md-4 ms-xl-5 position-absolute title">
