@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import Card from "../components/Card";
 import "../style/index.css";
@@ -14,29 +14,21 @@ export default function Userpage() {
   if (isLogin === null) {
     navigate("/SignIn");
   }
-
+  
   const nama = "Agung";
   const email = "agung@gmail.com";
-
+  
   const { properties, loading } = useContext(PropertiesContext);
   const { agents, agentLoading } = useContext(AgentsContext);
-
+  
   let idCard = localStorage.getItem("wishlist");
   idCard = JSON.parse(idCard);
-  let context = {};
-  for (let key in properties) {
-    if (key == idCard) {
-      context = properties[key];
-    }
-  }
-  console.log(context);
-
+  
   let wishlistUser = [];
   if (!loading && idCard) {
     wishlistUser = idCard.map((element) => properties.find((property) => property.id === element));
-    console.log(wishlistUser);
   }
-
+  
   const formatPrice = (price) => {
     if (price > 999 && price < 1000000) {
       return `${(price / 1000).toFixed(1)} K`;
@@ -79,7 +71,7 @@ export default function Userpage() {
                       let agent = agents.find((agent) => agent.id == value.agent);
                       return (
                         <div className="col-md-6 col-xl-4">
-                          <Card src={value.img[0]} tipe={value.propertyType} nama={value.propertyName} lokasi={`${value.kota}, Bali`} harga={`IDR. ${formatPrice(value.price)}`} agen={agent.nama} href={`/properties/detail/${value.id}`} />
+                          <Card src={value.img[0]} tipe={value.propertyType} nama={value.propertyName} lokasi={`${value.kota}, Bali`} harga={`IDR. ${formatPrice(value.price)}`} agen={agent.nama} href={`/properties/detail/${value.id}`} id={value.id} />
                         </div>
                       );
                     })

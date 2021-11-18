@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -6,13 +6,21 @@ import '../style/index.css'
 import '../style/Card.css'
 
 export default function Card({src,nama,lokasi,tipe,agen,harga,href, id}){
+    let initialWishlist = localStorage.getItem('wishlist')
+    initialWishlist = JSON.parse(initialWishlist)
+    let [wishlist, setWishlist] = useState(initialWishlist || [])
+    
+    let indexOfWishlist = wishlist.indexOf(id)
     function addWishlist(id) {
-        let wishlist = localStorage.getItem('wishlist')
         if(wishlist) {
-            wishlist = JSON.parse(wishlist)
-            wishlist.push(id)
+            if(indexOfWishlist === -1) {
+                setWishlist([...wishlist, id])
+                // wishlist.push(id)
+            } else {
+                wishlist.splice(indexOfWishlist, 1)
+            }
         } else {
-            wishlist = [id]
+            setWishlist([id])
         }
         localStorage.setItem('wishlist', JSON.stringify(wishlist))
     }
@@ -20,10 +28,14 @@ export default function Card({src,nama,lokasi,tipe,agen,harga,href, id}){
             <div className="text-decoration-none">
                 <div className="card h-100 hover-shadow mt-4 position-relative">
                     <div className="card-img">
-                    <div className="label-top-left position-absolute badge rounded-pill col-3 mt-3 ms-3">
-                        <span className="fw-bold ">{tipe}</span>
-                    </div>
-                    <div className="label-top shadow-sm"><button onClick={() => addWishlist(id)} className ="btn btn-sm text-white"><i class="far fa-heart"></i></button></div>
+                        <div className="label-top-left position-absolute badge rounded-pill col-3 mt-3 ms-3">
+                            <span className="fw-bold ">{tipe}</span>
+                        </div>
+                        <div className="label-top shadow-sm">
+                            <button onClick={() => addWishlist(id)} className ="btn btn-sm text-white">
+                                {indexOfWishlist === -1 ? <i class="far fa-heart"></i> : <i class="fas fa-heart"></i>}
+                            </button>
+                        </div>
                     </div> 
                         
                    <img
