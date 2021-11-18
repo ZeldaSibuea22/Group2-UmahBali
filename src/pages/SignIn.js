@@ -30,7 +30,7 @@ function SignIn() {
       Navigate("/");
     }
   };
-  console.log(errors);
+  
   return (
     <div className="container">
       <div className="row">
@@ -45,7 +45,7 @@ function SignIn() {
                       <p className="text-secondary mt-1 mb-2">Selamat datang di UmahBali</p>
                     </div>
                     <div className="col-lg-5 col-md-5 col-7 p-2 my-auto">
-                      <img src="https://t3.ftcdn.net/jpg/02/22/46/52/360_F_222465278_7iugd1RGKKwm6p4AbQPAInFSHLOVvhpt.jpg" class="img-fluid w-100" alt="property pict" />
+                      <img src="https://t3.ftcdn.net/jpg/02/22/46/52/360_F_222465278_7iugd1RGKKwm6p4AbQPAInFSHLOVvhpt.jpg" className="img-fluid w-100" alt="property pict" />
                     </div>
 
                     <div className="col-lg-5 col-md-6 col-12 p-lg-5 px-4 pe-lg-2 py-md-5">
@@ -55,7 +55,7 @@ function SignIn() {
                       </div>
                       {/* Alert */}
 
-                      <div class={`alert alert-danger align-items-center ${errorsMessage ? "d-flex" : "d-none"}`} role="alert">
+                      <div className={`alert alert-danger align-items-center ${errorsMessage ? "d-flex" : "d-none"}`} role="alert">
                         <div>Email dan Password tidak sesuai !</div>
                       </div>
 
@@ -80,7 +80,7 @@ function SignIn() {
                               })}
                               placeholder="pengguna@mail.com"
                               id="email"
-                              autocomplete="off"
+                              autoComplete="off"
                               onKeyUp={() => {
                                 trigger("email");
                               }}
@@ -90,7 +90,7 @@ function SignIn() {
                         </div>
 
                         <div className="mb-2">
-                          <label for="password" className="form-label">
+                          <label htmlFor="password" className="form-label">
                             Password
                           </label>
                           <div className="input-group mb-1">
@@ -109,7 +109,7 @@ function SignIn() {
                               })}
                               placeholder="masukan password"
                               id="password"
-                              autocomplete="off"
+                              autoComplete="off"
                             />
                           </div>
                           {errors.password && <small className="text-danger">{errors.password.message}</small>}
@@ -117,7 +117,7 @@ function SignIn() {
 
                         <div className="mb-3 form-check">
                           <input type="checkbox" onClick={() => togglePasswordVisiblity()} className="form-check-input" id="showPassword" />
-                          <label className="form-check-label" for="showPassword">
+                          <label className="form-check-label" htmlFor="showPassword">
                             Tampilkan password
                           </label>
                         </div>

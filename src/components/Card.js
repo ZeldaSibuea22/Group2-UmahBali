@@ -51,7 +51,7 @@ export default function Card({src,nama,lokasi,tipe,agen,harga,href, id, variable
                         </div>
                         <div className="label-top shadow-sm">
                             <button onClick={() => variable? setMissingCard(id) :addWishlist(id)} className ="btn btn-sm text-white">
-                                {active ? <i class="fas fa-heart"></i> : <i class="far fa-heart"></i>}
+                                {active ? <i className="fas fa-heart"></i> : <i className="far fa-heart"></i>}
                             </button>
                         </div>
                     </div> 
@@ -61,18 +61,18 @@ export default function Card({src,nama,lokasi,tipe,agen,harga,href, id, variable
                     className="" alt="card property"/>
 
                     <div className="card-body">
-                            <span class="me-2 badge rounded-pill bg-success pe-2">NEW</span>
-                            <span class="badge rounded-pill bg-danger">SEWA</span>
+                            <span className="me-2 badge rounded-pill bg-success pe-2">NEW</span>
+                            <span className="badge rounded-pill bg-danger">SEWA</span>
                     <Link className="text-decoration-none" to={href}>
                         <div className="clearfix mb-1">
-                            <span class="float-start fw-bolder fs-5" style={{color:"black"}}>{nama}</span>
+                            <span className="float-start fw-bolder fs-5" style={{color:"black"}}>{nama}</span>
                         </div>
                     </Link>   
                             
                             <div className="text-secondary md-3">{lokasi}</div>
                                             <div className="row mt-3">
                                 <div className="col-12 col-md-6">
-                                <p className="text-secondary"><i class="fas fa-user-circle"></i>{agen}</p>
+                                <p className="text-secondary"><i className="fas fa-user-circle"></i>{agen}</p>
                                 </div>
                             <div className="col-12 col-md-6 text-start text-md-end">
                                 <h5 className="fw-bold"style={{color:"black"}}>{harga}</h5>
@@ -80,24 +80,24 @@ export default function Card({src,nama,lokasi,tipe,agen,harga,href, id, variable
                             </div>
                         </div>
                     </div>
-                    {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Launch demo modal
                     </button> */}
 
                   
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
+                            <div className="modal-body">
                                 ...
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" className="btn btn-primary">Save changes</button>
                             </div>
                             </div>
                         </div>

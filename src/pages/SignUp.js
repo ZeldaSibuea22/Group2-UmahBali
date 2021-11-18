@@ -58,7 +58,7 @@ function SignUp() {
                   <p className="text-secondary mt-1">Daftarkan akun anda dan dapatkan promo dan informasi menarik seputar properti</p>
                 </div>
                 <div className="col-lg-5 col-md-5 col-7 p-2 my-auto">
-                  <img src="https://t3.ftcdn.net/jpg/02/22/46/52/360_F_222465278_7iugd1RGKKwm6p4AbQPAInFSHLOVvhpt.jpg" class="img-fluid w-100" alt="Eco Shopping" />
+                  <img src="https://t3.ftcdn.net/jpg/02/22/46/52/360_F_222465278_7iugd1RGKKwm6p4AbQPAInFSHLOVvhpt.jpg" className="img-fluid w-100" alt="Eco Shopping" />
                 </div>
 
                 <div className="col-lg-6 col-md-6 col-12 p-lg-5 px-4 pe-md-2 py-md-5">
@@ -70,7 +70,7 @@ function SignUp() {
                   {/* Input Nama */}
                   <form onSubmit={handleSubmit(onSubmit)} id="registForm">
                     <div className="mb-3">
-                      <label for="name" className="form-label">
+                      <label htmlFor="name" className="form-label">
                         Nama
                       </label>
                       <div className="input-group">
@@ -86,7 +86,7 @@ function SignUp() {
                           }}
                           placeholder="Harry Potter"
                           id="name"
-                          autocomplete="off"
+                          autoComplete="off"
                         />
                       </div>
                       {errors.name && <small className="text-danger">{errors.name.message}</small>}
@@ -94,7 +94,7 @@ function SignUp() {
 
                     {/* Input Email */}
                     <div className="mb-3">
-                      <label for="email" className="form-label">
+                      <label htmlFor="email" className="form-label">
                         Email
                       </label>
                       <div className="input-group">
@@ -113,7 +113,7 @@ function SignUp() {
                           })}
                           placeholder="pengguna@gmail.com"
                           id="email"
-                          autocomplete="off"
+                          autoComplete="off"
                           onKeyUp={() => {
                             trigger("email");
                           }}
@@ -123,7 +123,7 @@ function SignUp() {
 
                       {/* form password */}
                       <div className="mb-3 mt-3">
-                        <label for="password" className="form-label">
+                        <label htmlFor="password" className="form-label">
                           Password
                         </label>
                         <div className="input-group">
@@ -142,7 +142,7 @@ function SignUp() {
                             })}
                             placeholder="masukan password"
                             id="password"
-                            autocomplete="off"
+                            autoComplete="off"
                           />
                         </div>
                         {errors.password && <small className="text-danger">{errors.password.message}</small>}
@@ -150,7 +150,7 @@ function SignUp() {
 
                       {/* konfirmasipassword */}
                       <div className="mb-3">
-                        <label for="password" className="form-label">
+                        <label htmlFor="password" className="form-label">
                           Konfirmasi Password
                         </label>
                         <div className="input-group">
@@ -169,7 +169,7 @@ function SignUp() {
                             })}
                             placeholder="masukan password"
                             id="password"
-                            autocomplete="off"
+                            autoComplete="off"
                           />
                         </div>
                         {errors.passwordconfirm && <small className="text-danger">{errors.passwordconfirm.message}</small>}
@@ -177,7 +177,7 @@ function SignUp() {
 
                       <div className="mb-3 form-check">
                         <input type="checkbox" onClick={() => togglePasswordVisiblity()} className="form-check-input" id="showPassword" />
-                        <label className="form-check-label" for="showPassword">
+                        <label className="form-check-label" htmlFor="showPassword">
                           Tampilkan password
                         </label>
                       </div>
@@ -191,7 +191,7 @@ function SignUp() {
                   </form>
 
                   <div className="mt-4">
-                    <p class=" mb-0">
+                    <p className=" mb-0">
                       Sudah punya akun?{" "}
                       <Link to="/sign-in" className="text-primary text-decoration-none">
                         Masuk
