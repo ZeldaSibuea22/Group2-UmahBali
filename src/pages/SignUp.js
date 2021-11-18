@@ -192,7 +192,7 @@ function SignUp() {
                   <div className="mt-4">
                     <p class=" mb-0">
                       Sudah punya akun?{" "}
-                      <Link to="/SignIn" className="text-primary text-decoration-none">
+                      <Link to="/sign-in" className="text-primary text-decoration-none">
                         Masuk
                       </Link>
                     </p>
