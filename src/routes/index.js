@@ -17,7 +17,7 @@ export default function Routers() {
       <Route path="/sign-up" element={<SignUp />}></Route>
       <Route path="/sign-in" element={<SignIn />}></Route>
       <Route path="/userpage" element={<Userpage />}></Route>
-      <Route path="/search-property" element={<Properties_Search />}></Route>
+      <Route path="/search-property" element={<PropertiesSearch />}></Route>
       <Route path="/properties/detail/:id" element={<DetailProperty />}></Route>
       <Route path="*" element={<NotFound />}></Route>
     </Routes>
