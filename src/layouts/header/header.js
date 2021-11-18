@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Link } from "react-router-dom";
 import "../../style/header.css"
@@ -35,16 +36,26 @@ export default function Headers() {
                         {console.log(location.pathname)}
                         {/* Khusus Sign in user */}
                         <li className={"nav-item dropdown " + (isLogin ? "" : "d-none")}>
-                            <a className="nav-link dropdown-toggle" href="href={() => false" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i className="fas fa-user"></i>
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a href="href={() => false" className="dropdown-item"><i className="fas fa-heart fa-fw"></i> Wish List</a></li>
-                                <li><hr className="dropdown-divider"></hr></li>
-                                <li><a href="href={() => false" className="dropdown-item" ><i className="fas fa-sign-out-alt fa-fw"></i> Keluar</a></li>
+                           <a className="nav-link dropdown-toggle" href="href={() => false" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i className="fas fa-user"></i>
+                           </a>
+                           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <li>
+                                <Link to="/userpage" className="dropdown-item">
+                                  <i className="fas fa-heart fa-fw"></i> Wish List
+                                </Link>
+                              </li>
+                              <li>
+                                 <hr className="dropdown-divider"></hr>
+                              </li>
+                              <li>
+                                  <a onClick={() => logout()} className="dropdown-item">
+                                      <i className="fas fa-sign-out-alt fa-fw"></i> Keluar
+                                  </a>
+                              </li>
                             </ul>
-                        </li>
-                    </ul>
+                          </li>
+                         </ul>
                     {/* {isLogin ? } */}
                     <Link to="/sign-in" className={"nav-link " + (isLogin ? "d-none" : "")} >
                         <button className="btn btn-primary" style={{ backgroundColor: "#003459", border: "none" }}>Masuk</button>
