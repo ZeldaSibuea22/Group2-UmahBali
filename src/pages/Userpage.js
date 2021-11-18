@@ -11,9 +11,9 @@ import { useNavigate } from "react-router";
 export default function Userpage() {
   let isLogin = localStorage.getItem("isLogin");
   let navigate = useNavigate();
-  if (isLogin === null) {
-    navigate("/SignIn");
-  }
+  // if (isLogin === null) {
+  //   navigate("/SignIn");
+  // }
   
   const nama = "Agung";
   const email = "agung@gmail.com";

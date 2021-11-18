@@ -6,30 +6,36 @@ import '../style/index.css'
 import '../style/Card.css'
 
 export default function Card({src,nama,lokasi,tipe,agen,harga,href, id}){
-    let [click, setClick] = useState(false)
-    let initialWishlist = localStorage.getItem('wishlist') || "[]"
-    initialWishlist = JSON.parse(initialWishlist)
-    let indexOfWishlist = initialWishlist.indexOf(id)
-
-    console.log(initialWishlist);
-    console.log(indexOfWishlist);
-    
+    let local = localStorage.getItem('wishlist') 
+    let a = local.includes(id)
+    let [active, setActive] = useState(a)
     function addWishlist(id) {
-        let wishlist = initialWishlist
+        let temp = []
+        let wishlist = localStorage.getItem('wishlist') || temp
+        if (wishlist !== temp){
+            wishlist = JSON.parse(wishlist)
+        }
+        let indexOfWishlist = wishlist.indexOf(id)
+        console.log(wishlist);
         if(wishlist) {
             if(indexOfWishlist === -1) {
                 // setWishlist([...wishlist, id])
+                setActive(true)
                 wishlist.push(id)
+                console.log('if')
             } else {
+                setActive(false)
                 wishlist.splice(indexOfWishlist, 1)
+                console.log('else')
             }
         } else {
             // setWishlist([id])
+            console.log('else lain')
             wishlist = [id]
         }
-        console.log(wishlist);
+        
         localStorage.setItem('wishlist', JSON.stringify(wishlist))
-        setClick(true)
+        
     }
             return (
             <div className="text-decoration-none">
@@ -40,7 +46,7 @@ export default function Card({src,nama,lokasi,tipe,agen,harga,href, id}){
                         </div>
                         <div className="label-top shadow-sm">
                             <button onClick={() => addWishlist(id)} className ="btn btn-sm text-white">
-                                {indexOfWishlist === -1 ? <i class="far fa-heart"></i> : <i class="fas fa-heart"></i>}
+                                {active ? <i class="fas fa-heart"></i> : <i class="far fa-heart"></i>}
                             </button>
                         </div>
                     </div> 
