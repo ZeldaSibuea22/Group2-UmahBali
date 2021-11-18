@@ -25,10 +25,9 @@ function SignIn() {
     let userEmail = localStorage.getItem("SubmissionEmail");
     let userPassword = localStorage.getItem("SubmissionPassword");
     console.log(inputEmail, inputPassword, userEmail, userPassword);
-    if (inputEmail === userEmail && inputPassword === userPassword) {
+    if (inputEmail !== userEmail && inputPassword !== userPassword) {
       setErrorMessage(true);
     } else {
-      localStorage.setItem("isLogin", "true");
       localStorage.setItem("isLogin", "true");
       Navigate("/");
     }
