@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -15,7 +16,7 @@ function SignUp() {
     console.log(data);
     reset();
 
-    if (data.password == data.passwordconfirm) {
+    if (data.password === data.passwordconfirm) {
       localStorage.setItem("SubmissionName", data.name);
       localStorage.setItem("SubmissionEmail", data.email);
       localStorage.setItem("SubmissionPassword", data.password);
