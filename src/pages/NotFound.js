@@ -6,6 +6,7 @@ export default function NotFound() {
   return (
     <Layout>
       <section className="container pb-5 px-5">
+
         <div className="row ms-auto me-auto">
           <div className="col-12 col-sm-9 col-md-6 ms-auto me-auto">
             <img src="https://user-images.githubusercontent.com/61933958/142138061-1f764917-c60d-4d0d-b247-842b4e12e94d.png" alt="Not Found" className="img-fluid" />
@@ -16,6 +17,7 @@ export default function NotFound() {
               <p className="text-dark text-center mb-2">Mungkin halaman yang anda tuju sudah dihapus atau dipindahkan.</p>
             <Link to="/" className="d-flex text-decoration-none">
                 <button className="btn btn-sm btn-outline-main mt-5 ms-auto me-auto">Kembali ke Beranda</button>
+
             </Link>
           </div>
         </div>
