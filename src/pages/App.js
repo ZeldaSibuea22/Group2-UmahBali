@@ -27,7 +27,7 @@ function App() {
     data.hakMilikType = hakMilik;
     const searchValue = data;
     localStorage.setItem("searchProperty", JSON.stringify(searchValue));
-    navigate("/searchProperty");
+    navigate("/search-property");
   };
 
   const { properties, loading } = useContext(PropertiesContext);
