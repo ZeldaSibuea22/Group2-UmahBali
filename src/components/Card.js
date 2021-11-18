@@ -6,23 +6,30 @@ import '../style/index.css'
 import '../style/Card.css'
 
 export default function Card({src,nama,lokasi,tipe,agen,harga,href, id}){
-    let initialWishlist = localStorage.getItem('wishlist')
+    let [click, setClick] = useState(false)
+    let initialWishlist = localStorage.getItem('wishlist') || "[]"
     initialWishlist = JSON.parse(initialWishlist)
-    let [wishlist, setWishlist] = useState(initialWishlist || [])
+    let indexOfWishlist = initialWishlist.indexOf(id)
+
+    console.log(initialWishlist);
+    console.log(indexOfWishlist);
     
-    let indexOfWishlist = wishlist.indexOf(id)
     function addWishlist(id) {
+        let wishlist = initialWishlist
         if(wishlist) {
             if(indexOfWishlist === -1) {
-                setWishlist([...wishlist, id])
-                // wishlist.push(id)
+                // setWishlist([...wishlist, id])
+                wishlist.push(id)
             } else {
                 wishlist.splice(indexOfWishlist, 1)
             }
         } else {
-            setWishlist([id])
+            // setWishlist([id])
+            wishlist = [id]
         }
+        console.log(wishlist);
         localStorage.setItem('wishlist', JSON.stringify(wishlist))
+        setClick(true)
     }
             return (
             <div className="text-decoration-none">
