@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignUp() {
   const {
@@ -12,6 +12,7 @@ function SignUp() {
     trigger,
   } = useForm();
 
+  let navigate = useNavigate();
   const onSubmit = (data) => {
     console.log(data);
     reset();
@@ -20,7 +21,8 @@ function SignUp() {
       localStorage.setItem("SubmissionName", data.name);
       localStorage.setItem("SubmissionEmail", data.email);
       localStorage.setItem("SubmissionPassword", data.password);
-      console.log("Simpan di Local Storage");
+      localStorage.setItem("isLogin", "true");
+      navigate("/");
     }
   };
 
@@ -45,6 +47,17 @@ function SignUp() {
   const togglePasswordVisiblity = () => {
     setShowPassword(showPassword ? false : true);
   };
+  // const [alert, setAlert] = useState(false);
+  // useEffect(() => {
+  //   const timeId = setTimeout(() => {
+  //     // After 3 seconds set the show value to false
+  //     setAlert(false);
+  //   }, 2000);
+
+  //   return () => {
+  //     clearTimeout(timeId);
+  //   };
+  // }, [alert]);
 
   return (
     <div>
@@ -66,6 +79,11 @@ function SignUp() {
                     <h4>Selamat datang di UmahBali</h4>
                     <p className="text-secondary mt-1">Daftarkan akun anda dan dapatkan promo dan informasi menarik seputar properti</p>
                   </div>
+
+                  {/* Alert */}
+                  {/* <div className={`alert alert-success align-items-center ${alert ? "show" : "d-none"}`} role="alert">
+                    <div>Selamat anda telah terdaftar, silahkan login !</div>
+                  </div> */}
 
                   {/* Input Nama */}
                   <form onSubmit={handleSubmit(onSubmit)} id="registForm">
