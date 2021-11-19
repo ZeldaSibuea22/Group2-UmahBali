@@ -43,7 +43,7 @@ export default function Headers() {
                             <CustomLink to="/properties">Properti</CustomLink>
                             }
                         </li>
-                        {console.log(location.pathname)}
+                        
                         {/* Khusus Sign in user */}
                         <li className={"nav-item dropdown " + (isLogin ? "" : "d-none")}>
                            <a className="nav-link dropdown-toggle" href="href={() => false" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
