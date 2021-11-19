@@ -11,7 +11,7 @@ export default function Card({src,nama,lokasi,tipe,agen,harga,href, id, variable
     let isLogin = localStorage.getItem('isLogin')
     // let [login, setLogin ] = useState(false)
     let idlocal = isLogin ? (local.includes(id)) : false; 
-    console.log(idlocal)
+    
     let [missing, setMissing] = useState(false)
     let [active, setActive] = useState(idlocal)
     
@@ -23,7 +23,7 @@ export default function Card({src,nama,lokasi,tipe,agen,harga,href, id, variable
                 wishlist = JSON.parse(wishlist)
             }
             let indexOfWishlist = wishlist.indexOf(id)
-            console.log(wishlist);
+            
             if(wishlist) {
                 if(indexOfWishlist === -1) {
                     setActive(true)
@@ -85,7 +85,7 @@ export default function Card({src,nama,lokasi,tipe,agen,harga,href, id, variable
                     </button> */}
 
                   
-                    <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog">
                             <div className="modal-content">
                             <div className="modal-header">
