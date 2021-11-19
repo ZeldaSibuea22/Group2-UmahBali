@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react'
+/* eslint-disable no-useless-concat */
+import React, { useContext } from 'react'
 import Layout from '../layouts'
 import '../style/3d.css'
 import { PropertiesContext } from "../context/property-context"
@@ -9,7 +10,6 @@ import {
     LightgalleryProvider,
     LightgalleryItem,
     useLightgallery,
-    withLightgallery
 } from "react-lightgallery"
 
 
@@ -31,7 +31,7 @@ export default function DetailProperty() {
     let params = useParams()
     const notfound = useNavigate()
     for (var key in properties) {
-        if (key == (params.id - 1)) {
+        if (Number(key) === (params.id - 1)) {
             context = properties[key]
         }
     }
@@ -42,9 +42,9 @@ export default function DetailProperty() {
         loadingcontext = false
     }
 
-    for (var key in agents) {
-        if (key == (context.agent - 1)) {
-            agencontext = agents[key]
+    for (var keys in agents) {
+        if (Number(keys) === (context.agent - 1)) {
+            agencontext = agents[keys]
         }
     }
 
@@ -55,7 +55,7 @@ export default function DetailProperty() {
     const PhotoItem = ({ image, thumb, group, classdiv, classimg, button }) => (
         <div className={classdiv}>
             <LightgalleryItem group={group} src={image} thumb={thumb}>
-                <img src={image} className={classimg} style={{ borderRadius: 'unset' }} />
+                <img src={image} className={classimg} style={{ borderRadius: 'unset' }} alt="photoimage"/>
             </LightgalleryItem>
             {button}
         </div>
@@ -105,7 +105,7 @@ export default function DetailProperty() {
                                     </div>
                                     <div className="col-6">
                                         <h5 className="ms-auto text-end fw-bold">
-                                            IDR {context.price}{context.hakMilikType == 'Dijual' ? '' : '/Tahun'}
+                                            IDR {context.price}{context.hakMilikType === 'Dijual' ? '' : '/Tahun'}
                                         </h5>
                                     </div>
                                 </div>
@@ -166,7 +166,7 @@ export default function DetailProperty() {
                         {/* Detail */}
                         <div className="container mt-5 mb-5">
                             <h3 className="text-start fw-bold" id="detail">Detail</h3>
-                            <iframe src={context.image360} width="100%" height="500px" frameborder="0"></iframe>
+                            <iframe src={context.image360} width="100%" height="500px" frameborder="0" title="360"></iframe>
                             {console.log(context)}
                             <div className="d-flex flex-wrap flex-md-row">
                                 <h6 className="me-4"><i class="fas fa-home"></i> {context.propertyDetail.luas} m2</h6>
@@ -188,7 +188,7 @@ export default function DetailProperty() {
                         <div className="container mt-5 mb-5" id="videotour">
                             <h3 className="text-start fw-bold">Video Tour</h3>
                             <iframe width="100%" height="500px"
-                                src={context.videoTour}>
+                                src={context.videoTour} title="videotour">
 
                             </iframe>
                             {console.log(context.videoTour)}
@@ -201,7 +201,7 @@ export default function DetailProperty() {
                             </div>
                             <div className="row">
                                 <div className="col-12 col-lg-9">
-                                    <iframe className="ms-auto" width="100%" height="100%" src={"//maps.google.com/maps?q=" + `${location.location1},${location.location2}` + "&z=15&output=embed"}></iframe>
+                                    <iframe className="ms-auto" width="100%" height="100%" src={"//maps.google.com/maps?q=" + `${location.location1},${location.location2}` + "&z=15&output=embed"} title="maps"></iframe>
                                 </div>
                                 <div className="col-12 col-lg-3 mt-3 mt-md-0">
                                     {/* Nanti dulu blm selesai */}
