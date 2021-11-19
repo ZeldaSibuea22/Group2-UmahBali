@@ -64,7 +64,7 @@ export default function Userpage() {
           </div>
 
           <section>
-            <div className="container pt-2 pb-5 mb">
+            <div className="container pt-2 pb-5 mb-5">
               <div className="mt-1 gx-0 gy-4 gx-md-4 gridpage">
                 {!loading && !agentLoading
                   ? wishlistUser.map((value) => {
