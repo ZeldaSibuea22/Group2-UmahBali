@@ -1,0 +1,100 @@
+.gallery-left{
+    border-top-left-radius: 3% !important;
+    border-bottom-left-radius: 3% !important;
+    height: 100% !important;
+}
+.borderred{
+    border-color: red;
+}
+
+.gallery-top-r{
+    border-top-right-radius: 3% !important;
+}
+.gallery-bottom-r{
+    border-bottom-right-radius: 3% !important;
+    filter: blur(2px);
+}
+
+.react_lightgallery_item{
+    height: 100% !important;
+}
+
+.button-img{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.icon{
+    font-size: 200 !important;
+}
+
+.gallery-img{
+    object-fit: cover !important;
+    height: 250px !important;
+    width: 100% !important;
+
+}
+
+@media only screen and (max-width: 992px) {
+    .gallery-left{
+        border-radius: 3% !important;
+        height: 100% !important;
+    }
+}
+
+.cards{
+    border-radius: 0.25rem !important;
+}
+
+.a-canvas{
+    height: auto !important;
+    width: 90% !important;
+}
+
+#lightgallery .row {
+    --bs-gutter-x: unset !important;
+}
+
+.a-enter{
+    position: static !important;
+}
+
+.a-enter-vr-button{
+    bottom: unset !important;
+    right: unset !important;
+    position: static !important;
+    margin-left: auto !important;
+    
+}
+
+.a-canvas{
+    position: unset !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.a-enter-vr{
+    position: absolute !important;
+    width: 93%;
+
+    right: unset !important;
+    display: flex;
+
+}
+
+.container{
+    display: block !important;
+}
+
+.a-body{
+    overflow: unset !important;
+}
+
+.a-html{
+    position: unset !important;
+}
+
+.fullscreen {
+    display: flex;
+}

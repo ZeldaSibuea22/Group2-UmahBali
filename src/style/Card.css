@@ -1,0 +1,56 @@
+.label-top {
+    position: absolute;
+    color: #fff;
+    top: 8px;
+    right: 8px;
+    padding: 5px 10px 5px 10px;
+    weight: 600;
+    border-radius: 3px;
+    
+}
+
+.top{
+    background-color: #fffbec;
+    width: 60px;
+    height: 25px;
+    padding-bottom: 3px;
+    border-radius: 5%;
+    display: flex;
+    color: #fed85d;
+    justify-content: center;
+    align-items: center
+}
+
+.card {
+    border-radius: 5%;
+}
+
+.fa-user-circle{
+    color: grey;
+    padding: 0 5px 0 0;
+
+}
+
+.label-top-left {
+    background-color: whitesmoke;
+    width: 60px;
+    height: 25px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    display: flex;
+    color: darkblue;
+    justify-content: center;
+    align-items: center
+}
+
+p {
+    font-size : 14px;
+    color : darkblue;
+}
+
+img {
+    weight: 80px;
+    height: 240px;
+    object-contain:fit;
+    border-radius: 10px 10px 0 0;
+}
