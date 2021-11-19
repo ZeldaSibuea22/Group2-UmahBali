@@ -39,10 +39,16 @@ export default function DetailProperty() {
         }
     }
 
+    const [nama, setNama] = useState('')
+    const [email, setEmail] = useState('')
+    const [pesan, setPesan] = useState('')
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
         setToast(true)
-        console.log(data)
+        setNama('')
+        setEmail('')
+        setPesan('')
     };
     const location = context.location
     let local = localStorage.getItem('wishlist') || '[]'
@@ -256,15 +262,15 @@ export default function DetailProperty() {
 
                                             <form onSubmit={handleSubmit(onSubmit)}>
                                                 <div class="mb-1">
-                                                    <input type="text" class="form-control" placeholder="Nama" {...register("Name", { required: true, maxLength: 80 })} />
+                                                    <input type="text" class="form-control" placeholder="Nama" value={nama}  {...register("Name", { required: true, maxLength: 80 })} onChange={(e) => setNama(e.target.value)} />
                                                     {errors.Name?.type === 'required' && "Nama harus diisi"}
                                                 </div>
                                                 <div class="mb-1">
-                                                    <input type="text" class="form-control" placeholder="Email" {...register("Email", { required: true, pattern: /^\S+@\S+$/i })} />
+                                                    <input type="text" class="form-control" placeholder="Email" value={email}  {...register("Email", { required: true, pattern: /^\S+@\S+$/i })}  onChange={(e) => setEmail(e.target.value)} />
                                                     {errors.Email?.type === 'required' && "Isi email dengan format yang benar"}
                                                 </div>
                                                 <div class="mb-1">
-                                                    <textarea class="form-control" rows="3" placeholder="Pesan" {...register("Message", { required: true, maxLength: 1000 })}></textarea>
+                                                    <textarea class="form-control" rows="3" placeholder="Pesan" value={pesan}  {...register("Message", { required: true, maxLength: 1000 })} onChange={(e) => setPesan(e.target.value)}></textarea>
                                                     {errors.Message?.type === 'required' && "Pesan harus diisi"}
                                                 </div>
                                                 <button onClick={()=> errors? '' : setToast(true)} className="btn btn-primary mt-2 w-100" type="submit">

@@ -85,7 +85,7 @@ export default function PropertiesSearch() {
           {dataProperti.city}
         </h3>
 
-        <div className="row mt-1 gx-0 gy-4 gx-md-4 mx-2">
+        <div className="row mt-1 gx-0 gy-4 gx-md-2">
           {!loading && !agentLoading
             ? propertiSearch.length > 0
               ? propertiSearch.map((property) => {
@@ -93,7 +93,7 @@ export default function PropertiesSearch() {
                     (agent) => agent.id === property.agent
                   );
                   return (
-                    <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id} >
+                    <div className="col-xxl-4 col-xl-4 col-lg-4 g-3 col-md-6 col-sm-12 col-12 mt-4" key={property.id} >
                       <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.kota}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id} type={property.hakMilikType}/>
                     </div>
                   );
@@ -103,7 +103,7 @@ export default function PropertiesSearch() {
                     (agent) => agent.id === property.agent
                   );
                   return (
-                    <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id} >
+                    <div className="col-xxl-4 col-xl-4 col-lg-4 g-3 col-md-6 col-sm-12 col-12 mt-4" key={property.id} >
                       <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.kota}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id} type={property.hakMilikType}/>
                     </div>
                   );
