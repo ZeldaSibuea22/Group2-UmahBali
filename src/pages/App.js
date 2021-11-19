@@ -240,6 +240,8 @@ function App() {
                         agen={agent.nama}
                         href={`/properties/detail/${property.id}`}
                         id={property.id}
+                        type={property.hakMilikType}
+                        isNew='NEW'
                       />
                     </div>
                   );
@@ -300,6 +302,7 @@ function App() {
                             agen={agent.nama}
                             href={`/properties/detail/${property.id}`}
                             id={property.id}
+                            type={property.hakMilikType}
                           />
                         </div>
                       );
@@ -325,6 +328,7 @@ function App() {
                             agen={agent.nama}
                             href={`/properties/detail/${property.id}`}
                             id={property.id}
+                            type={property.hakMilikType}
                           />
                         </div>
                       );
@@ -350,6 +354,7 @@ function App() {
                             agen={agent.nama}
                             href={`/properties/detail/${property.id}`}
                             id={property.id}
+                            type={property.hakMilikType}
                           />
                         </div>
                       );

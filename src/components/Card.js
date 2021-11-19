@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../style/index.css'
 import '../style/Card.css'
 
-export default function Card({src,nama,lokasi,tipe,agen,harga,href, id}){
+export default function Card({src,nama,lokasi,tipe,agen,harga,href, id,type,isNew=''}){
     function addWishlist(id) {
         let wishlist = localStorage.getItem('wishlist')
         if(wishlist) {
@@ -17,7 +17,7 @@ export default function Card({src,nama,lokasi,tipe,agen,harga,href, id}){
         localStorage.setItem('wishlist', JSON.stringify(wishlist))
     }
             return (
-            <div className="text-decoration-none">
+            <div className="text-decoration-none h-100">
                 <div className="card h-100 hover-shadow mt-4 position-relative">
                     <div className="card-img">
                     <div className="label-top-left position-absolute badge rounded-pill col-3 mt-3 ms-3">
@@ -31,8 +31,8 @@ export default function Card({src,nama,lokasi,tipe,agen,harga,href, id}){
                     className="" alt="card property"/>
 
                     <div className="card-body">
-                            <span class="me-2 badge rounded-pill bg-success pe-2">NEW</span>
-                            <span class="badge rounded-pill bg-danger">SEWA</span>
+                            <span class="me-2 badge rounded-pill bg-success pe-2">{isNew}</span>
+                            <span class="badge rounded-pill bg-danger">{type}</span>
                     <Link className="text-decoration-none" to={href}>
                         <div className="clearfix mb-1">
                             <span class="float-start fw-bolder fs-5" style={{color:"black"}}>{nama}</span>

@@ -71,7 +71,7 @@ export default function Properties() {
                     ? filterType.rumah.map((property) => {
                         let agent = agents.find((agent) => agent.id === property.agent);
                         return (
-                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
+                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-3 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
                             <Card
                             src={property.img[0]}
                             tipe={property.propertyType}
@@ -81,6 +81,8 @@ export default function Properties() {
                             agen={agent.nama}
                             href={`/properties/detail/${property.id}`}
                             id={property.id}
+                            type={property.hakMilikType}
+                            isNew='NEW'
                             />
                         </div>
                         );
@@ -96,7 +98,7 @@ export default function Properties() {
                     ? filterType.ruko.map((property) => {
                         let agent = agents.find((agent) => agent.id === property.agent);
                         return (
-                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
+                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-3 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
                             <Card
                             src={property.img[0]}
                             tipe={property.propertyType}
@@ -106,6 +108,8 @@ export default function Properties() {
                             agen={agent.nama}
                             href={`/properties/detail/${property.id}`}
                             id={property.id}
+                            type={property.hakMilikType}
+                            isNew='NEW'
                             />
                         </div>
                         );
@@ -121,7 +125,7 @@ export default function Properties() {
                     ? filterType.vila.map((property) => {
                         let agent = agents.find((agent) => agent.id === property.agent);
                         return (
-                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
+                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-3 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
                             <Card
                             src={property.img[0]}
                             tipe={property.propertyType}
@@ -131,6 +135,8 @@ export default function Properties() {
                             agen={agent.nama}
                             href={`/properties/detail/${property.id}`}
                             id={property.id}
+                            type={property.hakMilikType}
+                            isNew='NEW'
                             />
                         </div>
                         );

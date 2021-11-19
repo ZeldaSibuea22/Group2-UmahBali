@@ -17,6 +17,7 @@ export default function PropertiesSearch(){
   // }
   const { properties, loading } = useContext(PropertiesContext);
   const { agents, agentLoading } = useContext(AgentsContext);
+  
   let filterProperty = []
   
   const [isReload,setisReload] = useState(false)
@@ -57,7 +58,7 @@ export default function PropertiesSearch(){
       
       
         <div className="d-flex mt-5 justify-content-center">
-        <input onChange={(e)=>setinput((e.target.value))}  className="form-control me-2 w-75" type="search" placeholder="Cari Properti" aria-label="Search"/>
+        <input onChange={(e)=>setinput((e.target.value))}  className="form-control me-2 w-75" type="search" placeholder={`Cari Properti berdasarkan wilayah di ${dataProperti.city}`} aria-label="Search"/>
         <button onClick={()=>searchbyInput(input)} className="btn btn-outline-primary" type="button" style={{width:"75px"}}>Cari</button>
         </div>
 
@@ -69,7 +70,7 @@ export default function PropertiesSearch(){
                     ? filterProperty.map((property) => {
                         let agent = agents.find((agent) => agent.id === property.agent);
                         return (
-                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
+                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-3 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
                             <Card
                             src={property.img[0]}
                             tipe={property.propertyType}
@@ -79,6 +80,8 @@ export default function PropertiesSearch(){
                             agen={agent.nama}
                             href={`/properties/detail/${property.id}`}
                             id={property.id}
+                            type={property.hakMilikType}
+                            isNew='NEW'
                             />
                         </div>
                         );
