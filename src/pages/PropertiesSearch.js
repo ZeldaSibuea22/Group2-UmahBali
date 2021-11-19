@@ -94,7 +94,7 @@ export default function PropertiesSearch() {
                   );
                   return (
                     <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id} >
-                      <Card src={property.img[0]} tipe={property.hakm} nama={property.propertyName} lokasi={`${property.kota}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id} type={property.hakMilikType}/>
+                      <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.kota}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id} type={property.hakMilikType}/>
                     </div>
                   );
                 })
@@ -104,7 +104,7 @@ export default function PropertiesSearch() {
                   );
                   return (
                     <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id} >
-                      <Card src={property.img[0]} tipe={property.hakm} nama={property.propertyName} lokasi={`${property.kota}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id} type={property.hakMilikType}/>
+                      <Card src={property.img[0]} tipe={property.propertyType} nama={property.propertyName} lokasi={`${property.kota}, Bali`} harga={`IDR. ${formatPrice(property.price)}`} agen={agent.nama} href={`/properties/detail/${property.id}`} id={property.id} type={property.hakMilikType}/>
                     </div>
                   );
                 })
