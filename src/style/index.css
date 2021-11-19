@@ -99,6 +99,13 @@ code {
   font-size: larger;
 }
 
+.avatar-testimoni {
+  vertical-align: middle;
+  width: 11rem;
+  height: 11rem;
+  border-radius: 50%;
+}
+
 /* font size */
 .fs-title {
   /* font-size: 50px; */
@@ -135,6 +142,24 @@ code {
 }
 
 /* carousel */
+.rec.rec-arrow:hover {
+  background-color: #003459 !important;
+}
+
+button.rec-dot.rec-dot_active{
+  background-color: rgb(0, 52, 89);
+  box-shadow: 0 0 1px 3px rgba(0, 52, 89,0.5);
+}
+
+button.rec-dot:disabled {
+  background-color: rebeccapurple;
+}
+
+button.rec-dot:hover, button.rec-dot:active, button.rec-dot:focus  {
+  background-color: rgb(0, 52, 89);
+  box-shadow: 0 0 1px 3px rgba(0, 52, 89,0.5);
+}
+
 
 /* background transparency */
 .opacity-50 {

@@ -5,22 +5,16 @@ import Card from "../components/Card";
 import { PropertiesContext } from "../context/property-context";
 import { AgentsContext } from "../context/agent-context";
 import { useState, useContext } from "react";
-import { useSearchParams } from 'react-router-dom';
 
 
 export default function PropertiesSearch(){
-  // const{
-  //   const rememberMe = localStorage.getItem('rememberMe') === 'true';
-  //   const user = rememberMe ? localStorage.getItem('user') : '';
-  //   this.setState({ user, rememberMe });
-  
-  // }
+
   const { properties, loading } = useContext(PropertiesContext);
   const { agents, agentLoading } = useContext(AgentsContext);
   
   let filterProperty = []
   
-  const [isReload,setisReload] = useState(false)
+  const [propertiSearch,setPropertiSearch] = useState([])
 
  let dataProperti = localStorage.getItem ('searchProperty');
  dataProperti = JSON.parse(dataProperti);
@@ -36,8 +30,7 @@ export default function PropertiesSearch(){
   
   function searchbyInput(input){
     filterProperty = filterProperty.filter(item=>(item.alamatLengkap).toLowerCase().includes(input.toLowerCase()))
-    setisReload(true)
-    console.log(filterProperty)
+    setPropertiSearch(filterProperty)
   } 
   const formatPrice = (price) => {
     if (price > 999 && price < 1000000) {
@@ -51,6 +44,7 @@ export default function PropertiesSearch(){
     }
     };
 
+    console.log(propertiSearch);
 
     
     return( 
@@ -81,7 +75,7 @@ export default function PropertiesSearch(){
                             href={`/properties/detail/${property.id}`}
                             id={property.id}
                             type={property.hakMilikType}
-                            isNew='NEW'
+                         
                             />
                         </div>
                         );
@@ -89,8 +83,6 @@ export default function PropertiesSearch(){
                     : null}
      
     </div>
-    <h4 className="mt-5 fw-bold">Lokasi</h4>
-    
     </div>
     </Layout>
 

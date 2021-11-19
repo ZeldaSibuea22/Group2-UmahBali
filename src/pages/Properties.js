@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import Layout from "../layouts/index";
 import Card from "../components/Card";
@@ -82,7 +83,7 @@ export default function Properties() {
                             href={`/properties/detail/${property.id}`}
                             id={property.id}
                             type={property.hakMilikType}
-                            isNew='NEW'
+                          
                             />
                         </div>
                         );
@@ -109,7 +110,7 @@ export default function Properties() {
                             href={`/properties/detail/${property.id}`}
                             id={property.id}
                             type={property.hakMilikType}
-                            isNew='NEW'
+                         
                             />
                         </div>
                         );
@@ -136,7 +137,7 @@ export default function Properties() {
                             href={`/properties/detail/${property.id}`}
                             id={property.id}
                             type={property.hakMilikType}
-                            isNew='NEW'
+                         
                             />
                         </div>
                         );
