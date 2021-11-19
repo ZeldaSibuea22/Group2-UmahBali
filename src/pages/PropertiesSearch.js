@@ -49,9 +49,9 @@ export default function PropertiesSearch() {
     if (price > 999 && price < 1000000) {
       return `${(price / 1000).toFixed(1)} K`;
     } else if (price >= 1000000 && price < 1000000000) {
-      return `${(price / 1000000).toFixed(1)} M`;
+      return `${(price / 1000000).toFixed(1)} JT`;
     } else if (price >= 1000000000) {
-      return `${(price / 1000000000).toFixed(1)} B`;
+      return `${(price / 1000000000).toFixed(1)} M`;
     } else {
       return price;
     }
