@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-concat */
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Layout from '../layouts'
 import '../style/3d.css'
 import { PropertiesContext } from "../context/property-context"
@@ -16,16 +16,7 @@ import {
 export default function DetailProperty() {
     const { properties, loading } = useContext(PropertiesContext)
     const { agents, agentLoading } = useContext(AgentsContext)
-    function addWishlist(id) {
-        let wishlist = localStorage.getItem('wishlist')
-        if (wishlist) {
-            wishlist = JSON.parse(wishlist)
-            wishlist.push(id)
-        } else {
-            wishlist = [id]
-        }
-        localStorage.setItem('wishlist', JSON.stringify(wishlist))
-    }
+    let [toast, setToast] = useState(false)
     let context = {}
     let agencontext = {}
     let params = useParams()
@@ -49,13 +40,48 @@ export default function DetailProperty() {
     }
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = (data) => {
+        setToast(true)
+        console.log(data)
+    };
     const location = context.location
+    let local = localStorage.getItem('wishlist') || '[]'
+    let isLogin = localStorage.getItem('isLogin')
+    let idlocal = isLogin ? (local.includes(context.id)) : false; 
+    let [active, setActive] = useState(idlocal)
+    useEffect(() => {
+        const alertcard = setTimeout(() => {setToast(false)}, 4000);
+        return () => {
+            clearTimeout(alertcard)
+        }
+    }, [toast])
+    function addWishlist(id) {
+        if (isLogin){
+            let temp = []
+            let wishlist = localStorage.getItem('wishlist') || temp
+            if (wishlist !== temp){
+                wishlist = JSON.parse(wishlist)
+            }
+            let indexOfWishlist = wishlist.indexOf(id)
+            if(wishlist) {
+                if(indexOfWishlist === -1) {
+                    setActive(true)
+                    wishlist.push(id)
+                } else {
+                    setActive(false)
+                    wishlist.splice(indexOfWishlist, 1)
+                }
+            } else {
+                wishlist = [id]
+            }
+            localStorage.setItem('wishlist', JSON.stringify(wishlist))
+        }        
+    }
 
     const PhotoItem = ({ image, thumb, group, classdiv, classimg, button }) => (
         <div className={classdiv}>
             <LightgalleryItem group={group} src={image} thumb={thumb}>
-                <img src={image} className={classimg} style={{ borderRadius: 'unset' }} alt="photoimage"/>
+                <img src={image} className={classimg} style={{ borderRadius: 'unset' }} alt="photoimage" />
             </LightgalleryItem>
             {button}
         </div>
@@ -83,12 +109,12 @@ export default function DetailProperty() {
                         <div className="container">
                             <div className="container mt-4 mb-5">
                                 <div className="d-flex justify-content-between">
-                                    <p>{context.propertyType} &nbsp; | &nbsp; {context.hakMilikType}</p>
+                                    <p className="text-dark">{context.propertyType} &nbsp; | &nbsp; {context.hakMilikType}</p>
                                     <div >
                                         <button onClick={() => addWishlist(context.id)} style={{ backgroundColor: 'transparent', border: 'none', width: '60px', WebkitTextStrokeColor: 'black' }}>
                                             <span class="fa-stack fa-lg">
                                                 <i class="fa fa-circle fa-stack-2x text-white"></i>
-                                                <i class="fas fa-heart fa-stack-1x fa-inverse text-danger"></i>
+                                                <i class={(active? "fas fa-heart fa-stack-1x fa-inverse text-danger": "far fa-heart fa-stack-1x fa-inverse text-danger") }></i>
                                             </span>
                                         </button>
                                         <h6 className="d-inline">
@@ -100,12 +126,12 @@ export default function DetailProperty() {
                                 <div className="mb-2 row">
                                     <div className="col-6">
                                         <div>
-                                            <p className="icon"><i class="fas fa-map-marker-alt text-danger"></i> {context.alamatLengkap}</p>
+                                            <p className="icon text-dark"><i class="fas fa-map-marker-alt text-danger"></i> {context.alamatLengkap}</p>
                                         </div>
                                     </div>
                                     <div className="col-6">
                                         <h5 className="ms-auto text-end fw-bold">
-                                            IDR {context.price}{context.hakMilikType === 'Dijual' ? '' : '/Tahun'}
+                                            IDR {new Intl.NumberFormat('ID').format(context.price)}{context.hakMilikType === 'Dijual' ? '' : '/Tahun'}
                                         </h5>
                                     </div>
                                 </div>
@@ -168,7 +194,7 @@ export default function DetailProperty() {
                             <h3 className="text-start fw-bold" id="detail">Detail</h3>
                             <iframe src={context.image360} width="100%" height="500px" frameborder="0" title="360"></iframe>
                             {console.log(context)}
-                            <div className="d-flex flex-wrap flex-md-row">
+                            <div className="d-flex flex-wrap flex-md-row mt-3">
                                 <h6 className="me-4"><i class="fas fa-home"></i> {context.propertyDetail.luas} m2</h6>
                                 <h6 className="me-4"><i class="fas fa-bed"></i> {context.propertyDetail.kamar ? context.propertyDetail.kamar : '-'} kamar</h6>
                                 <h6 className="me-4"><i class="fas fa-shower"></i> {context.propertyDetail.toilet ? context.propertyDetail.toilet : '-'} toilet</h6>
@@ -189,15 +215,13 @@ export default function DetailProperty() {
                             <h3 className="text-start fw-bold">Video Tour</h3>
                             <iframe width="100%" height="500px"
                                 src={context.videoTour} title="videotour">
-
                             </iframe>
-                            {console.log(context.videoTour)}
                         </div>
                         {/* Lokasi */}
                         <div className="container mt-5 mb-5" id="lokasi">
                             <h3 className="text-start fw-bold">Lokasi</h3>
                             <div className="text-start">
-                                <p className="icon"><i class="fas fa-map-marker-alt text-danger"></i> {context.alamatLengkap}</p>
+                                <p className="icon text-dark"><i class="fas fa-map-marker-alt text-danger"></i> {context.alamatLengkap}</p>
                             </div>
                             <div className="row">
                                 <div className="col-12 col-lg-9">
@@ -207,6 +231,9 @@ export default function DetailProperty() {
                                     {/* Nanti dulu blm selesai */}
                                     <div className="card cards">
                                         <div className="container">
+                                            <div class={"alert alert-success mt-2 mb-2 " + (toast? 'show': 'd-none')} role="alert">
+                                                Pesan berhasil dikirimkan
+                                            </div>
                                             <h6 className="text-start fw-bold mt-2">Hubungi Agen</h6>
                                             {!agentLoading ?
                                                 <>
@@ -226,6 +253,7 @@ export default function DetailProperty() {
                                             }
                                         </div>
                                         <div className="card-body">
+
                                             <form onSubmit={handleSubmit(onSubmit)}>
                                                 <div class="mb-1">
                                                     <input type="text" class="form-control" placeholder="Nama" {...register("Name", { required: true, maxLength: 80 })} />
@@ -239,7 +267,7 @@ export default function DetailProperty() {
                                                     <textarea class="form-control" rows="3" placeholder="Pesan" {...register("Message", { required: true, maxLength: 1000 })}></textarea>
                                                     {errors.Message?.type === 'required' && "Pesan harus diisi"}
                                                 </div>
-                                                <button className="btn btn-primary mt-2 w-100" type="submit">
+                                                <button onClick={()=> errors? '' : setToast(true)} className="btn btn-primary mt-2 w-100" type="submit">
                                                     Hubungi
                                                 </button>
                                             </form>

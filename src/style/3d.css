@@ -3,6 +3,9 @@
     border-bottom-left-radius: 3% !important;
     height: 100% !important;
 }
+.borderred{
+    border-color: red;
+}
 
 .gallery-top-r{
     border-top-right-radius: 3% !important;
