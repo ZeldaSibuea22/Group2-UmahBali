@@ -45,7 +45,7 @@ export default function Userpage() {
     <Layout>
       <div className="container">
         <div className="row">
-          <div className="col-12 text-end p-5">
+          <div className="col-12 text-end p-4">
             {/* <div className="col-12 col-md-4 text-md-end"> */}
             <figure className="figure">
               <img src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png" height="50px" width="50px" className="figure-img img-fluid rounded" alt="..." />
@@ -55,7 +55,7 @@ export default function Userpage() {
             {/* </div> */}
           </div>
 
-          <div className="container py-5 mt-5">
+          <div className="container py-3 mt-1">
             <div className="row">
               <div className="col-12 text-center">
                 <h4 className="fw-bold">Daftar Wishlist</h4>
@@ -64,14 +64,14 @@ export default function Userpage() {
           </div>
 
           <section>
-            <div className="container py-5 mt-5">
+            <div className="container pt-2 pb-5 mb">
               <div className="mt-1 gx-0 gy-4 gx-md-4 gridpage">
                 {!loading && !agentLoading
                   ? wishlistUser.map((value) => {
                       let agent = agents.find((agent) => agent.id === value.agent);
                       return (
                         // <div className="m-2">
-                          <Card src={value.img[0]} variable = {true} tipe={value.propertyType} nama={value.propertyName} lokasi={`${value.kota}, Bali`} harga={`IDR. ${formatPrice(value.price)}`} agen={agent.nama} href={`/properties/detail/${value.id}`} id={value.id} />
+                          <Card  src={value.img[0]} variable = {true} tipe={value.propertyType} nama={value.propertyName} lokasi={`${value.kota}, Bali`} harga={`IDR. ${formatPrice(value.price)}`} agen={agent.nama} href={`/properties/detail/${value.id}`} id={value.id} type={value.hakMilikType} />
                         // </div>
                       );
                     })

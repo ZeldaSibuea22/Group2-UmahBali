@@ -8,14 +8,10 @@ import { useState, useContext } from "react";
 
 
 export default function PropertiesSearch(){
-  // const{
-  //   const rememberMe = localStorage.getItem('rememberMe') === 'true';
-  //   const user = rememberMe ? localStorage.getItem('user') : '';
-  //   this.setState({ user, rememberMe });
-  
-  // }
+
   const { properties, loading } = useContext(PropertiesContext);
   const { agents, agentLoading } = useContext(AgentsContext);
+  
   let filterProperty = []
   
   const [propertiSearch,setPropertiSearch] = useState([])
@@ -56,7 +52,7 @@ export default function PropertiesSearch(){
       
       
         <div className="d-flex mt-5 justify-content-center">
-        <input onChange={(e)=>setinput((e.target.value))}  className="form-control me-2 w-75" type="search" placeholder="Cari Properti" aria-label="Search"/>
+        <input onChange={(e)=>setinput((e.target.value))}  className="form-control me-2 w-75" type="search" placeholder={`Cari Properti berdasarkan wilayah di ${dataProperti.city}`} aria-label="Search"/>
         <button onClick={()=>searchbyInput(input)} className="btn btn-outline-primary" type="button" style={{width:"75px"}}>Cari</button>
         </div>
 
@@ -64,48 +60,29 @@ export default function PropertiesSearch(){
       <h3 className="mt-5 fw-bold">{dataProperti.type === 'Semua' ? 'Properti' : dataProperti.type} di {dataProperti.city}</h3>
 
       <div className="row mt-1 gx-0 gy-4 gx-md-4 mx-2">
-        {!loading && !agentLoading ? 
-          propertiSearch.length > 0 ? 
-            propertiSearch.map((property) => {
-              let agent = agents.find((agent) => agent.id === property.agent);
-              return (
-              <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
-                  <Card
-                  src={property.img[0]}
-                  tipe={property.propertyType}
-                  nama={property.propertyName}
-                  lokasi={`${property.kota}, Bali`}
-                  harga={`IDR. ${formatPrice(property.price)}`}
-                  agen={agent.nama}
-                  href={`/properties/detail/${property.id}`}
-                  id={property.id}
-                  />
-              </div>
-              );
-          }) :
-          
-            filterProperty.map((property) => {
-              let agent = agents.find((agent) => agent.id === property.agent);
-              return (
-              <div className="col-xxl-4 col-xl-4 col-lg-4 g-5 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
-                  <Card
-                  src={property.img[0]}
-                  tipe={property.propertyType}
-                  nama={property.propertyName}
-                  lokasi={`${property.kota}, Bali`}
-                  harga={`IDR. ${formatPrice(property.price)}`}
-                  agen={agent.nama}
-                  href={`/properties/detail/${property.id}`}
-                  id={property.id}
-                  />
-              </div>
-              );
-          })
-          : null}
+        {!loading && !agentLoading
+                    ? filterProperty.map((property) => {
+                        let agent = agents.find((agent) => agent.id === property.agent);
+                        return (
+                        <div className="col-xxl-4 col-xl-4 col-lg-4 g-3 col-md-6 col-sm-12 col-12 mt-4" key={property.id}>
+                            <Card
+                            src={property.img[0]}
+                            tipe={property.propertyType}
+                            nama={property.propertyName}
+                            lokasi={`${property.kota}, Bali`}
+                            harga={`IDR. ${formatPrice(property.price)}`}
+                            agen={agent.nama}
+                            href={`/properties/detail/${property.id}`}
+                            id={property.id}
+                            type={property.hakMilikType}
+                         
+                            />
+                        </div>
+                        );
+                    })
+                    : null}
      
     </div>
-    <h4 className="mt-5 fw-bold">Lokasi</h4>
-    
     </div>
     </Layout>
 
