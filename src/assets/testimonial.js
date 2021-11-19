@@ -11,7 +11,7 @@ const data = {
       "id": 2,
       "name":"Summer Young",
       "star": 5,
-      "img": "https://images.unsplash.com/photo-1601831698630-a814370b9cca?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjc3fHxwb3J0cmFpdHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      "img": "https://images.unsplash.com/photo-1635839090719-72082060a39e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80",
       "review":"Sekarang mencari properti, entah itu rumah, kantor, ruko, vila untuk disewa ataupun dibeli jadi lebih mudah banget gara-gara situs pencari properti UmahBali ini. Apalagi untuk pengguna smartphone juga bisa akses situs ini dengan mudah karena sudah mobile friendly."
     },
     {

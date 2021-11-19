@@ -415,7 +415,7 @@ function App() {
                             src={property.img[0]}
                             tipe={property.propertyType}
                             nama={property.propertyName}
-                            lokasi={`${property.lokasi}, Bali`}
+                            lokasi={`${property.kota}, Bali`}
                             harga={`IDR. ${formatPrice(property.price)}`}
                             agen={agent.nama}
                             href={`/properties/detail/${property.id}`}
@@ -448,7 +448,7 @@ function App() {
                             src={property.img[0]}
                             tipe={property.propertyType}
                             nama={property.propertyName}
-                            lokasi={`${property.lokasi}, Bali`}
+                            lokasi={`${property.kota}, Bali`}
                             harga={`IDR. ${formatPrice(property.price)}`}
                             agen={agent.nama}
                             href={`/properties/detail/${property.id}`}
@@ -481,7 +481,7 @@ function App() {
                             src={property.img[0]}
                             tipe={property.propertyType}
                             nama={property.propertyName}
-                            lokasi={`${property.lokasi}, Bali`}
+                            lokasi={`${property.kota}, Bali`}
                             harga={`IDR. ${formatPrice(property.price)}`}
                             agen={agent.nama}
                             href={`/properties/detail/${property.id}`}
